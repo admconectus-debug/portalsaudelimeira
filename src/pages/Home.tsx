@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Search, Users, Heart, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,14 +9,67 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SpecialtyCard from "@/components/cards/SpecialtyCard";
 import ProfessionalCard from "@/components/cards/ProfessionalCard";
-import { specialties, professionals } from "@/data/mockData";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Professional {
+  id: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  whatsapp: string | null;
+  location: string;
+  description: string | null;
+  photo_url: string | null;
+  specialties: { name: string } | null;
+}
+
+interface Specialty {
+  id: string;
+  name: string;
+  description: string | null;
+  icon: string | null;
+}
 
 const Home = () => {
-  // Featured professionals (first 3)
-  const featuredProfessionals = professionals.slice(0, 3);
-  
-  // Featured specialties (first 6)
-  const featuredSpecialties = specialties.slice(0, 6);
+  const [featuredProfessionals, setFeaturedProfessionals] = useState<Professional[]>([]);
+  const [featuredSpecialties, setFeaturedSpecialties] = useState<Specialty[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const [professionalsResponse, specialtiesResponse] = await Promise.all([
+        supabase
+          .from("professionals")
+          .select(`
+            *,
+            specialties (name)
+          `)
+          .order("name")
+          .limit(3),
+        supabase
+          .from("specialties")
+          .select("*")
+          .order("name")
+          .limit(6)
+      ]);
+
+      if (professionalsResponse.data) {
+        setFeaturedProfessionals(professionalsResponse.data);
+      }
+
+      if (specialtiesResponse.data) {
+        setFeaturedSpecialties(specialtiesResponse.data);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar dados:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -165,9 +219,19 @@ const Home = () => {
           </div>
 
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {featuredProfessionals.map((professional) => (
-              <ProfessionalCard key={professional.id} professional={professional} />
-            ))}
+            {loading ? (
+              <div className="col-span-full text-center py-8">
+                <div className="animate-pulse">Carregando profissionais...</div>
+              </div>
+            ) : featuredProfessionals.length > 0 ? (
+              featuredProfessionals.map((professional) => (
+                <ProfessionalCard key={professional.id} professional={professional} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-8">
+                <p className="text-muted-foreground">Nenhum profissional cadastrado ainda.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

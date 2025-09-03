@@ -13,6 +13,7 @@ const Header = () => {
     { name: "Profissionais", href: "/profissionais" },
     { name: "Especialidades", href: "/especialidades" },
     { name: "Contato", href: "/contato" },
+    { name: "Admin", href: "/auth" },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -47,9 +48,6 @@ const Header = () => {
               {item.name}
             </Link>
           ))}
-          <Button variant="outline" size="sm">
-            Área Admin
-          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -86,9 +84,6 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="outline" size="sm" className="w-full mt-4">
-              Área Admin
-            </Button>
           </nav>
         </div>
       )}

@@ -9,6 +9,8 @@ import ProfessionalProfile from "./pages/ProfessionalProfile";
 import Specialties from "./pages/Specialties";
 import SpecialtyProfessionals from "./pages/SpecialtyProfessionals";
 import Contact from "./pages/Contact";
+import Auth from "./pages/Auth";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/especialidades" element={<Specialties />} />
           <Route path="/especialidades/:id" element={<SpecialtyProfessionals />} />
           <Route path="/contato" element={<Contact />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

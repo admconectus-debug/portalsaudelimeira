@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Specialty } from "@/data/mockData";
 import * as Icons from "lucide-react";
+
+interface Specialty {
+  id: string;
+  name: string;
+  description: string | null;
+  icon: string | null;
+}
 
 interface SpecialtyCardProps {
   specialty: Specialty;
@@ -30,13 +36,13 @@ const SpecialtyCard = ({ specialty }: SpecialtyCardProps) => {
                 {specialty.name}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                {specialty.description}
+                {specialty.description || "Especialidade médica"}
               </p>
             </div>
 
             {/* Professionals Count */}
             <Badge variant="outline" className="mt-auto">
-              {specialty.professionalsCount} profissionais
+              Ver profissionais
             </Badge>
           </div>
         </CardContent>

@@ -1,17 +1,86 @@
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
 import ProfessionalCard from "@/components/cards/ProfessionalCard";
-import { professionals, specialties } from "@/data/mockData";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Professional {
+  id: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  whatsapp: string | null;
+  location: string;
+  description: string | null;
+  photo_url: string | null;
+  specialties: { name: string } | null;
+}
+
+interface Specialty {
+  id: string;
+  name: string;
+  description: string | null;
+  icon: string | null;
+}
 
 const SpecialtyProfessionals = () => {
   const { id } = useParams();
-  const specialty = specialties.find(s => s.id === id);
-  
-  const specialtyProfessionals = specialty 
-    ? professionals.filter(p => p.specialty === specialty.name)
-    : [];
+  const [specialty, setSpecialty] = useState<Specialty | null>(null);
+  const [specialtyProfessionals, setSpecialtyProfessionals] = useState<Professional[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
+  const fetchData = async () => {
+    if (!id) return;
+
+    try {
+      const [specialtyResponse, professionalsResponse] = await Promise.all([
+        supabase
+          .from("specialties")
+          .select("*")
+          .eq("id", id)
+          .maybeSingle(),
+        supabase
+          .from("professionals")
+          .select(`
+            *,
+            specialties (name)
+          `)
+          .eq("specialty_id", id)
+          .order("name")
+      ]);
+
+      if (specialtyResponse.data) {
+        setSpecialty(specialtyResponse.data);
+      }
+
+      if (professionalsResponse.data) {
+        setSpecialtyProfessionals(professionalsResponse.data);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar dados:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-12">
+          <div className="text-center">
+            <div className="animate-pulse">Carregando...</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!specialty) {
     return (

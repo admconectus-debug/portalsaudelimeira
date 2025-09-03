@@ -4,7 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Professional } from "@/data/mockData";
+
+interface Professional {
+  id: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  whatsapp: string | null;
+  location: string;
+  description: string | null;
+  photo_url: string | null;
+  specialties: { name: string } | null;
+}
 
 interface ProfessionalCardProps {
   professional: Professional;
@@ -26,7 +37,7 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
         <div className="flex items-start space-x-4">
           {/* Avatar */}
           <Avatar className="h-16 w-16 border-2 border-primary/20">
-            <AvatarImage src={professional.photo} alt={professional.name} />
+            <AvatarImage src={professional.photo_url} alt={professional.name} />
             <AvatarFallback className="bg-gradient-primary text-white font-semibold">
               {getInitials(professional.name)}
             </AvatarFallback>
@@ -40,17 +51,9 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
                   {professional.name}
                 </h3>
                 <Badge variant="secondary" className="mt-1 mb-2">
-                  {professional.specialty}
+                  {professional.specialties?.name || "Sem especialidade"}
                 </Badge>
               </div>
-              
-              {/* Rating */}
-              {professional.rating && (
-                <div className="flex items-center space-x-1">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-medium">{professional.rating}</span>
-                </div>
-              )}
             </div>
 
             {/* Location */}
@@ -59,16 +62,16 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
               <span className="text-sm">{professional.location}</span>
             </div>
 
-            {/* Experience & Clinic */}
+            {/* Contact Info */}
             <div className="space-y-1 mb-4">
-              {professional.experience && (
+              {professional.phone && (
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-medium">Experiência:</span> {professional.experience}
+                  <span className="font-medium">Telefone:</span> {professional.phone}
                 </p>
               )}
-              {professional.clinic && (
+              {professional.email && (
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-medium">Local:</span> {professional.clinic}
+                  <span className="font-medium">Email:</span> {professional.email}
                 </p>
               )}
             </div>
@@ -80,15 +83,17 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
                   Ver Perfil Completo
                 </Link>
               </Button>
-              <Button
-                variant="outline" 
-                size="sm"
-                className="flex items-center space-x-2"
-                onClick={() => window.open(`https://wa.me/${professional.whatsapp.replace(/\D/g, '')}`, '_blank')}
-              >
-                <Phone className="h-4 w-4" />
-                <span>WhatsApp</span>
-              </Button>
+              {professional.whatsapp && (
+                <Button
+                  variant="outline" 
+                  size="sm"
+                  className="flex items-center space-x-2"
+                  onClick={() => window.open(`https://wa.me/${professional.whatsapp?.replace(/\D/g, '')}`, '_blank')}
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>WhatsApp</span>
+                </Button>
+              )}
             </div>
           </div>
         </div>
