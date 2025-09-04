@@ -11,9 +11,6 @@ import { supabase } from "@/integrations/supabase/client";
 interface Professional {
   id: string;
   name: string;
-  email: string | null;
-  phone: string | null;
-  whatsapp: string | null;
   location: string;
   description: string | null;
   photo_url: string | null;
@@ -43,7 +40,12 @@ const Professionals = () => {
         supabase
           .from("professionals")
           .select(`
-            *,
+            id,
+            name,
+            location,
+            description,
+            photo_url,
+            specialty_id,
             specialties (name)
           `)
           .order("name"),

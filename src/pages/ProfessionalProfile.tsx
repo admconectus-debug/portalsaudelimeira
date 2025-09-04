@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Phone, Mail, Star, Calendar, Award, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowLeft, MapPin, Star, Calendar, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7,19 +8,82 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { professionals } from "@/data/mockData";
+import { ContactInfo } from "@/components/auth/ContactInfo";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Professional {
+  id: string;
+  name: string;
+  location: string;
+  description: string | null;
+  photo_url: string | null;
+  specialties: { name: string } | null;
+}
 
 const ProfessionalProfile = () => {
   const { id } = useParams();
-  const professional = professionals.find(p => p.id === id);
+  const [professional, setProfessional] = useState<Professional | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!professional) {
+  useEffect(() => {
+    if (id) {
+      fetchProfessional(id);
+    }
+  }, [id]);
+
+  const fetchProfessional = async (professionalId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("professionals")
+        .select(`
+          id,
+          name,
+          location,
+          description,
+          photo_url,
+          specialty_id,
+          specialties (name)
+        `)
+        .eq("id", professionalId)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data) {
+        setProfessional(data);
+      } else {
+        setError("Profissional não encontrado");
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex justify-center">
+            <div className="animate-pulse">Carregando perfil...</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !professional) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
         <div className="container mx-auto px-4 py-12">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Profissional não encontrado</h1>
+            <h1 className="text-2xl font-bold mb-4">
+              {error || "Profissional não encontrado"}
+            </h1>
             <Button asChild>
               <Link to="/profissionais">Voltar para a lista</Link>
             </Button>
@@ -36,24 +100,6 @@ const ProfessionalProfile = () => {
       .join("")
       .toUpperCase()
       .slice(0, 2);
-  };
-
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      `Olá ${professional.name}, encontrei seu contato no portal Saúde Connect e gostaria de agendar uma consulta.`
-    );
-    const phoneNumber = professional.whatsapp.replace(/\D/g, '');
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-  };
-
-  const handlePhoneClick = () => {
-    window.open(`tel:${professional.phone}`, '_self');
-  };
-
-  const handleEmailClick = () => {
-    if (professional.email) {
-      window.open(`mailto:${professional.email}`, '_self');
-    }
   };
 
   return (
@@ -77,49 +123,24 @@ const ProfessionalProfile = () => {
                 <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
                   {/* Avatar */}
                   <Avatar className="h-32 w-32 border-4 border-primary/20 mx-auto md:mx-0">
-                    <AvatarImage src={professional.photo} alt={professional.name} />
+                    <AvatarImage src={professional.photo_url || undefined} alt={professional.name} />
                     <AvatarFallback className="bg-gradient-primary text-white text-2xl font-bold">
                       {getInitials(professional.name)}
                     </AvatarFallback>
                   </Avatar>
 
-                  {/* Basic Info */}
-                  <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-3xl font-bold mb-2">{professional.name}</h1>
-                    <Badge variant="secondary" className="text-lg px-4 py-2 mb-4">
-                      {professional.specialty}
-                    </Badge>
+                 <div className="flex-1 text-center md:text-left">
+                   <h1 className="text-3xl font-bold mb-2">{professional.name}</h1>
+                   <Badge variant="secondary" className="text-lg px-4 py-2 mb-4">
+                     {professional.specialties?.name || "Sem especialidade"}
+                   </Badge>
 
-                    {/* Rating & Experience */}
-                    <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4">
-                      {professional.rating && (
-                        <div className="flex items-center space-x-2">
-                          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                          <span className="font-semibold">{professional.rating}</span>
-                          <span className="text-muted-foreground">de 5.0</span>
-                        </div>
-                      )}
-                      {professional.experience && (
-                        <div className="flex items-center space-x-2">
-                          <Award className="h-5 w-5 text-primary" />
-                          <span className="font-medium">{professional.experience} de experiência</span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Location */}
-                    <div className="flex items-center justify-center md:justify-start text-muted-foreground mb-6">
-                      <MapPin className="h-5 w-5 mr-2" />
-                      <span>{professional.location}</span>
-                    </div>
-
-                    {/* Clinic */}
-                    {professional.clinic && (
-                      <p className="text-muted-foreground mb-6">
-                        <span className="font-medium">Atende em:</span> {professional.clinic}
-                      </p>
-                    )}
-                  </div>
+                   {/* Location */}
+                   <div className="flex items-center justify-center md:justify-start text-muted-foreground mb-6">
+                     <MapPin className="h-5 w-5 mr-2" />
+                     <span>{professional.location}</span>
+                   </div>
+                 </div>
                 </div>
 
                 {/* Description */}
@@ -140,63 +161,12 @@ const ProfessionalProfile = () => {
 
           {/* Contact Sidebar */}
           <div>
-            <Card className="sticky top-24">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <MessageCircle className="h-5 w-5 mr-2" />
-                  Informações de Contato
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {/* WhatsApp */}
-                <Button
-                  onClick={handleWhatsAppClick}
-                  size="lg"
-                  className="w-full bg-green-500 hover:bg-green-600 text-white"
-                >
-                  <MessageCircle className="h-5 w-5 mr-2" />
-                  WhatsApp: {professional.whatsapp}
-                </Button>
-
-                {/* Phone */}
-                <Button
-                  onClick={handlePhoneClick}
-                  variant="outline"
-                  size="lg"
-                  className="w-full"
-                >
-                  <Phone className="h-5 w-5 mr-2" />
-                  Telefone: {professional.phone}
-                </Button>
-
-                {/* Email */}
-                {professional.email && (
-                  <Button
-                    onClick={handleEmailClick}
-                    variant="outline"
-                    size="lg"
-                    className="w-full"
-                  >
-                    <Mail className="h-5 w-5 mr-2" />
-                    E-mail
-                  </Button>
-                )}
-
-                <Separator />
-
-                {/* Contact Notes */}
-                <div className="text-sm text-muted-foreground space-y-2">
-                  <p className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    Entre em contato para agendar
-                  </p>
-                  <p className="text-xs">
-                    * Horários de atendimento podem variar. 
-                    Confirme disponibilidade diretamente com o profissional.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="sticky top-24">
+              <ContactInfo 
+                professionalId={professional.id} 
+                professionalName={professional.name}
+              />
+            </div>
           </div>
         </div>
 
@@ -209,20 +179,8 @@ const ProfessionalProfile = () => {
             <CardContent className="space-y-4">
               <div>
                 <h4 className="font-medium text-muted-foreground">Especialidade</h4>
-                <p className="font-semibold">{professional.specialty}</p>
+                <p className="font-semibold">{professional.specialties?.name || "Não informada"}</p>
               </div>
-              {professional.experience && (
-                <div>
-                  <h4 className="font-medium text-muted-foreground">Experiência</h4>
-                  <p className="font-semibold">{professional.experience}</p>
-                </div>
-              )}
-              {professional.clinic && (
-                <div>
-                  <h4 className="font-medium text-muted-foreground">Local de Atendimento</h4>
-                  <p className="font-semibold">{professional.clinic}</p>
-                </div>
-              )}
               <div>
                 <h4 className="font-medium text-muted-foreground">Região de Atendimento</h4>
                 <p className="font-semibold">{professional.location}</p>

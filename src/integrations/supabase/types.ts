@@ -93,47 +93,7 @@ export type Database = {
       }
     }
     Views: {
-      professionals_public: {
-        Row: {
-          created_at: string | null
-          description: string | null
-          id: string | null
-          location: string | null
-          name: string | null
-          photo_url: string | null
-          specialty_id: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          description?: string | null
-          id?: string | null
-          location?: string | null
-          name?: string | null
-          photo_url?: string | null
-          specialty_id?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          description?: string | null
-          id?: string | null
-          location?: string | null
-          name?: string | null
-          photo_url?: string | null
-          specialty_id?: string | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "professionals_specialty_id_fkey"
-            columns: ["specialty_id"]
-            isOneToOne: false
-            referencedRelation: "specialties"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Functions: {
       get_professional_contact: {

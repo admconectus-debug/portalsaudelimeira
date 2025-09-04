@@ -8,9 +8,6 @@ import { Badge } from "@/components/ui/badge";
 interface Professional {
   id: string;
   name: string;
-  email: string | null;
-  phone: string | null;
-  whatsapp: string | null;
   location: string;
   description: string | null;
   photo_url: string | null;
@@ -62,38 +59,20 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
               <span className="text-sm">{professional.location}</span>
             </div>
 
-            {/* Contact Info */}
-            <div className="space-y-1 mb-4">
-              {professional.phone && (
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-medium">Telefone:</span> {professional.phone}
-                </p>
-              )}
-              {professional.email && (
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-medium">Email:</span> {professional.email}
-                </p>
-              )}
-            </div>
+            {/* Description preview */}
+            {professional.description && (
+              <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                {professional.description}
+              </p>
+            )}
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-2">
               <Button asChild size="sm" className="flex-1">
                 <Link to={`/profissionais/${professional.id}`}>
-                  Ver Perfil Completo
+                  Ver Perfil e Contato
                 </Link>
               </Button>
-              {professional.whatsapp && (
-                <Button
-                  variant="outline" 
-                  size="sm"
-                  className="flex items-center space-x-2"
-                  onClick={() => window.open(`https://wa.me/${professional.whatsapp?.replace(/\D/g, '')}`, '_blank')}
-                >
-                  <Phone className="h-4 w-4" />
-                  <span>WhatsApp</span>
-                </Button>
-              )}
             </div>
           </div>
         </div>
