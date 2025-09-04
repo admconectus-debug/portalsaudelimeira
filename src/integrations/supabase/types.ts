@@ -140,6 +140,7 @@ export type Database = {
         Args: { professional_id: string }
         Returns: {
           email: string
+          id: string
           phone: string
           whatsapp: string
         }[]
