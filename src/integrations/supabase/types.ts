@@ -93,10 +93,57 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      professionals_public: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string | null
+          location: string | null
+          name: string | null
+          photo_url: string | null
+          specialty_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          location?: string | null
+          name?: string | null
+          photo_url?: string | null
+          specialty_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          location?: string | null
+          name?: string | null
+          photo_url?: string | null
+          specialty_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professionals_specialty_id_fkey"
+            columns: ["specialty_id"]
+            isOneToOne: false
+            referencedRelation: "specialties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      get_professional_contact: {
+        Args: { professional_id: string }
+        Returns: {
+          email: string
+          phone: string
+          whatsapp: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
