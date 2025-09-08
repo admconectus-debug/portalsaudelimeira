@@ -19,6 +19,7 @@ interface Professional {
   location: string;
   description: string | null;
   photo_url: string | null;
+  banner_url: string | null;
   specialty_id: string | null;
   specialties: { name: string } | null;
 }
@@ -45,6 +46,7 @@ export function ProfessionalsTab() {
     location: "",
     description: "",
     photo_url: "",
+    banner_url: "",
     specialty_id: "",
   });
 
@@ -100,6 +102,7 @@ export function ProfessionalsTab() {
       location: "",
       description: "",
       photo_url: "",
+      banner_url: "",
       specialty_id: "",
     });
     setEditingProfessional(null);
@@ -121,6 +124,7 @@ export function ProfessionalsTab() {
             location: formData.location,
             description: formData.description || null,
             photo_url: formData.photo_url || null,
+            banner_url: formData.banner_url || null,
             specialty_id: formData.specialty_id || null,
           })
           .eq("id", editingProfessional.id);
@@ -142,6 +146,7 @@ export function ProfessionalsTab() {
             location: formData.location,
             description: formData.description || null,
             photo_url: formData.photo_url || null,
+            banner_url: formData.banner_url || null,
             specialty_id: formData.specialty_id || null,
           });
 
@@ -177,6 +182,7 @@ export function ProfessionalsTab() {
       location: professional.location,
       description: professional.description || "",
       photo_url: professional.photo_url || "",
+      banner_url: professional.banner_url || "",
       specialty_id: professional.specialty_id || "",
     });
     setIsDialogOpen(true);
@@ -290,7 +296,7 @@ export function ProfessionalsTab() {
                   </Select>
                 </div>
                 <div className="col-span-2">
-                  <Label htmlFor="photo_url">URL da Foto</Label>
+                  <Label htmlFor="photo_url">URL da Foto de Perfil</Label>
                   <Input
                     id="photo_url"
                     value={formData.photo_url}
@@ -299,12 +305,22 @@ export function ProfessionalsTab() {
                   />
                 </div>
                 <div className="col-span-2">
-                  <Label htmlFor="description">Descrição</Label>
+                  <Label htmlFor="banner_url">URL do Banner</Label>
+                  <Input
+                    id="banner_url"
+                    value={formData.banner_url}
+                    onChange={(e) => setFormData({ ...formData, banner_url: e.target.value })}
+                    placeholder="https://exemplo.com/banner.jpg"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <Label htmlFor="description">Sobre o Profissional</Label>
                   <Textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    rows={3}
+                    rows={4}
+                    placeholder="Conte sobre a experiência, especialidades, formação e o que mais considerar importante..."
                   />
                 </div>
               </div>

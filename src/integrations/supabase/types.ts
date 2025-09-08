@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       professionals: {
         Row: {
+          banner_url: string | null
           created_at: string
           description: string | null
           email: string | null
@@ -29,6 +30,7 @@ export type Database = {
           whatsapp: string | null
         }
         Insert: {
+          banner_url?: string | null
           created_at?: string
           description?: string | null
           email?: string | null
@@ -42,6 +44,7 @@ export type Database = {
           whatsapp?: string | null
         }
         Update: {
+          banner_url?: string | null
           created_at?: string
           description?: string | null
           email?: string | null

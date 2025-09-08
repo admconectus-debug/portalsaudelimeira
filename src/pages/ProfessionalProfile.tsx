@@ -17,6 +17,7 @@ interface Professional {
   location: string;
   description: string | null;
   photo_url: string | null;
+  banner_url: string | null;
   specialties: { name: string } | null;
 }
 
@@ -42,6 +43,7 @@ const ProfessionalProfile = () => {
           location,
           description,
           photo_url,
+          banner_url,
           specialty_id,
           specialties (name)
         `)
@@ -106,6 +108,18 @@ const ProfessionalProfile = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
+      {/* Professional Banner */}
+      {professional.banner_url && (
+        <div className="relative w-full h-64 md:h-80 overflow-hidden">
+          <img 
+            src={professional.banner_url} 
+            alt={`Banner de ${professional.name}`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
+      )}
+      
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <Button variant="ghost" asChild className="mb-6">
@@ -143,15 +157,20 @@ const ProfessionalProfile = () => {
                  </div>
                 </div>
 
-                {/* Description */}
+                {/* Enhanced About Section */}
                 {professional.description && (
                   <>
                     <Separator className="my-8" />
                     <div>
-                      <h3 className="text-xl font-semibold mb-4">Sobre o Profissional</h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {professional.description}
-                      </p>
+                      <div className="flex items-center mb-6">
+                        <Award className="h-6 w-6 mr-3 text-primary" />
+                        <h3 className="text-2xl font-semibold">Sobre o Profissional</h3>
+                      </div>
+                      <div className="prose prose-neutral dark:prose-invert max-w-none">
+                        <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
+                          {professional.description}
+                        </p>
+                      </div>
                     </div>
                   </>
                 )}
