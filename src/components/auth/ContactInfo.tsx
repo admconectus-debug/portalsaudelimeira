@@ -3,9 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Phone, Mail, MessageCircle, Lock, LogIn } from "lucide-react";
-import { Link } from "react-router-dom";
-import type { Session } from "@supabase/supabase-js";
+import { Phone, Mail, MessageCircle } from "lucide-react";
 
 interface ContactInfo {
   id: string;
@@ -20,32 +18,13 @@ interface ContactInfoProps {
 }
 
 export function ContactInfo({ professionalId, professionalName }: ContactInfoProps) {
-  const [session, setSession] = useState<Session | null>(null);
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-      }
-    );
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (session) {
-      fetchContactInfo();
-    } else {
-      setLoading(false);
-    }
-  }, [session, professionalId]);
+    fetchContactInfo();
+  }, [professionalId]);
 
   const fetchContactInfo = async () => {
     try {
@@ -89,30 +68,6 @@ export function ContactInfo({ professionalId, professionalName }: ContactInfoPro
     }
   };
 
-  if (!session) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <Lock className="h-5 w-5 mr-2" />
-            Informações de Contato
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Alert>
-            <LogIn className="h-4 w-4" />
-            <AlertDescription>
-              Para visualizar as informações de contato deste profissional, você precisa fazer login.
-              Isso protege os profissionais contra spam e uso indevido de seus dados.
-            </AlertDescription>
-          </Alert>
-          <Button asChild className="w-full mt-4">
-            <Link to="/auth">Fazer Login</Link>
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
 
   if (loading) {
     return (
