@@ -10,6 +10,9 @@ import type { Session } from "@supabase/supabase-js";
 import { ProfessionalsTab } from "@/components/admin/ProfessionalsTab";
 import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
 import { StorageTest } from "@/components/debug/StorageTest";
+import { ImageTest } from "@/components/debug/ImageTest";
+import { SimpleImageTest } from "@/components/debug/SimpleImageTest";
+import { ImageDebug } from "@/components/debug/ImageDebug";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -86,10 +89,13 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="professionals" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsList className="grid w-full grid-cols-6 mb-6">
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
                 <TabsTrigger value="debug">Debug Storage</TabsTrigger>
+                <TabsTrigger value="images">Teste Imagens</TabsTrigger>
+                <TabsTrigger value="simple">Teste Simples</TabsTrigger>
+                <TabsTrigger value="diagnose">Diagnóstico</TabsTrigger>
               </TabsList>
               
               <TabsContent value="professionals">
@@ -102,6 +108,18 @@ export default function Admin() {
               
               <TabsContent value="debug" className="flex justify-center">
                 <StorageTest />
+              </TabsContent>
+              
+              <TabsContent value="images" className="flex justify-center">
+                <ImageTest />
+              </TabsContent>
+              
+              <TabsContent value="simple" className="flex justify-center">
+                <SimpleImageTest />
+              </TabsContent>
+              
+              <TabsContent value="diagnose" className="flex justify-center">
+                <ImageDebug />
               </TabsContent>
             </Tabs>
           </CardContent>

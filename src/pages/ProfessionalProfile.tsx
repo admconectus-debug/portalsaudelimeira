@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Star, Calendar, Award } from "lucide-react";
+import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -17,7 +17,6 @@ interface Professional {
   location: string;
   description: string | null;
   photo_url: string | null;
-  banner_url: string | null;
   specialties: { name: string } | null;
 }
 
@@ -26,6 +25,9 @@ const ProfessionalProfile = () => {
   const [professional, setProfessional] = useState<Professional | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [imageLoading, setImageLoading] = useState({
+    avatar: false
+  });
 
   useEffect(() => {
     if (id) {
@@ -43,7 +45,6 @@ const ProfessionalProfile = () => {
           location,
           description,
           photo_url,
-          banner_url,
           specialty_id,
           specialties (name)
         `)
@@ -53,6 +54,8 @@ const ProfessionalProfile = () => {
       if (error) throw error;
 
       if (data) {
+        console.log('Dados do profissional:', data);
+        console.log('Photo URL:', data.photo_url);
         setProfessional(data);
       } else {
         setError("Profissional não encontrado");
@@ -108,17 +111,6 @@ const ProfessionalProfile = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Professional Banner */}
-      {professional.banner_url && (
-        <div className="relative w-full h-64 md:h-80 overflow-hidden">
-          <img 
-            src={professional.banner_url} 
-            alt={`Banner de ${professional.name}`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        </div>
-      )}
       
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
@@ -136,12 +128,35 @@ const ProfessionalProfile = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
                   {/* Avatar */}
-                  <Avatar className="h-32 w-32 border-4 border-primary/20 mx-auto md:mx-0">
-                    <AvatarImage src={professional.photo_url || undefined} alt={professional.name} />
-                    <AvatarFallback className="bg-gradient-primary text-white text-2xl font-bold">
-                      {getInitials(professional.name)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="relative mx-auto md:mx-0">
+                    <Avatar className="h-32 w-32 border-4 border-primary/20 shadow-lg">
+                      {imageLoading.avatar && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-muted/50 rounded-full">
+                          <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                        </div>
+                      )}
+                      <AvatarImage 
+                        src={professional.photo_url && professional.photo_url.trim() !== '' ? professional.photo_url : undefined} 
+                        alt={professional.name}
+                        className="object-cover"
+                        onLoad={() => setImageLoading(prev => ({ ...prev, avatar: false }))}
+                        onLoadStart={() => setImageLoading(prev => ({ ...prev, avatar: true }))}
+                        onError={(e) => {
+                          console.log('Erro ao carregar foto:', professional.photo_url);
+                          e.currentTarget.style.display = 'none';
+                          setImageLoading(prev => ({ ...prev, avatar: false }));
+                        }}
+                      />
+                      <AvatarFallback className="bg-gradient-primary text-white text-2xl font-bold">
+                        {getInitials(professional.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                    {professional.photo_url && professional.photo_url.trim() !== '' && !imageLoading.avatar && (
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center">
+                        <div className="w-3 h-3 bg-white rounded-full"></div>
+                      </div>
+                    )}
+                  </div>
 
                  <div className="flex-1 text-center md:text-left">
                    <h1 className="text-3xl font-bold mb-2">{professional.name}</h1>

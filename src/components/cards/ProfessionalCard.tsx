@@ -33,8 +33,15 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
       <CardContent className="p-6">
         <div className="flex items-start space-x-4">
           {/* Avatar */}
-          <Avatar className="h-16 w-16 border-2 border-primary/20">
-            <AvatarImage src={professional.photo_url} alt={professional.name} />
+          <Avatar className="h-16 w-16 border-2 border-primary/20 shadow-md">
+            <AvatarImage 
+              src={professional.photo_url || undefined} 
+              alt={professional.name}
+              className="object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
             <AvatarFallback className="bg-gradient-primary text-white font-semibold">
               {getInitials(professional.name)}
             </AvatarFallback>
