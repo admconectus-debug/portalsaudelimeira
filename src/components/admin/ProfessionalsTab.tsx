@@ -7,8 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import { uploadImage, uploadBanner } from "@/lib/storage";
 
 interface Professional {
   id: string;
@@ -296,21 +298,21 @@ export function ProfessionalsTab() {
                   </Select>
                 </div>
                 <div className="col-span-2">
-                  <Label htmlFor="photo_url">URL da Foto de Perfil</Label>
-                  <Input
-                    id="photo_url"
+                  <ImageUpload
+                    label="Foto de Perfil"
                     value={formData.photo_url}
-                    onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })}
-                    placeholder="https://exemplo.com/foto.jpg"
+                    onChange={(url) => setFormData({ ...formData, photo_url: url })}
+                    onUpload={uploadImage}
+                    maxSize={5}
                   />
                 </div>
                 <div className="col-span-2">
-                  <Label htmlFor="banner_url">URL do Banner</Label>
-                  <Input
-                    id="banner_url"
+                  <ImageUpload
+                    label="Banner"
                     value={formData.banner_url}
-                    onChange={(e) => setFormData({ ...formData, banner_url: e.target.value })}
-                    placeholder="https://exemplo.com/banner.jpg"
+                    onChange={(url) => setFormData({ ...formData, banner_url: url })}
+                    onUpload={uploadBanner}
+                    maxSize={10}
                   />
                 </div>
                 <div className="col-span-2">
