@@ -13,6 +13,7 @@ import { StorageTest } from "@/components/debug/StorageTest";
 import { ImageTest } from "@/components/debug/ImageTest";
 import { SimpleImageTest } from "@/components/debug/SimpleImageTest";
 import { ImageDebug } from "@/components/debug/ImageDebug";
+import { PhotoTest } from "@/components/debug/PhotoTest";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -89,13 +90,14 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="professionals" className="w-full">
-              <TabsList className="grid w-full grid-cols-6 mb-6">
+              <TabsList className="grid w-full grid-cols-7 mb-6">
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
                 <TabsTrigger value="debug">Debug Storage</TabsTrigger>
                 <TabsTrigger value="images">Teste Imagens</TabsTrigger>
                 <TabsTrigger value="simple">Teste Simples</TabsTrigger>
                 <TabsTrigger value="diagnose">Diagnóstico</TabsTrigger>
+                <TabsTrigger value="photos">Fotos</TabsTrigger>
               </TabsList>
               
               <TabsContent value="professionals">
@@ -120,6 +122,10 @@ export default function Admin() {
               
               <TabsContent value="diagnose" className="flex justify-center">
                 <ImageDebug />
+              </TabsContent>
+              
+              <TabsContent value="photos" className="flex justify-center">
+                <PhotoTest />
               </TabsContent>
             </Tabs>
           </CardContent>
