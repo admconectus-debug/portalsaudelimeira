@@ -9,6 +9,7 @@ import { LogOut, Plus } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { ProfessionalsTab } from "@/components/admin/ProfessionalsTab";
 import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
+import { StorageTest } from "@/components/debug/StorageTest";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -85,9 +86,10 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="professionals" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsList className="grid w-full grid-cols-3 mb-6">
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
+                <TabsTrigger value="debug">Debug Storage</TabsTrigger>
               </TabsList>
               
               <TabsContent value="professionals">
@@ -96,6 +98,10 @@ export default function Admin() {
               
               <TabsContent value="specialties">
                 <SpecialtiesTab />
+              </TabsContent>
+              
+              <TabsContent value="debug" className="flex justify-center">
+                <StorageTest />
               </TabsContent>
             </Tabs>
           </CardContent>
