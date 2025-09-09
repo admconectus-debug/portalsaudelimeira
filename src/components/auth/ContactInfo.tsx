@@ -49,7 +49,7 @@ export function ContactInfo({ professionalId, professionalName }: ContactInfoPro
   const handleWhatsAppClick = () => {
     if (contactInfo?.whatsapp) {
       const message = encodeURIComponent(
-        `Olá ${professionalName}, encontrei seu contato no portal Saúde Connect e gostaria de agendar uma consulta.`
+        `Olá ${professionalName}, encontrei seu contato no Portal Saúde Limeira e gostaria de agendar uma consulta.`
       );
       const phoneNumber = contactInfo.whatsapp.replace(/\D/g, '');
       window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');

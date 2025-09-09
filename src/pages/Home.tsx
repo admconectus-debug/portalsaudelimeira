@@ -129,7 +129,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Por que escolher o Saúde Connect?
+              Por que escolher o Portal Saúde Limeira?
             </h2>
             <p className="text-lg text-muted-foreground">
               Facilitamos o acesso a profissionais de saúde qualificados e confiáveis

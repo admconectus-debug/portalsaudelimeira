@@ -194,7 +194,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium">E-mail</p>
-                    <p className="text-sm text-muted-foreground">contato@saudeconnect.com</p>
+                    <p className="text-sm text-muted-foreground">contato@portalsaudelimeira.com</p>
                   </div>
                 </div>
               </CardContent>
