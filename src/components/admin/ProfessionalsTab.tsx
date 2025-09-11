@@ -302,7 +302,10 @@ export function ProfessionalsTab() {
                     label="Foto de Perfil"
                     value={formData.photo_url}
                     onChange={(url) => setFormData({ ...formData, photo_url: url })}
-                    onUpload={uploadImage}
+                    onUpload={async (file) => {
+                      const result = await uploadImage(file);
+                      return result.url;
+                    }}
                     maxSize={5}
                   />
                 </div>
@@ -311,7 +314,10 @@ export function ProfessionalsTab() {
                     label="Banner"
                     value={formData.banner_url}
                     onChange={(url) => setFormData({ ...formData, banner_url: url })}
-                    onUpload={uploadBanner}
+                    onUpload={async (file) => {
+                      const result = await uploadBanner(file);
+                      return result.url;
+                    }}
                     maxSize={10}
                   />
                 </div>
