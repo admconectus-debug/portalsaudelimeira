@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
+// Import banner images
+import banner1 from "@/assets/banner-1.jpg";
+import banner2 from "@/assets/banner-2.jpg";
+import banner3 from "@/assets/banner-3.jpg";
+import banner4 from "@/assets/banner-4.jpg";
+import banner5 from "@/assets/banner-5.jpg";
+
 interface Banner {
   id: number;
   title: string;
@@ -21,7 +28,7 @@ const banners: Banner[] = [
     title: "Encontre os Melhores",
     subtitle: "Profissionais de Saúde",
     description: "Conectamos você com médicos, dentistas, psicólogos e outros especialistas qualificados na sua região",
-    imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1920&q=80",
+    imageUrl: banner1,
     ctaText: "Ver Profissionais",
     ctaLink: "/profissionais"
   },
@@ -30,7 +37,7 @@ const banners: Banner[] = [
     title: "Cuidados Médicos",
     subtitle: "de Qualidade",
     description: "Profissionais verificados e qualificados para cuidar da sua saúde e bem-estar",
-    imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1920&q=80",
+    imageUrl: banner2,
     ctaText: "Agendar Consulta",
     ctaLink: "/profissionais"
   },
@@ -39,7 +46,7 @@ const banners: Banner[] = [
     title: "Especialidades",
     subtitle: "Completas",
     description: "Diversas especialidades médicas disponíveis para atender todas as suas necessidades",
-    imageUrl: "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=1920&q=80",
+    imageUrl: banner3,
     ctaText: "Ver Especialidades",
     ctaLink: "/especialidades"
   },
@@ -48,7 +55,7 @@ const banners: Banner[] = [
     title: "Atendimento",
     subtitle: "Personalizado",
     description: "Cada profissional oferece atendimento personalizado e focado nas suas necessidades específicas",
-    imageUrl: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=1920&q=80",
+    imageUrl: banner4,
     ctaText: "Fale Conosco",
     ctaLink: "/contato"
   },
@@ -57,7 +64,7 @@ const banners: Banner[] = [
     title: "Sua Saúde",
     subtitle: "Nossa Prioridade",
     description: "Facilitamos o acesso a cuidados de saúde de qualidade na sua região",
-    imageUrl: "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=1920&q=80",
+    imageUrl: banner5,
     ctaText: "Começar Agora",
     ctaLink: "/profissionais"
   }
