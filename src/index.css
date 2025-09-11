@@ -21,6 +21,7 @@ All colors MUST be HSL.
     /* Medical Blue - Primary brand color */
     --primary: 210 100% 45%;
     --primary-light: 210 100% 55%;
+    --primary-glow: 210 100% 65%;
     --primary-foreground: 0 0% 100%;
 
     /* Health Green - Secondary accent */

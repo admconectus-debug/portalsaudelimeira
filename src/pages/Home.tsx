@@ -9,6 +9,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SpecialtyCard from "@/components/cards/SpecialtyCard";
 import ProfessionalCard from "@/components/cards/ProfessionalCard";
+import { BannerSlider } from "@/components/home/BannerSlider";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Professional {
@@ -75,50 +76,43 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative container mx-auto px-4 py-20">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Encontre os Melhores
-              <span className="block">Profissionais de Saúde</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Conectamos você com médicos, dentistas, psicólogos e outros especialistas 
-              qualificados na sua região
-            </p>
-            
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-8">
-              <div className="flex flex-col md:flex-row gap-4 p-2 bg-white/10 backdrop-blur-sm rounded-lg">
+      {/* Banner Slider Section */}
+      <BannerSlider />
+
+      {/* Search Section */}
+      <section className="py-12 bg-white/95 backdrop-blur-sm -mt-20 relative z-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h2 className="text-2xl font-semibold text-center mb-6">
+                Encontre o profissional ideal para você
+              </h2>
+              <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
                   <Input 
                     placeholder="Buscar por especialidade ou profissional..."
-                    className="border-white/20 bg-white/10 text-white placeholder:text-white/70"
+                    className="h-12 text-lg"
                   />
                 </div>
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                <Button size="lg" className="h-12 px-8">
                   <Search className="h-5 w-5 mr-2" />
                   Buscar
                 </Button>
               </div>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary">
-                <Link to="/profissionais">
-                  <Users className="h-5 w-5 mr-2" />
-                  Ver Todos os Profissionais
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                <Link to="/especialidades">
-                  <Heart className="h-5 w-5 mr-2" />
-                  Explorar Especialidades
-                </Link>
-              </Button>
+              <div className="flex flex-wrap gap-2 mt-6 justify-center">
+                <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                  Cardiologia
+                </Badge>
+                <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                  Odontologia
+                </Badge>
+                <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                  Psicologia
+                </Badge>
+                <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                  Pediatria
+                </Badge>
+              </div>
             </div>
           </div>
         </div>
