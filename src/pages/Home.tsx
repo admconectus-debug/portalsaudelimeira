@@ -84,7 +84,7 @@ const Home = () => {
       <ModalitiesSection />
 
       {/* Search Section */}
-      <section className="py-12 bg-white/95 backdrop-blur-sm -mt-20 relative z-10">
+      <section className="py-8 bg-white/95 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-xl p-8">
