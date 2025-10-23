@@ -10,6 +10,7 @@ import Footer from "@/components/layout/Footer";
 import SpecialtyCard from "@/components/cards/SpecialtyCard";
 import ProfessionalCard from "@/components/cards/ProfessionalCard";
 import { BannerSlider } from "@/components/home/BannerSlider";
+import { ModalitiesSection } from "@/components/home/ModalitiesSection";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Professional {
@@ -78,6 +79,9 @@ const Home = () => {
       
       {/* Banner Slider Section */}
       <BannerSlider />
+
+      {/* Modalities Section */}
+      <ModalitiesSection />
 
       {/* Search Section */}
       <section className="py-12 bg-white/95 backdrop-blur-sm -mt-20 relative z-10">
