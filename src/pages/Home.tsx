@@ -11,6 +11,7 @@ import SpecialtyCard from "@/components/cards/SpecialtyCard";
 import ProfessionalCard from "@/components/cards/ProfessionalCard";
 import { BannerSlider } from "@/components/home/BannerSlider";
 import { ModalitiesSection } from "@/components/home/ModalitiesSection";
+import { VideosSection } from "@/components/home/VideosSection";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Professional {
@@ -82,6 +83,9 @@ const Home = () => {
 
       {/* Modalities Section */}
       <ModalitiesSection />
+
+      {/* Videos Section */}
+      <VideosSection />
 
       {/* Search Section */}
       <section className="py-8 bg-white/95 backdrop-blur-sm relative z-10">
