@@ -12,6 +12,8 @@ import ProfessionalCard from "@/components/cards/ProfessionalCard";
 import { BannerSlider } from "@/components/home/BannerSlider";
 import { ModalitiesSection } from "@/components/home/ModalitiesSection";
 import { VideosSection } from "@/components/home/VideosSection";
+import { PartnersSection } from "@/components/home/PartnersSection";
+import { NewsCarousel } from "@/components/home/NewsCarousel";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Professional {
@@ -237,6 +239,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Partners Section */}
+      <PartnersSection />
+
+      {/* News Carousel */}
+      <NewsCarousel />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-primary text-white">
