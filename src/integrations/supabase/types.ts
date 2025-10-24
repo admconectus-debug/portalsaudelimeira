@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      partners: {
+        Row: {
+          business_area: string
+          company_name: string
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          logo_url: string | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          business_area: string
+          company_name: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          business_area?: string
+          company_name?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       professionals: {
         Row: {
           banner_url: string | null

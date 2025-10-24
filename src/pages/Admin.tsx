@@ -9,6 +9,7 @@ import { LogOut, Plus } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { ProfessionalsTab } from "@/components/admin/ProfessionalsTab";
 import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
+import { PartnersTab } from "@/components/admin/PartnersTab";
 import { StorageTest } from "@/components/debug/StorageTest";
 import { ImageTest } from "@/components/debug/ImageTest";
 import { SimpleImageTest } from "@/components/debug/SimpleImageTest";
@@ -90,9 +91,10 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="professionals" className="w-full">
-              <TabsList className="grid w-full grid-cols-7 mb-6">
+              <TabsList className="grid w-full grid-cols-8 mb-6">
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
+                <TabsTrigger value="partners">Parceiros</TabsTrigger>
                 <TabsTrigger value="debug">Debug Storage</TabsTrigger>
                 <TabsTrigger value="images">Teste Imagens</TabsTrigger>
                 <TabsTrigger value="simple">Teste Simples</TabsTrigger>
@@ -106,6 +108,10 @@ export default function Admin() {
               
               <TabsContent value="specialties">
                 <SpecialtiesTab />
+              </TabsContent>
+              
+              <TabsContent value="partners">
+                <PartnersTab />
               </TabsContent>
               
               <TabsContent value="debug" className="flex justify-center">
