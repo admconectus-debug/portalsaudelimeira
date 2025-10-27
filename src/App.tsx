@@ -8,6 +8,10 @@ import Professionals from "./pages/Professionals";
 import ProfessionalProfile from "./pages/ProfessionalProfile";
 import Specialties from "./pages/Specialties";
 import SpecialtyProfessionals from "./pages/SpecialtyProfessionals";
+import Clinics from "./pages/Clinics";
+import ClinicDetail from "./pages/ClinicDetail";
+import Doctors from "./pages/Doctors";
+import DoctorDetail from "./pages/DoctorDetail";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
@@ -27,6 +31,10 @@ const App = () => (
           <Route path="/profissionais/:id" element={<ProfessionalProfile />} />
           <Route path="/especialidades" element={<Specialties />} />
           <Route path="/especialidades/:id" element={<SpecialtyProfessionals />} />
+          <Route path="/clinicas" element={<Clinics />} />
+          <Route path="/clinicas/:slug" element={<ClinicDetail />} />
+          <Route path="/medicos" element={<Doctors />} />
+          <Route path="/medicos/:slug" element={<DoctorDetail />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
