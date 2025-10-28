@@ -10,6 +10,7 @@ import type { Session } from "@supabase/supabase-js";
 import { ProfessionalsTab } from "@/components/admin/ProfessionalsTab";
 import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
 import { PartnersTab } from "@/components/admin/PartnersTab";
+import { ClinicsTab } from "@/components/admin/ClinicsTab";
 import { StorageTest } from "@/components/debug/StorageTest";
 import { ImageTest } from "@/components/debug/ImageTest";
 import { SimpleImageTest } from "@/components/debug/SimpleImageTest";
@@ -90,8 +91,9 @@ export default function Admin() {
             <CardTitle>Gerenciamento do Portal</CardTitle>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="professionals" className="w-full">
-              <TabsList className="grid w-full grid-cols-8 mb-6">
+            <Tabs defaultValue="clinics" className="w-full">
+              <TabsList className="grid w-full grid-cols-9 mb-6">
+                <TabsTrigger value="clinics">Clínicas</TabsTrigger>
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
                 <TabsTrigger value="partners">Parceiros</TabsTrigger>
@@ -101,6 +103,10 @@ export default function Admin() {
                 <TabsTrigger value="diagnose">Diagnóstico</TabsTrigger>
                 <TabsTrigger value="photos">Fotos</TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="clinics">
+                <ClinicsTab />
+              </TabsContent>
               
               <TabsContent value="professionals">
                 <ProfessionalsTab />
