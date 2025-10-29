@@ -14,42 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      clinic_doctors: {
-        Row: {
-          clinic_id: string
-          created_at: string
-          doctor_id: string
-          id: string
-        }
-        Insert: {
-          clinic_id: string
-          created_at?: string
-          doctor_id: string
-          id?: string
-        }
-        Update: {
-          clinic_id?: string
-          created_at?: string
-          doctor_id?: string
-          id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "clinic_doctors_clinic_id_fkey"
-            columns: ["clinic_id"]
-            isOneToOne: false
-            referencedRelation: "clinics"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "clinic_doctors_doctor_id_fkey"
-            columns: ["doctor_id"]
-            isOneToOne: false
-            referencedRelation: "doctors"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       clinic_professionals: {
         Row: {
           clinic_id: string
@@ -137,51 +101,6 @@ export type Database = {
           state?: string | null
           updated_at?: string
           website?: string | null
-        }
-        Relationships: []
-      }
-      doctors: {
-        Row: {
-          appointment_link: string | null
-          bio: string | null
-          created_at: string
-          crm: string | null
-          id: string
-          is_active: boolean
-          name: string
-          photo_url: string | null
-          schedule: string | null
-          slug: string
-          specialty: string
-          updated_at: string
-        }
-        Insert: {
-          appointment_link?: string | null
-          bio?: string | null
-          created_at?: string
-          crm?: string | null
-          id?: string
-          is_active?: boolean
-          name: string
-          photo_url?: string | null
-          schedule?: string | null
-          slug: string
-          specialty: string
-          updated_at?: string
-        }
-        Update: {
-          appointment_link?: string | null
-          bio?: string | null
-          created_at?: string
-          crm?: string | null
-          id?: string
-          is_active?: boolean
-          name?: string
-          photo_url?: string | null
-          schedule?: string | null
-          slug?: string
-          specialty?: string
-          updated_at?: string
         }
         Relationships: []
       }

@@ -28,12 +28,6 @@ interface Clinic {
   is_active: boolean;
 }
 
-interface Doctor {
-  id: string;
-  name: string;
-  specialty: string;
-}
-
 interface Professional {
   id: string;
   name: string;
@@ -42,15 +36,13 @@ interface Professional {
 
 export function ClinicsTab() {
   const [clinics, setClinics] = useState<Clinic[]>([]);
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isDoctorsDialogOpen, setIsDoctorsDialogOpen] = useState(false);
+  const [isProfessionalsDialogOpen, setIsProfessionalsDialogOpen] = useState(false);
   const [editingClinic, setEditingClinic] = useState<Clinic | null>(null);
   const [selectedClinicId, setSelectedClinicId] = useState<string | null>(null);
-  const [selectedDoctorIds, setSelectedDoctorIds] = useState<string[]>([]);
   const [selectedProfessionalIds, setSelectedProfessionalIds] = useState<string[]>([]);
   const { toast } = useToast();
 
@@ -70,7 +62,6 @@ export function ClinicsTab() {
 
   useEffect(() => {
     fetchClinics();
-    fetchDoctors();
     fetchProfessionals();
   }, []);
 
@@ -101,24 +92,6 @@ export function ClinicsTab() {
     setLoading(false);
   };
 
-  const fetchDoctors = async () => {
-    const { data, error } = await supabase
-      .from("doctors")
-      .select("id, name, specialty")
-      .eq("is_active", true)
-      .order("name");
-
-    if (error) {
-      toast({
-        title: "Erro ao carregar médicos",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      setDoctors(data || []);
-    }
-  };
-
   const fetchProfessionals = async () => {
     const { data, error } = await supabase
       .from("professionals")
@@ -133,23 +106,6 @@ export function ClinicsTab() {
       });
     } else {
       setProfessionals(data || []);
-    }
-  };
-
-  const fetchClinicDoctors = async (clinicId: string) => {
-    const { data, error } = await supabase
-      .from("clinic_doctors")
-      .select("doctor_id")
-      .eq("clinic_id", clinicId);
-
-    if (error) {
-      toast({
-        title: "Erro ao carregar médicos da clínica",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      setSelectedDoctorIds(data?.map(d => d.doctor_id) || []);
     }
   };
 
@@ -300,43 +256,22 @@ export function ClinicsTab() {
     }
   };
 
-  const handleManageDoctors = async (clinic: Clinic) => {
+  const handleManageProfessionals = async (clinic: Clinic) => {
     setSelectedClinicId(clinic.id);
-    await fetchClinicDoctors(clinic.id);
     await fetchClinicProfessionals(clinic.id);
-    setIsDoctorsDialogOpen(true);
+    setIsProfessionalsDialogOpen(true);
   };
 
-  const handleSaveDoctors = async () => {
+  const handleSaveProfessionals = async () => {
     if (!selectedClinicId) return;
     setSaving(true);
 
     try {
-      // Remove existing doctor associations
-      await supabase
-        .from("clinic_doctors")
-        .delete()
-        .eq("clinic_id", selectedClinicId);
-
       // Remove existing professional associations
       await supabase
         .from("clinic_professionals")
         .delete()
         .eq("clinic_id", selectedClinicId);
-
-      // Add new doctor associations
-      if (selectedDoctorIds.length > 0) {
-        const doctorAssociations = selectedDoctorIds.map(doctorId => ({
-          clinic_id: selectedClinicId,
-          doctor_id: doctorId,
-        }));
-
-        const { error: doctorError } = await supabase
-          .from("clinic_doctors")
-          .insert(doctorAssociations);
-
-        if (doctorError) throw doctorError;
-      }
 
       // Add new professional associations
       if (selectedProfessionalIds.length > 0) {
@@ -345,21 +280,20 @@ export function ClinicsTab() {
           professional_id: professionalId,
         }));
 
-        const { error: professionalError } = await supabase
+        const { error } = await supabase
           .from("clinic_professionals")
           .insert(professionalAssociations);
 
-        if (professionalError) throw professionalError;
+        if (error) throw error;
       }
 
       toast({
         title: "Profissionais atualizados",
-        description: "Os médicos e profissionais da clínica foram salvos com sucesso.",
+        description: "Os profissionais da clínica foram salvos com sucesso.",
       });
 
-      setIsDoctorsDialogOpen(false);
+      setIsProfessionalsDialogOpen(false);
       setSelectedClinicId(null);
-      setSelectedDoctorIds([]);
       setSelectedProfessionalIds([]);
     } catch (error: any) {
       toast({
@@ -370,14 +304,6 @@ export function ClinicsTab() {
     }
 
     setSaving(false);
-  };
-
-  const toggleDoctorSelection = (doctorId: string) => {
-    setSelectedDoctorIds(prev =>
-      prev.includes(doctorId)
-        ? prev.filter(id => id !== doctorId)
-        : [...prev, doctorId]
-    );
   };
 
   const toggleProfessionalSelection = (professionalId: string) => {
@@ -579,8 +505,8 @@ export function ClinicsTab() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => handleManageDoctors(clinic)}
-                        title="Gerenciar médicos"
+                        onClick={() => handleManageProfessionals(clinic)}
+                        title="Gerenciar profissionais"
                       >
                         <Users className="w-4 h-4" />
                       </Button>
@@ -607,71 +533,42 @@ export function ClinicsTab() {
         </Table>
       </div>
 
-      <Dialog open={isDoctorsDialogOpen} onOpenChange={setIsDoctorsDialogOpen}>
+      <Dialog open={isProfessionalsDialogOpen} onOpenChange={setIsProfessionalsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Gerenciar Profissionais da Clínica</DialogTitle>
           </DialogHeader>
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h4 className="font-semibold">Médicos</h4>
-              {doctors.length === 0 ? (
-                <p className="text-center py-4 text-muted-foreground">
-                  Nenhum médico cadastrado
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  {doctors.map((doctor) => (
-                    <div key={doctor.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted">
-                      <Checkbox
-                        id={`doctor-${doctor.id}`}
-                        checked={selectedDoctorIds.includes(doctor.id)}
-                        onCheckedChange={() => toggleDoctorSelection(doctor.id)}
-                      />
-                      <Label htmlFor={`doctor-${doctor.id}`} className="cursor-pointer flex-1">
-                        <div className="font-medium">{doctor.name}</div>
-                        <div className="text-sm text-muted-foreground">{doctor.specialty}</div>
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold">Profissionais</h4>
-              {professionals.length === 0 ? (
-                <p className="text-center py-4 text-muted-foreground">
-                  Nenhum profissional cadastrado
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  {professionals.map((professional) => (
-                    <div key={professional.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted">
-                      <Checkbox
-                        id={`professional-${professional.id}`}
-                        checked={selectedProfessionalIds.includes(professional.id)}
-                        onCheckedChange={() => toggleProfessionalSelection(professional.id)}
-                      />
-                      <Label htmlFor={`professional-${professional.id}`} className="cursor-pointer flex-1">
-                        <div className="font-medium">{professional.name}</div>
-                        <div className="text-sm text-muted-foreground">{professional.location}</div>
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
+          <div className="space-y-4">
+            {professionals.length === 0 ? (
+              <p className="text-center py-8 text-muted-foreground">
+                Nenhum profissional cadastrado
+              </p>
+            ) : (
+              <div className="space-y-2">
+                {professionals.map((professional) => (
+                  <div key={professional.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted">
+                    <Checkbox
+                      id={`professional-${professional.id}`}
+                      checked={selectedProfessionalIds.includes(professional.id)}
+                      onCheckedChange={() => toggleProfessionalSelection(professional.id)}
+                    />
+                    <Label htmlFor={`professional-${professional.id}`} className="cursor-pointer flex-1">
+                      <div className="font-medium">{professional.name}</div>
+                      <div className="text-sm text-muted-foreground">{professional.location}</div>
+                    </Label>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="flex justify-end gap-2 pt-4 border-t">
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setIsDoctorsDialogOpen(false)}
+                onClick={() => setIsProfessionalsDialogOpen(false)}
               >
                 Cancelar
               </Button>
-              <Button onClick={handleSaveDoctors} disabled={saving}>
+              <Button onClick={handleSaveProfessionals} disabled={saving}>
                 {saving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                 Salvar
               </Button>

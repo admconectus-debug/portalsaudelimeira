@@ -22,18 +22,18 @@ interface Clinic {
   website: string | null;
 }
 
-interface Doctor {
+interface Professional {
   id: string;
   name: string;
-  specialty: string;
+  location: string;
   photo_url: string | null;
-  slug: string;
+  specialty_id: string | null;
 }
 
 const ClinicDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const [clinic, setClinic] = useState<Clinic | null>(null);
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -56,31 +56,31 @@ const ClinicDetail = () => {
       if (clinicData) {
         setClinic(clinicData);
 
-        const { data: doctorsData, error: doctorsError } = await supabase
-          .from("clinic_doctors")
+        const { data: professionalsData, error: professionalsError } = await supabase
+          .from("clinic_professionals")
           .select(`
-            doctor_id,
-            doctors (
+            professional_id,
+            professionals (
               id,
               name,
-              specialty,
+              location,
               photo_url,
-              slug
+              specialty_id
             )
           `)
           .eq("clinic_id", clinicData.id);
 
-        if (doctorsError) throw doctorsError;
+        if (professionalsError) throw professionalsError;
 
-        const formattedDoctors = doctorsData
-          ?.filter(item => item.doctors)
+        const formattedProfessionals = professionalsData
+          ?.filter(item => item.professionals)
           .map(item => {
-            const doctor = Array.isArray(item.doctors) ? item.doctors[0] : item.doctors;
-            return doctor;
+            const professional = Array.isArray(item.professionals) ? item.professionals[0] : item.professionals;
+            return professional;
           })
-          .filter(Boolean) as Doctor[];
+          .filter(Boolean) as Professional[];
 
-        setDoctors(formattedDoctors || []);
+        setProfessionals(formattedProfessionals || []);
       }
     } catch (error) {
       console.error("Erro ao carregar dados da clínica:", error);
@@ -242,19 +242,19 @@ const ClinicDetail = () => {
           </CardContent>
         </Card>
 
-        {doctors.length > 0 && (
+        {professionals.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold mb-6">Médicos desta Clínica</h2>
+            <h2 className="text-2xl font-bold mb-6">Profissionais desta Clínica</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {doctors.map((doctor) => (
-                <Card key={doctor.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              {professionals.map((professional) => (
+                <Card key={professional.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex flex-col items-center text-center">
                       <div className="w-24 h-24 rounded-full overflow-hidden mb-4 bg-gradient-subtle">
-                        {doctor.photo_url ? (
+                        {professional.photo_url ? (
                           <img 
-                            src={doctor.photo_url} 
-                            alt={doctor.name}
+                            src={professional.photo_url} 
+                            alt={professional.name}
                             className="w-full h-full object-cover"
                           />
                         ) : (
@@ -263,10 +263,10 @@ const ClinicDetail = () => {
                           </div>
                         )}
                       </div>
-                      <h3 className="font-bold text-lg mb-1">{doctor.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-4">{doctor.specialty}</p>
+                      <h3 className="font-bold text-lg mb-1">{professional.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-4">{professional.location}</p>
                       <Button asChild variant="outline" size="sm" className="w-full">
-                        <Link to={`/medicos/${doctor.slug}`}>
+                        <Link to={`/profissionais/${professional.id}`}>
                           Ver Perfil
                         </Link>
                       </Button>
