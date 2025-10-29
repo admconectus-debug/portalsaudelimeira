@@ -34,9 +34,16 @@ interface Doctor {
   specialty: string;
 }
 
+interface Professional {
+  id: string;
+  name: string;
+  location: string;
+}
+
 export function ClinicsTab() {
   const [clinics, setClinics] = useState<Clinic[]>([]);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -44,6 +51,7 @@ export function ClinicsTab() {
   const [editingClinic, setEditingClinic] = useState<Clinic | null>(null);
   const [selectedClinicId, setSelectedClinicId] = useState<string | null>(null);
   const [selectedDoctorIds, setSelectedDoctorIds] = useState<string[]>([]);
+  const [selectedProfessionalIds, setSelectedProfessionalIds] = useState<string[]>([]);
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -63,6 +71,7 @@ export function ClinicsTab() {
   useEffect(() => {
     fetchClinics();
     fetchDoctors();
+    fetchProfessionals();
   }, []);
 
   const generateSlug = (name: string) => {
@@ -110,6 +119,23 @@ export function ClinicsTab() {
     }
   };
 
+  const fetchProfessionals = async () => {
+    const { data, error } = await supabase
+      .from("professionals")
+      .select("id, name, location")
+      .order("name");
+
+    if (error) {
+      toast({
+        title: "Erro ao carregar profissionais",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      setProfessionals(data || []);
+    }
+  };
+
   const fetchClinicDoctors = async (clinicId: string) => {
     const { data, error } = await supabase
       .from("clinic_doctors")
@@ -124,6 +150,23 @@ export function ClinicsTab() {
       });
     } else {
       setSelectedDoctorIds(data?.map(d => d.doctor_id) || []);
+    }
+  };
+
+  const fetchClinicProfessionals = async (clinicId: string) => {
+    const { data, error } = await supabase
+      .from("clinic_professionals")
+      .select("professional_id")
+      .eq("clinic_id", clinicId);
+
+    if (error) {
+      toast({
+        title: "Erro ao carregar profissionais da clínica",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      setSelectedProfessionalIds(data?.map(p => p.professional_id) || []);
     }
   };
 
@@ -260,6 +303,7 @@ export function ClinicsTab() {
   const handleManageDoctors = async (clinic: Clinic) => {
     setSelectedClinicId(clinic.id);
     await fetchClinicDoctors(clinic.id);
+    await fetchClinicProfessionals(clinic.id);
     setIsDoctorsDialogOpen(true);
   };
 
@@ -268,37 +312,58 @@ export function ClinicsTab() {
     setSaving(true);
 
     try {
-      // Remove existing associations
+      // Remove existing doctor associations
       await supabase
         .from("clinic_doctors")
         .delete()
         .eq("clinic_id", selectedClinicId);
 
-      // Add new associations
+      // Remove existing professional associations
+      await supabase
+        .from("clinic_professionals")
+        .delete()
+        .eq("clinic_id", selectedClinicId);
+
+      // Add new doctor associations
       if (selectedDoctorIds.length > 0) {
-        const associations = selectedDoctorIds.map(doctorId => ({
+        const doctorAssociations = selectedDoctorIds.map(doctorId => ({
           clinic_id: selectedClinicId,
           doctor_id: doctorId,
         }));
 
-        const { error } = await supabase
+        const { error: doctorError } = await supabase
           .from("clinic_doctors")
-          .insert(associations);
+          .insert(doctorAssociations);
 
-        if (error) throw error;
+        if (doctorError) throw doctorError;
+      }
+
+      // Add new professional associations
+      if (selectedProfessionalIds.length > 0) {
+        const professionalAssociations = selectedProfessionalIds.map(professionalId => ({
+          clinic_id: selectedClinicId,
+          professional_id: professionalId,
+        }));
+
+        const { error: professionalError } = await supabase
+          .from("clinic_professionals")
+          .insert(professionalAssociations);
+
+        if (professionalError) throw professionalError;
       }
 
       toast({
-        title: "Médicos atualizados",
-        description: "Os médicos da clínica foram salvos com sucesso.",
+        title: "Profissionais atualizados",
+        description: "Os médicos e profissionais da clínica foram salvos com sucesso.",
       });
 
       setIsDoctorsDialogOpen(false);
       setSelectedClinicId(null);
       setSelectedDoctorIds([]);
+      setSelectedProfessionalIds([]);
     } catch (error: any) {
       toast({
-        title: "Erro ao salvar médicos",
+        title: "Erro ao salvar profissionais",
         description: error.message,
         variant: "destructive",
       });
@@ -312,6 +377,14 @@ export function ClinicsTab() {
       prev.includes(doctorId)
         ? prev.filter(id => id !== doctorId)
         : [...prev, doctorId]
+    );
+  };
+
+  const toggleProfessionalSelection = (professionalId: string) => {
+    setSelectedProfessionalIds(prev =>
+      prev.includes(professionalId)
+        ? prev.filter(id => id !== professionalId)
+        : [...prev, professionalId]
     );
   };
 
@@ -535,33 +608,62 @@ export function ClinicsTab() {
       </div>
 
       <Dialog open={isDoctorsDialogOpen} onOpenChange={setIsDoctorsDialogOpen}>
-        <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Gerenciar Médicos da Clínica</DialogTitle>
+            <DialogTitle>Gerenciar Profissionais da Clínica</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4">
-            {doctors.length === 0 ? (
-              <p className="text-center py-8 text-muted-foreground">
-                Nenhum médico cadastrado
-              </p>
-            ) : (
-              <div className="space-y-2">
-                {doctors.map((doctor) => (
-                  <div key={doctor.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted">
-                    <Checkbox
-                      id={`doctor-${doctor.id}`}
-                      checked={selectedDoctorIds.includes(doctor.id)}
-                      onCheckedChange={() => toggleDoctorSelection(doctor.id)}
-                    />
-                    <Label htmlFor={`doctor-${doctor.id}`} className="cursor-pointer flex-1">
-                      <div className="font-medium">{doctor.name}</div>
-                      <div className="text-sm text-muted-foreground">{doctor.specialty}</div>
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="flex justify-end gap-2 pt-4">
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <h4 className="font-semibold">Médicos</h4>
+              {doctors.length === 0 ? (
+                <p className="text-center py-4 text-muted-foreground">
+                  Nenhum médico cadastrado
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {doctors.map((doctor) => (
+                    <div key={doctor.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted">
+                      <Checkbox
+                        id={`doctor-${doctor.id}`}
+                        checked={selectedDoctorIds.includes(doctor.id)}
+                        onCheckedChange={() => toggleDoctorSelection(doctor.id)}
+                      />
+                      <Label htmlFor={`doctor-${doctor.id}`} className="cursor-pointer flex-1">
+                        <div className="font-medium">{doctor.name}</div>
+                        <div className="text-sm text-muted-foreground">{doctor.specialty}</div>
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold">Profissionais</h4>
+              {professionals.length === 0 ? (
+                <p className="text-center py-4 text-muted-foreground">
+                  Nenhum profissional cadastrado
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {professionals.map((professional) => (
+                    <div key={professional.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted">
+                      <Checkbox
+                        id={`professional-${professional.id}`}
+                        checked={selectedProfessionalIds.includes(professional.id)}
+                        onCheckedChange={() => toggleProfessionalSelection(professional.id)}
+                      />
+                      <Label htmlFor={`professional-${professional.id}`} className="cursor-pointer flex-1">
+                        <div className="font-medium">{professional.name}</div>
+                        <div className="text-sm text-muted-foreground">{professional.location}</div>
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-end gap-2 pt-4 border-t">
               <Button
                 type="button"
                 variant="outline"
