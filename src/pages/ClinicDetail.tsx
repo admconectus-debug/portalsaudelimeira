@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import BannerCarousel from "@/components/shared/BannerCarousel";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Clinic {
@@ -13,7 +14,7 @@ interface Clinic {
   name: string;
   description: string | null;
   image_url: string | null;
-  banner_url: string | null;
+  banners: string[];
   address: string | null;
   city: string;
   state: string | null;
@@ -128,16 +129,9 @@ const ClinicDetail = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Banner Section */}
-      {clinic.banner_url && (
-        <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
-          <img
-            src={clinic.banner_url}
-            alt={`Banner de ${clinic.name}`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        </div>
+      {/* Banner Carousel */}
+      {clinic.banners && clinic.banners.length > 0 && (
+        <BannerCarousel banners={clinic.banners} alt={`Banner de ${clinic.name}`} />
       )}
 
       <div className="container mx-auto px-4 py-8">

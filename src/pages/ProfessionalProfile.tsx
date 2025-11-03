@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import BannerCarousel from "@/components/shared/BannerCarousel";
 import { ContactInfo } from "@/components/auth/ContactInfo";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -17,7 +18,7 @@ interface Professional {
   location: string;
   description: string | null;
   photo_url: string | null;
-  banner_url: string | null;
+  banners: string[];
   specialties: { name: string } | null;
 }
 
@@ -46,7 +47,7 @@ const ProfessionalProfile = () => {
           location,
           description,
           photo_url,
-          banner_url,
+          banners,
           specialty_id,
           specialties (name)
         `)
@@ -113,16 +114,9 @@ const ProfessionalProfile = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Banner Section */}
-      {professional.banner_url && (
-        <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
-          <img
-            src={professional.banner_url}
-            alt={`Banner de ${professional.name}`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        </div>
+      {/* Banner Carousel */}
+      {professional.banners && professional.banners.length > 0 && (
+        <BannerCarousel banners={professional.banners} alt={`Banner de ${professional.name}`} />
       )}
       
       <div className="container mx-auto px-4 py-8">

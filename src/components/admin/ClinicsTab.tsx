@@ -17,7 +17,7 @@ interface Clinic {
   name: string;
   description: string | null;
   image_url: string | null;
-  banner_url: string | null;
+  banners: string[];
   address: string | null;
   city: string;
   state: string | null;
@@ -51,7 +51,7 @@ export function ClinicsTab() {
     name: "",
     description: "",
     image_url: "",
-    banner_url: "",
+    banners: [] as string[],
     address: "",
     city: "",
     state: "",
@@ -133,7 +133,7 @@ export function ClinicsTab() {
       name: "",
       description: "",
       image_url: "",
-      banner_url: "",
+      banners: [],
       address: "",
       city: "",
       state: "",
@@ -160,7 +160,7 @@ export function ClinicsTab() {
             name: formData.name,
             description: formData.description || null,
             image_url: formData.image_url || null,
-            banner_url: formData.banner_url || null,
+            banners: formData.banners,
             address: formData.address || null,
             city: formData.city,
             state: formData.state || null,
@@ -186,7 +186,7 @@ export function ClinicsTab() {
             name: formData.name,
             description: formData.description || null,
             image_url: formData.image_url || null,
-            banner_url: formData.banner_url || null,
+            banners: formData.banners,
             address: formData.address || null,
             city: formData.city,
             state: formData.state || null,
@@ -226,7 +226,7 @@ export function ClinicsTab() {
       name: clinic.name,
       description: clinic.description || "",
       image_url: clinic.image_url || "",
-      banner_url: clinic.banner_url || "",
+      banners: clinic.banners || [],
       address: clinic.address || "",
       city: clinic.city,
       state: clinic.state || "",
@@ -365,16 +365,49 @@ export function ClinicsTab() {
                   />
                 </div>
                 <div className="col-span-2">
-                  <ImageUpload
-                    label="Banner (Fotos do Espaço)"
-                    value={formData.banner_url}
-                    onChange={(url) => setFormData({ ...formData, banner_url: url })}
-                    onUpload={async (file) => {
-                      const result = await uploadBanner(file, "clinics", "banners");
-                      return result.url;
-                    }}
-                    maxSize={10}
-                  />
+                  <Label>Banners (Fotos do Espaço) - Máx. 5</Label>
+                  <div className="space-y-2">
+                    {formData.banners.map((banner, index) => (
+                      <div key={index} className="flex gap-2">
+                        <ImageUpload
+                          value={banner}
+                          onChange={(url) => {
+                            const newBanners = [...formData.banners];
+                            newBanners[index] = url;
+                            setFormData({ ...formData, banners: newBanners });
+                          }}
+                          onUpload={async (file) => {
+                            const result = await uploadBanner(file, "clinics", "banners");
+                            return result.url;
+                          }}
+                          maxSize={10}
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => {
+                            const newBanners = formData.banners.filter((_, i) => i !== index);
+                            setFormData({ ...formData, banners: newBanners });
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    {formData.banners.length < 5 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          setFormData({ ...formData, banners: [...formData.banners, ""] });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Adicionar Banner
+                      </Button>
+                    )}
+                  </div>
                 </div>
                 <div className="col-span-2">
                   <Label htmlFor="description">Descrição</Label>

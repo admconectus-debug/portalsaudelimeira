@@ -14,7 +14,6 @@ import { ClinicsTab } from "@/components/admin/ClinicsTab";
 import { StorageTest } from "@/components/debug/StorageTest";
 import { ImageTest } from "@/components/debug/ImageTest";
 import { SimpleImageTest } from "@/components/debug/SimpleImageTest";
-import { ImageDebug } from "@/components/debug/ImageDebug";
 import { PhotoTest } from "@/components/debug/PhotoTest";
 
 export default function Admin() {
@@ -92,7 +91,7 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="clinics" className="w-full">
-              <TabsList className="grid w-full grid-cols-9 mb-6">
+              <TabsList className="grid w-full grid-cols-8 mb-6">
                 <TabsTrigger value="clinics">Clínicas</TabsTrigger>
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
@@ -100,7 +99,6 @@ export default function Admin() {
                 <TabsTrigger value="debug">Debug Storage</TabsTrigger>
                 <TabsTrigger value="images">Teste Imagens</TabsTrigger>
                 <TabsTrigger value="simple">Teste Simples</TabsTrigger>
-                <TabsTrigger value="diagnose">Diagnóstico</TabsTrigger>
                 <TabsTrigger value="photos">Fotos</TabsTrigger>
               </TabsList>
               
@@ -130,10 +128,6 @@ export default function Admin() {
               
               <TabsContent value="simple" className="flex justify-center">
                 <SimpleImageTest />
-              </TabsContent>
-              
-              <TabsContent value="diagnose" className="flex justify-center">
-                <ImageDebug />
               </TabsContent>
               
               <TabsContent value="photos" className="flex justify-center">

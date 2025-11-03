@@ -53,7 +53,7 @@ export type Database = {
       clinics: {
         Row: {
           address: string | null
-          banner_url: string | null
+          banners: string[] | null
           city: string
           created_at: string
           description: string | null
@@ -71,7 +71,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
-          banner_url?: string | null
+          banners?: string[] | null
           city: string
           created_at?: string
           description?: string | null
@@ -89,7 +89,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
-          banner_url?: string | null
+          banners?: string[] | null
           city?: string
           created_at?: string
           description?: string | null
@@ -145,7 +145,7 @@ export type Database = {
       }
       professionals: {
         Row: {
-          banner_url: string | null
+          banners: string[] | null
           created_at: string
           description: string | null
           email: string | null
@@ -159,7 +159,7 @@ export type Database = {
           whatsapp: string | null
         }
         Insert: {
-          banner_url?: string | null
+          banners?: string[] | null
           created_at?: string
           description?: string | null
           email?: string | null
@@ -173,7 +173,7 @@ export type Database = {
           whatsapp?: string | null
         }
         Update: {
-          banner_url?: string | null
+          banners?: string[] | null
           created_at?: string
           description?: string | null
           email?: string | null
