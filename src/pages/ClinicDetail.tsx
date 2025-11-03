@@ -94,19 +94,7 @@ const ClinicDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-      {/* Banner Section */}
-      {clinic?.banner_url && (
-        <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
-          <img
-            src={clinic.banner_url}
-            alt={`Banner da ${clinic.name}`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        </div>
-      )}
-      
-      <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12">
           <div className="flex justify-center py-12">
             <div className="animate-pulse">Carregando clínica...</div>
           </div>
@@ -140,26 +128,23 @@ const ClinicDetail = () => {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <div className="relative h-64 md:h-96 bg-gradient-subtle">
-        {clinic.image_url ? (
-          <img 
-            src={clinic.image_url} 
-            alt={clinic.name}
+      {/* Banner Section */}
+      {clinic.banner_url && (
+        <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
+          <img
+            src={clinic.banner_url}
+            alt={`Banner de ${clinic.name}`}
             className="w-full h-full object-cover"
           />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <Building2 className="w-32 h-32 text-muted-foreground/20" />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-      </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
+      )}
 
-      <div className="container mx-auto px-4 -mt-20 relative z-10 pb-12">
-        <Button asChild variant="outline" className="mb-4">
+      <div className="container mx-auto px-4 py-8">
+        <Button asChild variant="ghost" className="mb-6">
           <Link to="/clinicas">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar
+            Voltar para clínicas
           </Link>
         </Button>
 
