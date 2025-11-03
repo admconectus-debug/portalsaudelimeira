@@ -10,13 +10,14 @@ import { ImageUpload } from "@/components/ui/image-upload";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2, Loader2, Users } from "lucide-react";
-import { uploadImage } from "@/lib/storage";
+import { uploadImage, uploadBanner } from "@/lib/storage";
 
 interface Clinic {
   id: string;
   name: string;
   description: string | null;
   image_url: string | null;
+  banner_url: string | null;
   address: string | null;
   city: string;
   state: string | null;
@@ -50,6 +51,7 @@ export function ClinicsTab() {
     name: "",
     description: "",
     image_url: "",
+    banner_url: "",
     address: "",
     city: "",
     state: "",
@@ -131,6 +133,7 @@ export function ClinicsTab() {
       name: "",
       description: "",
       image_url: "",
+      banner_url: "",
       address: "",
       city: "",
       state: "",
@@ -157,6 +160,7 @@ export function ClinicsTab() {
             name: formData.name,
             description: formData.description || null,
             image_url: formData.image_url || null,
+            banner_url: formData.banner_url || null,
             address: formData.address || null,
             city: formData.city,
             state: formData.state || null,
@@ -182,6 +186,7 @@ export function ClinicsTab() {
             name: formData.name,
             description: formData.description || null,
             image_url: formData.image_url || null,
+            banner_url: formData.banner_url || null,
             address: formData.address || null,
             city: formData.city,
             state: formData.state || null,
@@ -221,6 +226,7 @@ export function ClinicsTab() {
       name: clinic.name,
       description: clinic.description || "",
       image_url: clinic.image_url || "",
+      banner_url: clinic.banner_url || "",
       address: clinic.address || "",
       city: clinic.city,
       state: clinic.state || "",
@@ -356,6 +362,18 @@ export function ClinicsTab() {
                       return result.url;
                     }}
                     maxSize={5}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <ImageUpload
+                    label="Banner (Fotos do Espaço)"
+                    value={formData.banner_url}
+                    onChange={(url) => setFormData({ ...formData, banner_url: url })}
+                    onUpload={async (file) => {
+                      const result = await uploadBanner(file, "clinics", "banners");
+                      return result.url;
+                    }}
+                    maxSize={10}
                   />
                 </div>
                 <div className="col-span-2">

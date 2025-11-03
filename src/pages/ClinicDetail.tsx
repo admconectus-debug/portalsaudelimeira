@@ -13,6 +13,7 @@ interface Clinic {
   name: string;
   description: string | null;
   image_url: string | null;
+  banner_url: string | null;
   address: string | null;
   city: string;
   state: string | null;
@@ -93,7 +94,19 @@ const ClinicDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="container mx-auto px-4 py-12">
+      {/* Banner Section */}
+      {clinic?.banner_url && (
+        <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
+          <img
+            src={clinic.banner_url}
+            alt={`Banner da ${clinic.name}`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
+      )}
+      
+      <div className="container mx-auto px-4 py-12">
           <div className="flex justify-center py-12">
             <div className="animate-pulse">Carregando clínica...</div>
           </div>

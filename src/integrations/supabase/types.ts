@@ -53,6 +53,7 @@ export type Database = {
       clinics: {
         Row: {
           address: string | null
+          banner_url: string | null
           city: string
           created_at: string
           description: string | null
@@ -70,6 +71,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          banner_url?: string | null
           city: string
           created_at?: string
           description?: string | null
@@ -87,6 +89,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          banner_url?: string | null
           city?: string
           created_at?: string
           description?: string | null
