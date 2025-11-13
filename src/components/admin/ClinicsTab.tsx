@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ImageUpload } from "@/components/ui/image-upload";
@@ -26,6 +27,7 @@ interface Clinic {
   schedule: string | null;
   website: string | null;
   slug: string;
+  category: string | null;
   is_active: boolean;
 }
 
@@ -59,6 +61,7 @@ export function ClinicsTab() {
     email: "",
     schedule: "",
     website: "",
+    category: "",
     is_active: true,
   });
 
@@ -141,6 +144,7 @@ export function ClinicsTab() {
       email: "",
       schedule: "",
       website: "",
+      category: "",
       is_active: true,
     });
     setEditingClinic(null);
@@ -168,6 +172,7 @@ export function ClinicsTab() {
             email: formData.email || null,
             schedule: formData.schedule || null,
             website: formData.website || null,
+            category: formData.category || null,
             slug,
             is_active: formData.is_active,
           })
@@ -194,6 +199,7 @@ export function ClinicsTab() {
             email: formData.email || null,
             schedule: formData.schedule || null,
             website: formData.website || null,
+            category: formData.category || null,
             slug,
             is_active: formData.is_active,
           });
@@ -234,6 +240,7 @@ export function ClinicsTab() {
       email: clinic.email || "",
       schedule: clinic.schedule || "",
       website: clinic.website || "",
+      category: clinic.category || "",
       is_active: clinic.is_active,
     });
     setIsDialogOpen(true);
@@ -481,6 +488,29 @@ export function ClinicsTab() {
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                     placeholder="https://"
                   />
+                </div>
+                <div className="col-span-2">
+                  <Label htmlFor="category">Categoria da Clínica</Label>
+                  <Select
+                    value={formData.category}
+                    onValueChange={(value) => setFormData({ ...formData, category: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione uma categoria" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pediatria">Clínica Pediátrica</SelectItem>
+                      <SelectItem value="veterinaria">Clínica Veterinária / Pet</SelectItem>
+                      <SelectItem value="beleza">Espaço de Beleza</SelectItem>
+                      <SelectItem value="odontologia">Clínica Odontológica</SelectItem>
+                      <SelectItem value="fisioterapia">Clínica de Fisioterapia</SelectItem>
+                      <SelectItem value="psicologia">Clínica de Psicologia</SelectItem>
+                      <SelectItem value="nutricao">Clínica de Nutrição</SelectItem>
+                      <SelectItem value="estetica">Clínica de Estética</SelectItem>
+                      <SelectItem value="geral">Clínica Geral</SelectItem>
+                      <SelectItem value="outro">Outro</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div className="col-span-2 flex items-center space-x-2">
                   <Checkbox

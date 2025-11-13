@@ -22,11 +22,13 @@ interface Clinic {
   schedule: string | null;
   website: string | null;
   slug: string;
+  category: string | null;
 }
 
 const Clinics = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [clinics, setClinics] = useState<Clinic[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -57,6 +59,30 @@ const Clinics = () => {
     return uniqueCities.sort();
   }, [clinics]);
 
+  const categories = useMemo(() => {
+    const categoryMap: Record<string, string> = {
+      pediatria: "Clínica Pediátrica",
+      veterinaria: "Clínica Veterinária / Pet",
+      beleza: "Espaço de Beleza",
+      odontologia: "Clínica Odontológica",
+      fisioterapia: "Clínica de Fisioterapia",
+      psicologia: "Clínica de Psicologia",
+      nutricao: "Clínica de Nutrição",
+      estetica: "Clínica de Estética",
+      geral: "Clínica Geral",
+      outro: "Outro"
+    };
+    
+    const uniqueCategories = Array.from(new Set(
+      clinics.map(c => c.category).filter(Boolean)
+    )) as string[];
+    
+    return uniqueCategories.map(key => ({
+      value: key,
+      label: categoryMap[key] || key
+    })).sort((a, b) => a.label.localeCompare(b.label));
+  }, [clinics]);
+
   const filteredClinics = useMemo(() => {
     return clinics.filter(clinic => {
       const matchesSearch = 
@@ -65,14 +91,16 @@ const Clinics = () => {
         clinic.city.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesCity = selectedCity === "all" || clinic.city === selectedCity;
+      const matchesCategory = selectedCategory === "all" || clinic.category === selectedCategory;
 
-      return matchesSearch && matchesCity;
+      return matchesSearch && matchesCity && matchesCategory;
     });
-  }, [searchTerm, selectedCity, clinics]);
+  }, [searchTerm, selectedCity, selectedCategory, clinics]);
 
   const clearFilters = () => {
     setSearchTerm("");
     setSelectedCity("all");
+    setSelectedCategory("all");
   };
 
   return (
@@ -123,6 +151,20 @@ const Clinics = () => {
                     {cities.map((city) => (
                       <SelectItem key={city} value={city}>
                         {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-full lg:w-[220px]">
+                    <SelectValue placeholder="Categoria" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todas as categorias</SelectItem>
+                    {categories.map((category) => (
+                      <SelectItem key={category.value} value={category.value}>
+                        {category.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
