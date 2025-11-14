@@ -11,6 +11,7 @@ import { ProfessionalsTab } from "@/components/admin/ProfessionalsTab";
 import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
 import { PartnersTab } from "@/components/admin/PartnersTab";
 import { ClinicsTab } from "@/components/admin/ClinicsTab";
+import { NewsTab } from "@/components/admin/NewsTab";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -87,11 +88,12 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="clinics" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsList className="grid w-full grid-cols-5 mb-6">
                 <TabsTrigger value="clinics">Clínicas</TabsTrigger>
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
                 <TabsTrigger value="partners">Parceiros</TabsTrigger>
+                <TabsTrigger value="news">Notícias</TabsTrigger>
               </TabsList>
               
               <TabsContent value="clinics">
@@ -108,6 +110,10 @@ export default function Admin() {
               
               <TabsContent value="partners">
                 <PartnersTab />
+              </TabsContent>
+              
+              <TabsContent value="news">
+                <NewsTab />
               </TabsContent>
             </Tabs>
           </CardContent>
