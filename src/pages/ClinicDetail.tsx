@@ -130,7 +130,7 @@ const ClinicDetail = () => {
       <Header />
 
       {/* Banner Carousel */}
-      {clinic.banners && clinic.banners.length > 0 && (
+      {clinic.banners && Array.isArray(clinic.banners) && clinic.banners.length > 0 && (
         <BannerCarousel banners={clinic.banners} alt={`Banner de ${clinic.name}`} />
       )}
 
