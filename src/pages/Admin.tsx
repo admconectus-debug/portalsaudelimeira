@@ -11,10 +11,6 @@ import { ProfessionalsTab } from "@/components/admin/ProfessionalsTab";
 import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
 import { PartnersTab } from "@/components/admin/PartnersTab";
 import { ClinicsTab } from "@/components/admin/ClinicsTab";
-import { StorageTest } from "@/components/debug/StorageTest";
-import { ImageTest } from "@/components/debug/ImageTest";
-import { SimpleImageTest } from "@/components/debug/SimpleImageTest";
-import { PhotoTest } from "@/components/debug/PhotoTest";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -91,15 +87,11 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="clinics" className="w-full">
-              <TabsList className="grid w-full grid-cols-8 mb-6">
+              <TabsList className="grid w-full grid-cols-4 mb-6">
                 <TabsTrigger value="clinics">Clínicas</TabsTrigger>
                 <TabsTrigger value="professionals">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties">Especialidades</TabsTrigger>
                 <TabsTrigger value="partners">Parceiros</TabsTrigger>
-                <TabsTrigger value="debug">Debug Storage</TabsTrigger>
-                <TabsTrigger value="images">Teste Imagens</TabsTrigger>
-                <TabsTrigger value="simple">Teste Simples</TabsTrigger>
-                <TabsTrigger value="photos">Fotos</TabsTrigger>
               </TabsList>
               
               <TabsContent value="clinics">
@@ -116,22 +108,6 @@ export default function Admin() {
               
               <TabsContent value="partners">
                 <PartnersTab />
-              </TabsContent>
-              
-              <TabsContent value="debug" className="flex justify-center">
-                <StorageTest />
-              </TabsContent>
-              
-              <TabsContent value="images" className="flex justify-center">
-                <ImageTest />
-              </TabsContent>
-              
-              <TabsContent value="simple" className="flex justify-center">
-                <SimpleImageTest />
-              </TabsContent>
-              
-              <TabsContent value="photos" className="flex justify-center">
-                <PhotoTest />
               </TabsContent>
             </Tabs>
           </CardContent>

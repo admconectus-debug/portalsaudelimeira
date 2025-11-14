@@ -115,7 +115,7 @@ const ProfessionalProfile = () => {
       <Header />
       
       {/* Banner Carousel */}
-      {professional.banners && professional.banners.length > 0 && (
+      {professional.banners && Array.isArray(professional.banners) && professional.banners.length > 0 && (
         <BannerCarousel banners={professional.banners} alt={`Banner de ${professional.name}`} />
       )}
       
