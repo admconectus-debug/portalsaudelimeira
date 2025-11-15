@@ -62,6 +62,7 @@ export type Database = {
           id: string
           image_url: string | null
           is_active: boolean
+          is_featured: boolean
           name: string
           phone: string | null
           schedule: string | null
@@ -81,6 +82,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          is_featured?: boolean
           name: string
           phone?: string | null
           schedule?: string | null
@@ -100,6 +102,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           is_active?: boolean
+          is_featured?: boolean
           name?: string
           phone?: string | null
           schedule?: string | null

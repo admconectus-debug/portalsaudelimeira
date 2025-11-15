@@ -29,6 +29,7 @@ interface Clinic {
   slug: string;
   category: string | null;
   is_active: boolean;
+  is_featured: boolean;
 }
 
 interface Professional {
@@ -63,6 +64,7 @@ export function ClinicsTab() {
     website: "",
     category: "",
     is_active: true,
+    is_featured: false,
   });
 
   useEffect(() => {
@@ -146,6 +148,7 @@ export function ClinicsTab() {
       website: "",
       category: "",
       is_active: true,
+      is_featured: false,
     });
     setEditingClinic(null);
   };
@@ -242,6 +245,7 @@ export function ClinicsTab() {
       website: clinic.website || "",
       category: clinic.category || "",
       is_active: clinic.is_active,
+      is_featured: clinic.is_featured,
     });
     setIsDialogOpen(true);
   };
@@ -512,7 +516,7 @@ export function ClinicsTab() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="col-span-2 flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
                   <Checkbox
                     id="is_active"
                     checked={formData.is_active}
@@ -522,6 +526,18 @@ export function ClinicsTab() {
                   />
                   <Label htmlFor="is_active" className="cursor-pointer">
                     Clínica ativa
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="is_featured"
+                    checked={formData.is_featured}
+                    onCheckedChange={(checked) => 
+                      setFormData({ ...formData, is_featured: checked as boolean })
+                    }
+                  />
+                  <Label htmlFor="is_featured" className="cursor-pointer">
+                    Clínica em destaque
                   </Label>
                 </div>
               </div>

@@ -14,6 +14,7 @@ import { ModalitiesSection } from "@/components/home/ModalitiesSection";
 import { VideosSection } from "@/components/home/VideosSection";
 import { PartnersSection } from "@/components/home/PartnersSection";
 import { NewsCarousel } from "@/components/home/NewsCarousel";
+import { FeaturedClinicsSection } from "@/components/home/FeaturedClinicsSection";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Professional {
@@ -239,6 +240,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Featured Clinics Section */}
+      <FeaturedClinicsSection />
 
       {/* Partners Section */}
       <PartnersSection />
