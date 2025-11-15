@@ -254,15 +254,15 @@ export const PartnersTab = () => {
         </Select>
       </div>
 
-      <div className="border rounded-lg">
+      <div className="border rounded-lg overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[80px]">Logo</TableHead>
-              <TableHead>Nome da Empresa</TableHead>
-              <TableHead>Área de Atuação</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-              <TableHead className="text-right">Ações</TableHead>
+              <TableHead className="w-[80px] whitespace-nowrap">Logo</TableHead>
+              <TableHead className="whitespace-nowrap">Nome da Empresa</TableHead>
+              <TableHead className="whitespace-nowrap">Área de Atuação</TableHead>
+              <TableHead className="text-center whitespace-nowrap">Status</TableHead>
+              <TableHead className="text-right whitespace-nowrap">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -294,7 +294,7 @@ export const PartnersTab = () => {
                       </div>
                     )}
                   </TableCell>
-                  <TableCell className="font-medium">
+                  <TableCell className="font-medium whitespace-nowrap">
                     {partner.company_name}
                     {partner.website_url && (
                       <a
@@ -307,10 +307,10 @@ export const PartnersTab = () => {
                       </a>
                     )}
                   </TableCell>
-                  <TableCell>{partner.business_area}</TableCell>
+                  <TableCell className="whitespace-nowrap">{partner.business_area}</TableCell>
                   <TableCell className="text-center">
                     <span
-                      className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
+                      className={`inline-flex px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
                         partner.is_active
                           ? "bg-green-100 text-green-700"
                           : "bg-gray-100 text-gray-700"
@@ -320,23 +320,25 @@ export const PartnersTab = () => {
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleEdit(partner)}
-                    >
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        setSelectedPartner(partner);
-                        setDeleteDialogOpen(true);
-                      }}
-                    >
-                      <Trash2 className="h-4 w-4 text-destructive" />
-                    </Button>
+                    <div className="flex justify-end gap-1 whitespace-nowrap">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleEdit(partner)}
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedPartner(partner);
+                          setDeleteDialogOpen(true);
+                        }}
+                      >
+                        <Trash2 className="h-4 w-4 text-destructive" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
