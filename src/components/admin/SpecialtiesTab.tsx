@@ -228,14 +228,14 @@ export function SpecialtiesTab() {
         </Dialog>
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Nome</TableHead>
-              <TableHead>Descrição</TableHead>
-              <TableHead>Ícone</TableHead>
-              <TableHead className="text-right">Ações</TableHead>
+              <TableHead className="whitespace-nowrap">Nome</TableHead>
+              <TableHead className="whitespace-nowrap">Descrição</TableHead>
+              <TableHead className="whitespace-nowrap">Ícone</TableHead>
+              <TableHead className="text-right whitespace-nowrap">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -248,11 +248,11 @@ export function SpecialtiesTab() {
             ) : (
               specialties.map((specialty) => (
                 <TableRow key={specialty.id}>
-                  <TableCell className="font-medium">{specialty.name}</TableCell>
+                  <TableCell className="font-medium whitespace-nowrap">{specialty.name}</TableCell>
                   <TableCell>{specialty.description || "Sem descrição"}</TableCell>
-                  <TableCell>{specialty.icon || "Sem ícone"}</TableCell>
+                  <TableCell className="whitespace-nowrap">{specialty.icon || "Sem ícone"}</TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex justify-end gap-1 whitespace-nowrap">
                       <Button
                         variant="outline"
                         size="sm"

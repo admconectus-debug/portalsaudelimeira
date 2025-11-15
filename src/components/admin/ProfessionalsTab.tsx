@@ -383,15 +383,15 @@ export function ProfessionalsTab() {
         </Dialog>
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Nome</TableHead>
-              <TableHead>Especialidade</TableHead>
-              <TableHead>Localização</TableHead>
-              <TableHead>Contato</TableHead>
-              <TableHead className="text-right">Ações</TableHead>
+              <TableHead className="whitespace-nowrap">Nome</TableHead>
+              <TableHead className="whitespace-nowrap">Especialidade</TableHead>
+              <TableHead className="whitespace-nowrap">Localização</TableHead>
+              <TableHead className="whitespace-nowrap">Contato</TableHead>
+              <TableHead className="text-right whitespace-nowrap">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -405,17 +405,17 @@ export function ProfessionalsTab() {
               professionals.map((professional) => (
                 <TableRow key={professional.id}>
                   <TableCell className="font-medium">{professional.name}</TableCell>
-                  <TableCell>{professional.specialties?.name || "Não informada"}</TableCell>
-                  <TableCell>{professional.location}</TableCell>
+                  <TableCell className="whitespace-nowrap">{professional.specialties?.name || "Não informada"}</TableCell>
+                  <TableCell className="whitespace-nowrap">{professional.location}</TableCell>
                   <TableCell>
                     <div className="text-sm">
-                      {professional.phone && <div>Tel: {professional.phone}</div>}
-                      {professional.whatsapp && <div>WhatsApp: {professional.whatsapp}</div>}
-                      {professional.email && <div>{professional.email}</div>}
+                      {professional.phone && <div className="whitespace-nowrap">Tel: {professional.phone}</div>}
+                      {professional.whatsapp && <div className="whitespace-nowrap">WhatsApp: {professional.whatsapp}</div>}
+                      {professional.email && <div className="truncate max-w-[200px]">{professional.email}</div>}
                     </div>
                   </TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex justify-end gap-1 whitespace-nowrap">
                       <Button
                         variant="outline"
                         size="sm"

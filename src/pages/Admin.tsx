@@ -68,32 +68,32 @@ export default function Admin() {
     <div className="min-h-screen bg-gradient-subtle">
       <header className="bg-background border-b shadow-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">Painel Administrativo</h1>
-              <p className="text-muted-foreground">Gerencie profissionais e especialidades</p>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 sm:py-6 gap-4">
+            <div className="flex-1">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground">Painel Administrativo</h1>
+              <p className="text-sm text-muted-foreground hidden sm:block">Gerencie profissionais e especialidades</p>
             </div>
-            <Button onClick={handleSignOut} variant="outline">
-              <LogOut className="w-4 h-4 mr-2" />
-              Sair
+            <Button onClick={handleSignOut} variant="outline" size="sm" className="self-end sm:self-auto">
+              <LogOut className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Sair</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Gerenciamento do Portal</CardTitle>
+      <main className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
+        <Card className="border-0 sm:border">
+          <CardHeader className="px-4 sm:px-6">
+            <CardTitle className="text-lg sm:text-xl">Gerenciamento do Portal</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-2 sm:px-6">
             <Tabs defaultValue="clinics" className="w-full">
-              <TabsList className="grid w-full grid-cols-5 mb-6">
-                <TabsTrigger value="clinics">Clínicas</TabsTrigger>
-                <TabsTrigger value="professionals">Profissionais</TabsTrigger>
-                <TabsTrigger value="specialties">Especialidades</TabsTrigger>
-                <TabsTrigger value="partners">Parceiros</TabsTrigger>
-                <TabsTrigger value="news">Notícias</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 mb-4 sm:mb-6 h-auto gap-1">
+                <TabsTrigger value="clinics" className="text-xs sm:text-sm py-2">Clínicas</TabsTrigger>
+                <TabsTrigger value="professionals" className="text-xs sm:text-sm py-2">Profissionais</TabsTrigger>
+                <TabsTrigger value="specialties" className="text-xs sm:text-sm py-2">Especialidades</TabsTrigger>
+                <TabsTrigger value="partners" className="text-xs sm:text-sm py-2">Parceiros</TabsTrigger>
+                <TabsTrigger value="news" className="text-xs sm:text-sm py-2 col-span-2 sm:col-span-1">Notícias</TabsTrigger>
               </TabsList>
               
               <TabsContent value="clinics">

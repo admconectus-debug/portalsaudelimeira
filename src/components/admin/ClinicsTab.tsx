@@ -559,15 +559,15 @@ export function ClinicsTab() {
         </Dialog>
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Nome</TableHead>
-              <TableHead>Cidade</TableHead>
-              <TableHead>Contato</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Ações</TableHead>
+              <TableHead className="whitespace-nowrap">Nome</TableHead>
+              <TableHead className="whitespace-nowrap">Cidade</TableHead>
+              <TableHead className="whitespace-nowrap">Contato</TableHead>
+              <TableHead className="whitespace-nowrap">Status</TableHead>
+              <TableHead className="text-right whitespace-nowrap">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -580,16 +580,16 @@ export function ClinicsTab() {
             ) : (
               clinics.map((clinic) => (
                 <TableRow key={clinic.id}>
-                  <TableCell className="font-medium">{clinic.name}</TableCell>
-                  <TableCell>{clinic.city}{clinic.state ? ` - ${clinic.state}` : ""}</TableCell>
+                  <TableCell className="font-medium whitespace-nowrap">{clinic.name}</TableCell>
+                  <TableCell className="whitespace-nowrap">{clinic.city}{clinic.state ? ` - ${clinic.state}` : ""}</TableCell>
                   <TableCell>
-                    <div className="text-sm">
+                    <div className="text-sm whitespace-nowrap">
                       {clinic.phone && <div>{clinic.phone}</div>}
                       {clinic.email && <div>{clinic.email}</div>}
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
+                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs whitespace-nowrap ${
                       clinic.is_active 
                         ? "bg-green-100 text-green-800" 
                         : "bg-gray-100 text-gray-800"
@@ -598,7 +598,7 @@ export function ClinicsTab() {
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex justify-end gap-1 whitespace-nowrap">
                       <Button
                         variant="outline"
                         size="sm"
