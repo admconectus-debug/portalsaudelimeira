@@ -87,7 +87,7 @@ export const PartnersSection = () => {
           Parceiros
         </h2>
         
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {partners.map((partner) => {
             const IconComponent = iconMap[partner.business_area] || Users;
             
@@ -97,25 +97,23 @@ export const PartnersSection = () => {
                 href={partner.website_url || undefined}
                 target={partner.website_url ? "_blank" : undefined}
                 rel={partner.website_url ? "noopener noreferrer" : undefined}
-                className="group"
+                className="group flex flex-col items-center"
                 title={partner.description || partner.company_name}
               >
-                <div className="w-28 h-16 md:w-36 md:h-20 bg-white border rounded-lg flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-primary/30 overflow-hidden px-3">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white border-2 border-muted shadow-sm flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:scale-110 hover:border-primary/40 overflow-hidden">
                   {partner.logo_url ? (
                     <img 
                       src={partner.logo_url} 
                       alt={partner.company_name}
-                      className="max-w-full max-h-full object-contain"
+                      className="w-full h-full object-cover rounded-full"
                     />
                   ) : (
-                    <div className="flex flex-col items-center gap-1">
-                      <IconComponent className="w-6 h-6 text-primary" strokeWidth={1.5} />
-                      <span className="text-xs font-medium text-muted-foreground truncate max-w-full">
-                        {partner.company_name}
-                      </span>
-                    </div>
+                    <IconComponent className="w-8 h-8 text-primary" strokeWidth={1.5} />
                   )}
                 </div>
+                <p className="text-center mt-2 text-xs font-medium text-muted-foreground max-w-20 md:max-w-24 truncate">
+                  {partner.company_name}
+                </p>
               </a>
             );
           })}
