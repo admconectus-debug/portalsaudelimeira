@@ -83,14 +83,17 @@ export const NewsCarousel = () => {
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-12 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1E3A8A]">
-            Últimas Notícias
-          </h2>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              Notícias
+            </h2>
+            <p className="text-muted-foreground text-sm">Fique por dentro das últimas novidades</p>
+          </div>
           <Link to="/noticias">
-            <Button variant="outline">Ver todas</Button>
+            <Button variant="outline" size="sm">Ver todas</Button>
           </Link>
         </div>
 

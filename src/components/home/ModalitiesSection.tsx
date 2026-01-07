@@ -57,11 +57,12 @@ const modalities: Modality[] = [
 
 export const ModalitiesSection = () => {
   return (
-    <section className="py-8 bg-gradient-to-b from-background to-muted/30">
+    <section className="py-10 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-medium text-center mb-12 uppercase tracking-wide text-primary/80">
+        <h2 className="text-2xl md:text-3xl font-medium text-center mb-2 uppercase tracking-wider text-primary">
           Modalidades
         </h2>
+        <p className="text-center text-muted-foreground mb-8 text-sm uppercase tracking-wide">Carrossel</p>
         
         <div className="max-w-7xl mx-auto">
           <Carousel
