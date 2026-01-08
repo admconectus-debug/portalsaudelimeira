@@ -187,34 +187,50 @@ const ProfessionalProfile = () => {
 
                    {/* Social Media Icons */}
                    {(professional.instagram || professional.facebook || professional.linkedin || professional.youtube) && (
-                     <div className="flex items-center justify-center md:justify-start gap-2">
+                     <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
                        {professional.instagram && (
-                         <Button asChild variant="outline" size="icon">
-                           <a href={professional.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
-                             <Instagram className="w-5 h-5 text-pink-600" />
-                           </a>
-                         </Button>
+                         <a 
+                           href={professional.instagram} 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           title="Instagram"
+                           className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                         >
+                           <Instagram className="w-6 h-6 text-white" />
+                         </a>
                        )}
                        {professional.facebook && (
-                         <Button asChild variant="outline" size="icon">
-                           <a href={professional.facebook} target="_blank" rel="noopener noreferrer" title="Facebook">
-                             <Facebook className="w-5 h-5 text-blue-600" />
-                           </a>
-                         </Button>
+                         <a 
+                           href={professional.facebook} 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           title="Facebook"
+                           className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                         >
+                           <Facebook className="w-6 h-6 text-white" />
+                         </a>
                        )}
                        {professional.linkedin && (
-                         <Button asChild variant="outline" size="icon">
-                           <a href={professional.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                             <Linkedin className="w-5 h-5 text-blue-700" />
-                           </a>
-                         </Button>
+                         <a 
+                           href={professional.linkedin} 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           title="LinkedIn"
+                           className="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                         >
+                           <Linkedin className="w-6 h-6 text-white" />
+                         </a>
                        )}
                        {professional.youtube && (
-                         <Button asChild variant="outline" size="icon">
-                           <a href={professional.youtube} target="_blank" rel="noopener noreferrer" title="YouTube">
-                             <Youtube className="w-5 h-5 text-red-600" />
-                           </a>
-                         </Button>
+                         <a 
+                           href={professional.youtube} 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           title="YouTube"
+                           className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                         >
+                           <Youtube className="w-6 h-6 text-white" />
+                         </a>
                        )}
                      </div>
                    )}
