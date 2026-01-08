@@ -59,10 +59,13 @@ export type Database = {
           created_at: string
           description: string | null
           email: string | null
+          facebook: string | null
           id: string
           image_url: string | null
+          instagram: string | null
           is_active: boolean
           is_featured: boolean
+          linkedin: string | null
           name: string
           phone: string | null
           schedule: string | null
@@ -70,6 +73,7 @@ export type Database = {
           state: string | null
           updated_at: string
           website: string | null
+          youtube: string | null
         }
         Insert: {
           address?: string | null
@@ -79,10 +83,13 @@ export type Database = {
           created_at?: string
           description?: string | null
           email?: string | null
+          facebook?: string | null
           id?: string
           image_url?: string | null
+          instagram?: string | null
           is_active?: boolean
           is_featured?: boolean
+          linkedin?: string | null
           name: string
           phone?: string | null
           schedule?: string | null
@@ -90,6 +97,7 @@ export type Database = {
           state?: string | null
           updated_at?: string
           website?: string | null
+          youtube?: string | null
         }
         Update: {
           address?: string | null
@@ -99,10 +107,13 @@ export type Database = {
           created_at?: string
           description?: string | null
           email?: string | null
+          facebook?: string | null
           id?: string
           image_url?: string | null
+          instagram?: string | null
           is_active?: boolean
           is_featured?: boolean
+          linkedin?: string | null
           name?: string
           phone?: string | null
           schedule?: string | null
@@ -110,6 +121,7 @@ export type Database = {
           state?: string | null
           updated_at?: string
           website?: string | null
+          youtube?: string | null
         }
         Relationships: []
       }
@@ -197,7 +209,10 @@ export type Database = {
           created_at: string
           description: string | null
           email: string | null
+          facebook: string | null
           id: string
+          instagram: string | null
+          linkedin: string | null
           location: string
           name: string
           phone: string | null
@@ -205,13 +220,17 @@ export type Database = {
           specialty_id: string | null
           updated_at: string
           whatsapp: string | null
+          youtube: string | null
         }
         Insert: {
           banners?: string[] | null
           created_at?: string
           description?: string | null
           email?: string | null
+          facebook?: string | null
           id?: string
+          instagram?: string | null
+          linkedin?: string | null
           location: string
           name: string
           phone?: string | null
@@ -219,13 +238,17 @@ export type Database = {
           specialty_id?: string | null
           updated_at?: string
           whatsapp?: string | null
+          youtube?: string | null
         }
         Update: {
           banners?: string[] | null
           created_at?: string
           description?: string | null
           email?: string | null
+          facebook?: string | null
           id?: string
+          instagram?: string | null
+          linkedin?: string | null
           location?: string
           name?: string
           phone?: string | null
@@ -233,6 +256,7 @@ export type Database = {
           specialty_id?: string | null
           updated_at?: string
           whatsapp?: string | null
+          youtube?: string | null
         }
         Relationships: [
           {

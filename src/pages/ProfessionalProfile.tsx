@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2 } from "lucide-react";
+import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,6 +20,10 @@ interface Professional {
   photo_url: string | null;
   banners: string[];
   specialties: { name: string } | null;
+  instagram: string | null;
+  facebook: string | null;
+  linkedin: string | null;
+  youtube: string | null;
 }
 
 const ProfessionalProfile = () => {
@@ -49,6 +53,10 @@ const ProfessionalProfile = () => {
           photo_url,
           banners,
           specialty_id,
+          instagram,
+          facebook,
+          linkedin,
+          youtube,
           specialties (name)
         `)
         .eq("id", professionalId)
@@ -172,10 +180,44 @@ const ProfessionalProfile = () => {
                    </Badge>
 
                    {/* Location */}
-                   <div className="flex items-center justify-center md:justify-start text-muted-foreground mb-6">
+                   <div className="flex items-center justify-center md:justify-start text-muted-foreground mb-4">
                      <MapPin className="h-5 w-5 mr-2" />
                      <span>{professional.location}</span>
                    </div>
+
+                   {/* Social Media Icons */}
+                   {(professional.instagram || professional.facebook || professional.linkedin || professional.youtube) && (
+                     <div className="flex items-center justify-center md:justify-start gap-2">
+                       {professional.instagram && (
+                         <Button asChild variant="outline" size="icon">
+                           <a href={professional.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
+                             <Instagram className="w-5 h-5 text-pink-600" />
+                           </a>
+                         </Button>
+                       )}
+                       {professional.facebook && (
+                         <Button asChild variant="outline" size="icon">
+                           <a href={professional.facebook} target="_blank" rel="noopener noreferrer" title="Facebook">
+                             <Facebook className="w-5 h-5 text-blue-600" />
+                           </a>
+                         </Button>
+                       )}
+                       {professional.linkedin && (
+                         <Button asChild variant="outline" size="icon">
+                           <a href={professional.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                             <Linkedin className="w-5 h-5 text-blue-700" />
+                           </a>
+                         </Button>
+                       )}
+                       {professional.youtube && (
+                         <Button asChild variant="outline" size="icon">
+                           <a href={professional.youtube} target="_blank" rel="noopener noreferrer" title="YouTube">
+                             <Youtube className="w-5 h-5 text-red-600" />
+                           </a>
+                         </Button>
+                       )}
+                     </div>
+                   )}
                  </div>
                 </div>
 

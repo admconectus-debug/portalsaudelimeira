@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Clock, ExternalLink, ArrowLeft, Building2 } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ExternalLink, ArrowLeft, Building2, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -22,6 +22,10 @@ interface Clinic {
   email: string | null;
   schedule: string | null;
   website: string | null;
+  instagram: string | null;
+  facebook: string | null;
+  linkedin: string | null;
+  youtube: string | null;
 }
 
 interface Professional {
@@ -220,15 +224,47 @@ const ClinicDetail = () => {
               )}
             </div>
 
-            {clinic.website && (
+            {(clinic.website || clinic.instagram || clinic.facebook || clinic.linkedin || clinic.youtube) && (
               <>
                 <Separator className="my-6" />
-                <Button asChild variant="outline" className="w-full md:w-auto">
-                  <a href={clinic.website} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Visitar Site
-                  </a>
-                </Button>
+                <div className="flex flex-wrap gap-3">
+                  {clinic.website && (
+                    <Button asChild variant="outline">
+                      <a href={clinic.website} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Visitar Site
+                      </a>
+                    </Button>
+                  )}
+                  {clinic.instagram && (
+                    <Button asChild variant="outline" size="icon">
+                      <a href={clinic.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <Instagram className="w-5 h-5 text-pink-600" />
+                      </a>
+                    </Button>
+                  )}
+                  {clinic.facebook && (
+                    <Button asChild variant="outline" size="icon">
+                      <a href={clinic.facebook} target="_blank" rel="noopener noreferrer" title="Facebook">
+                        <Facebook className="w-5 h-5 text-blue-600" />
+                      </a>
+                    </Button>
+                  )}
+                  {clinic.linkedin && (
+                    <Button asChild variant="outline" size="icon">
+                      <a href={clinic.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                        <Linkedin className="w-5 h-5 text-blue-700" />
+                      </a>
+                    </Button>
+                  )}
+                  {clinic.youtube && (
+                    <Button asChild variant="outline" size="icon">
+                      <a href={clinic.youtube} target="_blank" rel="noopener noreferrer" title="YouTube">
+                        <Youtube className="w-5 h-5 text-red-600" />
+                      </a>
+                    </Button>
+                  )}
+                </div>
               </>
             )}
           </CardContent>

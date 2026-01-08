@@ -30,6 +30,10 @@ interface Clinic {
   category: string | null;
   is_active: boolean;
   is_featured: boolean;
+  instagram: string | null;
+  facebook: string | null;
+  linkedin: string | null;
+  youtube: string | null;
 }
 
 interface Professional {
@@ -65,6 +69,10 @@ export function ClinicsTab() {
     category: "",
     is_active: true,
     is_featured: false,
+    instagram: "",
+    facebook: "",
+    linkedin: "",
+    youtube: "",
   });
 
   useEffect(() => {
@@ -149,6 +157,10 @@ export function ClinicsTab() {
       category: "",
       is_active: true,
       is_featured: false,
+      instagram: "",
+      facebook: "",
+      linkedin: "",
+      youtube: "",
     });
     setEditingClinic(null);
   };
@@ -178,6 +190,10 @@ export function ClinicsTab() {
             category: formData.category || null,
             slug,
             is_active: formData.is_active,
+            instagram: formData.instagram || null,
+            facebook: formData.facebook || null,
+            linkedin: formData.linkedin || null,
+            youtube: formData.youtube || null,
           })
           .eq("id", editingClinic.id);
 
@@ -205,6 +221,10 @@ export function ClinicsTab() {
             category: formData.category || null,
             slug,
             is_active: formData.is_active,
+            instagram: formData.instagram || null,
+            facebook: formData.facebook || null,
+            linkedin: formData.linkedin || null,
+            youtube: formData.youtube || null,
           });
 
         if (error) throw error;
@@ -246,6 +266,10 @@ export function ClinicsTab() {
       category: clinic.category || "",
       is_active: clinic.is_active,
       is_featured: clinic.is_featured,
+      instagram: clinic.instagram || "",
+      facebook: clinic.facebook || "",
+      linkedin: clinic.linkedin || "",
+      youtube: clinic.youtube || "",
     });
     setIsDialogOpen(true);
   };
@@ -485,12 +509,48 @@ export function ClinicsTab() {
                   />
                 </div>
                 <div className="col-span-2">
-                  <Label htmlFor="website">Site / Redes Sociais</Label>
+                  <Label htmlFor="website">Site</Label>
                   <Input
                     id="website"
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    placeholder="https://"
+                    placeholder="https://www.seusite.com.br"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="instagram">Instagram</Label>
+                  <Input
+                    id="instagram"
+                    value={formData.instagram}
+                    onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+                    placeholder="https://instagram.com/seuperfil"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="facebook">Facebook</Label>
+                  <Input
+                    id="facebook"
+                    value={formData.facebook}
+                    onChange={(e) => setFormData({ ...formData, facebook: e.target.value })}
+                    placeholder="https://facebook.com/suapagina"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="linkedin">LinkedIn</Label>
+                  <Input
+                    id="linkedin"
+                    value={formData.linkedin}
+                    onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
+                    placeholder="https://linkedin.com/company/suaempresa"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="youtube">YouTube</Label>
+                  <Input
+                    id="youtube"
+                    value={formData.youtube}
+                    onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
+                    placeholder="https://youtube.com/@seucanal"
                   />
                 </div>
                 <div className="col-span-2">

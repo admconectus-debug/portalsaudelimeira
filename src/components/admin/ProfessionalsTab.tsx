@@ -24,6 +24,10 @@ interface Professional {
   banners: string[];
   specialty_id: string | null;
   specialties: { name: string } | null;
+  instagram: string | null;
+  facebook: string | null;
+  linkedin: string | null;
+  youtube: string | null;
 }
 
 interface Specialty {
@@ -50,6 +54,10 @@ export function ProfessionalsTab() {
     photo_url: "",
     banners: [] as string[],
     specialty_id: "",
+    instagram: "",
+    facebook: "",
+    linkedin: "",
+    youtube: "",
   });
 
   useEffect(() => {
@@ -106,6 +114,10 @@ export function ProfessionalsTab() {
       photo_url: "",
       banners: [],
       specialty_id: "",
+      instagram: "",
+      facebook: "",
+      linkedin: "",
+      youtube: "",
     });
     setEditingProfessional(null);
   };
@@ -128,6 +140,10 @@ export function ProfessionalsTab() {
             photo_url: formData.photo_url || null,
             banners: formData.banners,
             specialty_id: formData.specialty_id || null,
+            instagram: formData.instagram || null,
+            facebook: formData.facebook || null,
+            linkedin: formData.linkedin || null,
+            youtube: formData.youtube || null,
           })
           .eq("id", editingProfessional.id);
 
@@ -150,6 +166,10 @@ export function ProfessionalsTab() {
             photo_url: formData.photo_url || null,
             banners: formData.banners,
             specialty_id: formData.specialty_id || null,
+            instagram: formData.instagram || null,
+            facebook: formData.facebook || null,
+            linkedin: formData.linkedin || null,
+            youtube: formData.youtube || null,
           });
 
         if (error) throw error;
@@ -186,6 +206,10 @@ export function ProfessionalsTab() {
       photo_url: professional.photo_url || "",
       banners: professional.banners || [],
       specialty_id: professional.specialty_id || "",
+      instagram: professional.instagram || "",
+      facebook: professional.facebook || "",
+      linkedin: professional.linkedin || "",
+      youtube: professional.youtube || "",
     });
     setIsDialogOpen(true);
   };
@@ -362,6 +386,42 @@ export function ProfessionalsTab() {
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     rows={4}
                     placeholder="Conte sobre a experiência, especialidades, formação e o que mais considerar importante..."
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="instagram">Instagram</Label>
+                  <Input
+                    id="instagram"
+                    value={formData.instagram}
+                    onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+                    placeholder="https://instagram.com/seuperfil"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="facebook">Facebook</Label>
+                  <Input
+                    id="facebook"
+                    value={formData.facebook}
+                    onChange={(e) => setFormData({ ...formData, facebook: e.target.value })}
+                    placeholder="https://facebook.com/suapagina"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="linkedin">LinkedIn</Label>
+                  <Input
+                    id="linkedin"
+                    value={formData.linkedin}
+                    onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
+                    placeholder="https://linkedin.com/in/seuperfil"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="youtube">YouTube</Label>
+                  <Input
+                    id="youtube"
+                    value={formData.youtube}
+                    onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
+                    placeholder="https://youtube.com/@seucanal"
                   />
                 </div>
               </div>
