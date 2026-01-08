@@ -227,43 +227,62 @@ const ClinicDetail = () => {
             {(clinic.website || clinic.instagram || clinic.facebook || clinic.linkedin || clinic.youtube) && (
               <>
                 <Separator className="my-6" />
-                <div className="flex flex-wrap gap-3">
-                  {clinic.website && (
-                    <Button asChild variant="outline">
-                      <a href={clinic.website} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Visitar Site
+                <div>
+                  <h2 className="text-xl font-semibold mb-4">Redes Sociais</h2>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {clinic.website && (
+                      <Button asChild variant="outline" size="lg">
+                        <a href={clinic.website} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-5 h-5 mr-2" />
+                          Visitar Site
+                        </a>
+                      </Button>
+                    )}
+                    {clinic.instagram && (
+                      <a 
+                        href={clinic.instagram} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        title="Instagram"
+                        className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                      >
+                        <Instagram className="w-7 h-7 text-white" />
                       </a>
-                    </Button>
-                  )}
-                  {clinic.instagram && (
-                    <Button asChild variant="outline" size="icon">
-                      <a href={clinic.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
-                        <Instagram className="w-5 h-5 text-pink-600" />
+                    )}
+                    {clinic.facebook && (
+                      <a 
+                        href={clinic.facebook} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        title="Facebook"
+                        className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                      >
+                        <Facebook className="w-7 h-7 text-white" />
                       </a>
-                    </Button>
-                  )}
-                  {clinic.facebook && (
-                    <Button asChild variant="outline" size="icon">
-                      <a href={clinic.facebook} target="_blank" rel="noopener noreferrer" title="Facebook">
-                        <Facebook className="w-5 h-5 text-blue-600" />
+                    )}
+                    {clinic.linkedin && (
+                      <a 
+                        href={clinic.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        title="LinkedIn"
+                        className="w-14 h-14 rounded-full bg-blue-700 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                      >
+                        <Linkedin className="w-7 h-7 text-white" />
                       </a>
-                    </Button>
-                  )}
-                  {clinic.linkedin && (
-                    <Button asChild variant="outline" size="icon">
-                      <a href={clinic.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                        <Linkedin className="w-5 h-5 text-blue-700" />
+                    )}
+                    {clinic.youtube && (
+                      <a 
+                        href={clinic.youtube} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        title="YouTube"
+                        className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                      >
+                        <Youtube className="w-7 h-7 text-white" />
                       </a>
-                    </Button>
-                  )}
-                  {clinic.youtube && (
-                    <Button asChild variant="outline" size="icon">
-                      <a href={clinic.youtube} target="_blank" rel="noopener noreferrer" title="YouTube">
-                        <Youtube className="w-5 h-5 text-red-600" />
-                      </a>
-                    </Button>
-                  )}
+                    )}
+                  </div>
                 </div>
               </>
             )}
