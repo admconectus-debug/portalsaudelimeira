@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { useToast } from "@/hooks/use-toast";
@@ -28,6 +29,7 @@ interface Professional {
   facebook: string | null;
   linkedin: string | null;
   youtube: string | null;
+  clinic_professionals?: { clinic_id: string }[];
 }
 
 interface Specialty {
@@ -35,9 +37,15 @@ interface Specialty {
   name: string;
 }
 
+interface Clinic {
+  id: string;
+  name: string;
+}
+
 export function ProfessionalsTab() {
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
+  const [clinics, setClinics] = useState<Clinic[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -58,11 +66,13 @@ export function ProfessionalsTab() {
     facebook: "",
     linkedin: "",
     youtube: "",
+    clinic_ids: [] as string[],
   });
 
   useEffect(() => {
     fetchProfessionals();
     fetchSpecialties();
+    fetchClinics();
   }, []);
 
   const fetchProfessionals = async () => {
@@ -70,7 +80,8 @@ export function ProfessionalsTab() {
       .from("professionals")
       .select(`
         *,
-        specialties (name)
+        specialties (name),
+        clinic_professionals (clinic_id)
       `)
       .order("name");
 
@@ -103,6 +114,25 @@ export function ProfessionalsTab() {
     }
   };
 
+  const fetchClinics = async () => {
+    const { data, error } = await supabase
+      .from("clinics")
+      .select("id, name")
+      .eq("is_active", true)
+      .order("name");
+
+    if (error) {
+      toast({
+        title: "Erro ao carregar clínicas",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      setClinics(data || []);
+    }
+  };
+
+
   const resetForm = () => {
     setFormData({
       name: "",
@@ -118,8 +148,31 @@ export function ProfessionalsTab() {
       facebook: "",
       linkedin: "",
       youtube: "",
+      clinic_ids: [],
     });
     setEditingProfessional(null);
+  };
+
+  const updateClinicProfessionals = async (professionalId: string, clinicIds: string[]) => {
+    // First delete all existing relationships
+    await supabase
+      .from("clinic_professionals")
+      .delete()
+      .eq("professional_id", professionalId);
+
+    // Then insert new relationships
+    if (clinicIds.length > 0) {
+      const { error } = await supabase
+        .from("clinic_professionals")
+        .insert(
+          clinicIds.map(clinicId => ({
+            professional_id: professionalId,
+            clinic_id: clinicId,
+          }))
+        );
+
+      if (error) throw error;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -127,6 +180,8 @@ export function ProfessionalsTab() {
     setSaving(true);
 
     try {
+      let professionalId = editingProfessional?.id;
+
       if (editingProfessional) {
         const { error } = await supabase
           .from("professionals")
@@ -149,12 +204,15 @@ export function ProfessionalsTab() {
 
         if (error) throw error;
 
+        // Update clinic associations
+        await updateClinicProfessionals(editingProfessional.id, formData.clinic_ids);
+
         toast({
           title: "Profissional atualizado",
           description: "Os dados foram salvos com sucesso.",
         });
       } else {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("professionals")
           .insert({
             name: formData.name,
@@ -170,9 +228,16 @@ export function ProfessionalsTab() {
             facebook: formData.facebook || null,
             linkedin: formData.linkedin || null,
             youtube: formData.youtube || null,
-          });
+          })
+          .select("id")
+          .single();
 
         if (error) throw error;
+
+        // Add clinic associations for new professional
+        if (data?.id) {
+          await updateClinicProfessionals(data.id, formData.clinic_ids);
+        }
 
         toast({
           title: "Profissional adicionado",
@@ -196,6 +261,7 @@ export function ProfessionalsTab() {
 
   const handleEdit = (professional: Professional) => {
     setEditingProfessional(professional);
+    const clinicIds = professional.clinic_professionals?.map(cp => cp.clinic_id) || [];
     setFormData({
       name: professional.name,
       email: professional.email || "",
@@ -210,6 +276,7 @@ export function ProfessionalsTab() {
       facebook: professional.facebook || "",
       linkedin: professional.linkedin || "",
       youtube: professional.youtube || "",
+      clinic_ids: clinicIds,
     });
     setIsDialogOpen(true);
   };
@@ -320,6 +387,42 @@ export function ProfessionalsTab() {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+                <div className="col-span-2">
+                  <Label>Clínicas onde Atende</Label>
+                  <div className="border rounded-md p-3 mt-1 max-h-40 overflow-y-auto space-y-2">
+                    {clinics.length === 0 ? (
+                      <p className="text-sm text-muted-foreground">Nenhuma clínica cadastrada</p>
+                    ) : (
+                      clinics.map((clinic) => (
+                        <div key={clinic.id} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`clinic-${clinic.id}`}
+                            checked={formData.clinic_ids.includes(clinic.id)}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setFormData({
+                                  ...formData,
+                                  clinic_ids: [...formData.clinic_ids, clinic.id],
+                                });
+                              } else {
+                                setFormData({
+                                  ...formData,
+                                  clinic_ids: formData.clinic_ids.filter((id) => id !== clinic.id),
+                                });
+                              }
+                            }}
+                          />
+                          <label
+                            htmlFor={`clinic-${clinic.id}`}
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                          >
+                            {clinic.name}
+                          </label>
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
                 <div className="col-span-2">
                   <ImageUpload
