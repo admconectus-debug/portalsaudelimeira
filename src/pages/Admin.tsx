@@ -12,6 +12,7 @@ import { SpecialtiesTab } from "@/components/admin/SpecialtiesTab";
 import { PartnersTab } from "@/components/admin/PartnersTab";
 import { ClinicsTab } from "@/components/admin/ClinicsTab";
 import { NewsTab } from "@/components/admin/NewsTab";
+import { HealthPlansTab } from "@/components/admin/HealthPlansTab";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -88,12 +89,13 @@ export default function Admin() {
           </CardHeader>
           <CardContent className="px-2 sm:px-6">
             <Tabs defaultValue="clinics" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 mb-4 sm:mb-6 h-auto gap-1">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 mb-4 sm:mb-6 h-auto gap-1">
                 <TabsTrigger value="clinics" className="text-xs sm:text-sm py-2">Clínicas</TabsTrigger>
                 <TabsTrigger value="professionals" className="text-xs sm:text-sm py-2">Profissionais</TabsTrigger>
                 <TabsTrigger value="specialties" className="text-xs sm:text-sm py-2">Especialidades</TabsTrigger>
+                <TabsTrigger value="health-plans" className="text-xs sm:text-sm py-2">Planos</TabsTrigger>
                 <TabsTrigger value="partners" className="text-xs sm:text-sm py-2">Parceiros</TabsTrigger>
-                <TabsTrigger value="news" className="text-xs sm:text-sm py-2 col-span-2 sm:col-span-1">Notícias</TabsTrigger>
+                <TabsTrigger value="news" className="text-xs sm:text-sm py-2">Notícias</TabsTrigger>
               </TabsList>
               
               <TabsContent value="clinics">
@@ -106,6 +108,10 @@ export default function Admin() {
               
               <TabsContent value="specialties">
                 <SpecialtiesTab />
+              </TabsContent>
+
+              <TabsContent value="health-plans">
+                <HealthPlansTab />
               </TabsContent>
               
               <TabsContent value="partners">

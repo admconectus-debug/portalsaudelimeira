@@ -125,6 +125,33 @@ export type Database = {
         }
         Relationships: []
       }
+      health_plans: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          is_particular: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_particular?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_particular?: boolean
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       news: {
         Row: {
           author: string | null
@@ -202,6 +229,42 @@ export type Database = {
           website_url?: string | null
         }
         Relationships: []
+      }
+      professional_health_plans: {
+        Row: {
+          created_at: string
+          health_plan_id: string
+          id: string
+          professional_id: string
+        }
+        Insert: {
+          created_at?: string
+          health_plan_id: string
+          id?: string
+          professional_id: string
+        }
+        Update: {
+          created_at?: string
+          health_plan_id?: string
+          id?: string
+          professional_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_health_plans_health_plan_id_fkey"
+            columns: ["health_plan_id"]
+            isOneToOne: false
+            referencedRelation: "health_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "professional_health_plans_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       professionals: {
         Row: {
