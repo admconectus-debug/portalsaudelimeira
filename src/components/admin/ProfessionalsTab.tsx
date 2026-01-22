@@ -30,6 +30,7 @@ interface Professional {
   linkedin: string | null;
   youtube: string | null;
   clinic_professionals?: { clinic_id: string }[];
+  professional_health_plans?: { health_plan_id: string }[];
 }
 
 interface Specialty {
@@ -42,10 +43,17 @@ interface Clinic {
   name: string;
 }
 
+interface HealthPlan {
+  id: string;
+  name: string;
+  is_particular: boolean;
+}
+
 export function ProfessionalsTab() {
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const [clinics, setClinics] = useState<Clinic[]>([]);
+  const [healthPlans, setHealthPlans] = useState<HealthPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -67,12 +75,14 @@ export function ProfessionalsTab() {
     linkedin: "",
     youtube: "",
     clinic_ids: [] as string[],
+    health_plan_ids: [] as string[],
   });
 
   useEffect(() => {
     fetchProfessionals();
     fetchSpecialties();
     fetchClinics();
+    fetchHealthPlans();
   }, []);
 
   const fetchProfessionals = async () => {
@@ -85,6 +95,11 @@ export function ProfessionalsTab() {
       `)
       .order("name");
 
+    // Fetch health plan associations separately
+    const { data: healthPlanData } = await supabase
+      .from("professional_health_plans" as any)
+      .select("professional_id, health_plan_id");
+
     if (error) {
       toast({
         title: "Erro ao carregar profissionais",
@@ -92,7 +107,14 @@ export function ProfessionalsTab() {
         variant: "destructive",
       });
     } else {
-      setProfessionals(data || []);
+      // Map health plans to professionals
+      const professionalsWithPlans = (data || []).map((prof: any) => ({
+        ...prof,
+        professional_health_plans: (healthPlanData as any[] || [])
+          .filter((hp: any) => hp.professional_id === prof.id)
+          .map((hp: any) => ({ health_plan_id: hp.health_plan_id }))
+      }));
+      setProfessionals(professionalsWithPlans);
     }
     setLoading(false);
   };
@@ -132,6 +154,25 @@ export function ProfessionalsTab() {
     }
   };
 
+  const fetchHealthPlans = async () => {
+    const { data, error } = await supabase
+      .from("health_plans" as any)
+      .select("id, name, is_particular")
+      .eq("is_active", true)
+      .order("is_particular", { ascending: false })
+      .order("name");
+
+    if (error) {
+      toast({
+        title: "Erro ao carregar planos",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      setHealthPlans((data as unknown as HealthPlan[]) || []);
+    }
+  };
+
 
   const resetForm = () => {
     setFormData({
@@ -149,6 +190,7 @@ export function ProfessionalsTab() {
       linkedin: "",
       youtube: "",
       clinic_ids: [],
+      health_plan_ids: [],
     });
     setEditingProfessional(null);
   };
@@ -168,6 +210,28 @@ export function ProfessionalsTab() {
           clinicIds.map(clinicId => ({
             professional_id: professionalId,
             clinic_id: clinicId,
+          }))
+        );
+
+      if (error) throw error;
+    }
+  };
+
+  const updateProfessionalHealthPlans = async (professionalId: string, healthPlanIds: string[]) => {
+    // First delete all existing relationships
+    await supabase
+      .from("professional_health_plans" as any)
+      .delete()
+      .eq("professional_id", professionalId);
+
+    // Then insert new relationships
+    if (healthPlanIds.length > 0) {
+      const { error } = await supabase
+        .from("professional_health_plans" as any)
+        .insert(
+          healthPlanIds.map(healthPlanId => ({
+            professional_id: professionalId,
+            health_plan_id: healthPlanId,
           }))
         );
 
@@ -206,6 +270,8 @@ export function ProfessionalsTab() {
 
         // Update clinic associations
         await updateClinicProfessionals(editingProfessional.id, formData.clinic_ids);
+        // Update health plan associations
+        await updateProfessionalHealthPlans(editingProfessional.id, formData.health_plan_ids);
 
         toast({
           title: "Profissional atualizado",
@@ -237,6 +303,7 @@ export function ProfessionalsTab() {
         // Add clinic associations for new professional
         if (data?.id) {
           await updateClinicProfessionals(data.id, formData.clinic_ids);
+          await updateProfessionalHealthPlans(data.id, formData.health_plan_ids);
         }
 
         toast({
@@ -262,6 +329,7 @@ export function ProfessionalsTab() {
   const handleEdit = (professional: Professional) => {
     setEditingProfessional(professional);
     const clinicIds = professional.clinic_professionals?.map(cp => cp.clinic_id) || [];
+    const healthPlanIds = professional.professional_health_plans?.map(hp => hp.health_plan_id) || [];
     setFormData({
       name: professional.name,
       email: professional.email || "",
@@ -277,6 +345,7 @@ export function ProfessionalsTab() {
       linkedin: professional.linkedin || "",
       youtube: professional.youtube || "",
       clinic_ids: clinicIds,
+      health_plan_ids: healthPlanIds,
     });
     setIsDialogOpen(true);
   };
@@ -428,6 +497,58 @@ export function ProfessionalsTab() {
                                 />
                                 <span className="text-sm font-medium line-clamp-1">
                                   {clinic.name}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="col-span-2">
+                  <Label>Planos de Saúde que Atende</Label>
+                  <div className="border rounded-md p-3 mt-1 max-h-48 overflow-y-auto">
+                    {healthPlans.length === 0 ? (
+                      <p className="text-sm text-muted-foreground">Nenhum plano cadastrado</p>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-2">
+                        {healthPlans.map((plan) => {
+                          const isSelected = formData.health_plan_ids.includes(plan.id);
+                          return (
+                            <div
+                              key={plan.id}
+                              onClick={() => {
+                                if (isSelected) {
+                                  setFormData({
+                                    ...formData,
+                                    health_plan_ids: formData.health_plan_ids.filter((id) => id !== plan.id),
+                                  });
+                                } else {
+                                  setFormData({
+                                    ...formData,
+                                    health_plan_ids: [...formData.health_plan_ids, plan.id],
+                                  });
+                                }
+                              }}
+                              className={`
+                                cursor-pointer rounded-lg border-2 p-3 transition-all
+                                ${isSelected 
+                                  ? 'border-primary bg-primary/10 shadow-sm' 
+                                  : 'border-border hover:border-primary/50 hover:bg-muted/50'
+                                }
+                              `}
+                            >
+                              <div className="flex items-center gap-2">
+                                <Checkbox
+                                  checked={isSelected}
+                                  className="pointer-events-none"
+                                />
+                                <span className="text-sm font-medium line-clamp-1">
+                                  {plan.name}
+                                  {plan.is_particular && (
+                                    <span className="ml-1 text-xs text-muted-foreground">(Particular)</span>
+                                  )}
                                 </span>
                               </div>
                             </div>

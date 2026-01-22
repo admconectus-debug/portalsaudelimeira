@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube, Building2 } from "lucide-react";
+import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube, Building2, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -18,6 +18,12 @@ interface Clinic {
   slug: string;
   city: string;
   image_url: string | null;
+}
+
+interface HealthPlan {
+  id: string;
+  name: string;
+  is_particular: boolean;
 }
 
 interface Professional {
@@ -38,6 +44,7 @@ const ProfessionalProfile = () => {
   const { id } = useParams();
   const [professional, setProfessional] = useState<Professional | null>(null);
   const [clinics, setClinics] = useState<Clinic[]>([]);
+  const [healthPlans, setHealthPlans] = useState<HealthPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [imageLoading, setImageLoading] = useState({
@@ -48,6 +55,7 @@ const ProfessionalProfile = () => {
     if (id) {
       fetchProfessional(id);
       fetchProfessionalClinics(id);
+      fetchProfessionalHealthPlans(id);
     }
   }, [id]);
 
@@ -113,6 +121,34 @@ const ProfessionalProfile = () => {
       }
     } catch (err: any) {
       console.error("Erro ao buscar clínicas:", err.message);
+    }
+  };
+
+  const fetchProfessionalHealthPlans = async (professionalId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("professional_health_plans" as any)
+        .select("health_plan_id")
+        .eq("professional_id", professionalId);
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        const healthPlanIds = (data as any[]).map((item) => item.health_plan_id);
+        
+        const { data: plansData, error: plansError } = await supabase
+          .from("health_plans" as any)
+          .select("id, name, is_particular")
+          .in("id", healthPlanIds);
+
+        if (plansError) throw plansError;
+
+        if (plansData) {
+          setHealthPlans(plansData as unknown as HealthPlan[]);
+        }
+      }
+    } catch (err: any) {
+      console.error("Erro ao buscar planos de saúde:", err.message);
     }
   };
 
@@ -349,6 +385,31 @@ const ProfessionalProfile = () => {
                       </div>
                     </div>
                   </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Health Plans Section */}
+        {healthPlans.length > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CreditCard className="h-5 w-5 text-primary" />
+                Planos que Atende
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {healthPlans.map((plan) => (
+                  <Badge 
+                    key={plan.id} 
+                    variant={plan.is_particular ? "secondary" : "default"}
+                    className="text-sm px-3 py-1"
+                  >
+                    {plan.name}
+                  </Badge>
                 ))}
               </div>
             </CardContent>
