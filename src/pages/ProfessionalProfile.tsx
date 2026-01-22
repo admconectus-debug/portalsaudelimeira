@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,6 +11,14 @@ import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
 import { ContactInfo } from "@/components/auth/ContactInfo";
 import { supabase } from "@/integrations/supabase/client";
+
+interface Clinic {
+  id: string;
+  name: string;
+  slug: string;
+  city: string;
+  image_url: string | null;
+}
 
 interface Professional {
   id: string;
@@ -29,6 +37,7 @@ interface Professional {
 const ProfessionalProfile = () => {
   const { id } = useParams();
   const [professional, setProfessional] = useState<Professional | null>(null);
+  const [clinics, setClinics] = useState<Clinic[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [imageLoading, setImageLoading] = useState({
@@ -38,6 +47,7 @@ const ProfessionalProfile = () => {
   useEffect(() => {
     if (id) {
       fetchProfessional(id);
+      fetchProfessionalClinics(id);
     }
   }, [id]);
 
@@ -75,6 +85,34 @@ const ProfessionalProfile = () => {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchProfessionalClinics = async (professionalId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("clinic_professionals")
+        .select(`
+          clinics (
+            id,
+            name,
+            slug,
+            city,
+            image_url
+          )
+        `)
+        .eq("professional_id", professionalId);
+
+      if (error) throw error;
+
+      if (data) {
+        const clinicsList = data
+          .map((item: any) => item.clinics)
+          .filter((clinic: Clinic | null) => clinic !== null) as Clinic[];
+        setClinics(clinicsList);
+      }
+    } catch (err: any) {
+      console.error("Erro ao buscar clínicas:", err.message);
     }
   };
 
@@ -268,6 +306,54 @@ const ProfessionalProfile = () => {
             </div>
           </div>
         </div>
+
+        {/* Clinics Section */}
+        {clinics.length > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-primary" />
+                Clínicas onde Atende
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {clinics.map((clinic) => (
+                  <Link
+                    key={clinic.id}
+                    to={`/clinicas/${clinic.slug}`}
+                    className="group block"
+                  >
+                    <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-primary">
+                      <div className="aspect-video bg-muted relative overflow-hidden">
+                        {clinic.image_url ? (
+                          <img
+                            src={clinic.image_url}
+                            alt={clinic.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-gradient-subtle">
+                            <Building2 className="h-12 w-12 text-muted-foreground/40" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3">
+                        <h4 className="font-semibold text-sm group-hover:text-primary transition-colors line-clamp-1">
+                          {clinic.name}
+                        </h4>
+                        <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
+                          <MapPin className="h-3 w-3" />
+                          {clinic.city}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Additional Information */}
         <div className="grid md:grid-cols-2 gap-8 mt-8">
