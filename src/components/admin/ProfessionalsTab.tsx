@@ -390,37 +390,50 @@ export function ProfessionalsTab() {
                 </div>
                 <div className="col-span-2">
                   <Label>Clínicas onde Atende</Label>
-                  <div className="border rounded-md p-3 mt-1 max-h-40 overflow-y-auto space-y-2">
+                  <div className="border rounded-md p-3 mt-1 max-h-48 overflow-y-auto">
                     {clinics.length === 0 ? (
                       <p className="text-sm text-muted-foreground">Nenhuma clínica cadastrada</p>
                     ) : (
-                      clinics.map((clinic) => (
-                        <div key={clinic.id} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={`clinic-${clinic.id}`}
-                            checked={formData.clinic_ids.includes(clinic.id)}
-                            onCheckedChange={(checked) => {
-                              if (checked) {
-                                setFormData({
-                                  ...formData,
-                                  clinic_ids: [...formData.clinic_ids, clinic.id],
-                                });
-                              } else {
-                                setFormData({
-                                  ...formData,
-                                  clinic_ids: formData.clinic_ids.filter((id) => id !== clinic.id),
-                                });
-                              }
-                            }}
-                          />
-                          <label
-                            htmlFor={`clinic-${clinic.id}`}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-                          >
-                            {clinic.name}
-                          </label>
-                        </div>
-                      ))
+                      <div className="grid grid-cols-2 gap-2">
+                        {clinics.map((clinic) => {
+                          const isSelected = formData.clinic_ids.includes(clinic.id);
+                          return (
+                            <div
+                              key={clinic.id}
+                              onClick={() => {
+                                if (isSelected) {
+                                  setFormData({
+                                    ...formData,
+                                    clinic_ids: formData.clinic_ids.filter((id) => id !== clinic.id),
+                                  });
+                                } else {
+                                  setFormData({
+                                    ...formData,
+                                    clinic_ids: [...formData.clinic_ids, clinic.id],
+                                  });
+                                }
+                              }}
+                              className={`
+                                cursor-pointer rounded-lg border-2 p-3 transition-all
+                                ${isSelected 
+                                  ? 'border-primary bg-primary/10 shadow-sm' 
+                                  : 'border-border hover:border-primary/50 hover:bg-muted/50'
+                                }
+                              `}
+                            >
+                              <div className="flex items-center gap-2">
+                                <Checkbox
+                                  checked={isSelected}
+                                  className="pointer-events-none"
+                                />
+                                <span className="text-sm font-medium line-clamp-1">
+                                  {clinic.name}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     )}
                   </div>
                 </div>
