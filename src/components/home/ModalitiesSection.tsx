@@ -23,36 +23,15 @@ interface Modality {
 }
 
 const modalities: Modality[] = [
-  {
-    id: 1,
-    title: "Testes de COVID-19",
-    image: covidImg,
-    link: "/profissionais"
-  },
-  {
-    id: 2,
-    title: "Exames clínicos",
-    image: clinicalImg,
-    link: "/profissionais"
-  },
-  {
-    id: 3,
-    title: "Serviços farma",
-    image: pharmacyImg,
-    link: "/profissionais"
-  },
-  {
-    id: 4,
-    title: "Telessaúde",
-    image: telehealthImg,
-    link: "/profissionais"
-  },
-  {
-    id: 5,
-    title: "Vacinas",
-    image: vaccinesImg,
-    link: "/profissionais"
-  }
+  { id: 1, title: "Hospitais", image: clinicalImg, link: "/profissionais" },
+  { id: 2, title: "Planos Médicos", image: covidImg, link: "/profissionais" },
+  { id: 3, title: "Serviços 24 Horas", image: telehealthImg, link: "/profissionais" },
+  { id: 4, title: "Medicina", image: vaccinesImg, link: "/profissionais" },
+  { id: 5, title: "Odontologia", image: pharmacyImg, link: "/profissionais" },
+  { id: 6, title: "Laboratório", image: clinicalImg, link: "/profissionais" },
+  { id: 7, title: "Farmácia", image: pharmacyImg, link: "/profissionais" },
+  { id: 8, title: "Saúde & Beleza", image: telehealthImg, link: "/profissionais" },
+  { id: 9, title: "Saúde Pets", image: vaccinesImg, link: "/profissionais" },
 ];
 
 export const ModalitiesSection = () => {
