@@ -8,13 +8,13 @@ export const ScheduleSection = () => {
   const [activeTab, setActiveTab] = useState<"local" | "teleconsulta">("local");
 
   return (
-    <section className="py-16 bg-[#1a6b6b] text-white">
+    <section className="py-16 bg-primary text-primary-foreground">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-2">
             Agende agora sua consulta
           </h2>
-          <p className="text-white/80 mb-8">
+          <p className="text-primary-foreground/80 mb-8">
             Mais de 950 mil especialistas de saúde estão prontos para te ajudar
           </p>
 
@@ -24,8 +24,8 @@ export const ScheduleSection = () => {
               onClick={() => setActiveTab("local")}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
                 activeTab === "local"
-                  ? "bg-white text-[#1a6b6b]"
-                  : "bg-white/20 text-white hover:bg-white/30"
+                  ? "bg-white text-primary"
+                  : "bg-white/20 text-primary-foreground hover:bg-white/30"
               }`}
             >
               📍 No local
@@ -34,8 +34,8 @@ export const ScheduleSection = () => {
               onClick={() => setActiveTab("teleconsulta")}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
                 activeTab === "teleconsulta"
-                  ? "bg-white text-[#1a6b6b]"
-                  : "bg-white/20 text-white hover:bg-white/30"
+                  ? "bg-white text-primary"
+                  : "bg-white/20 text-primary-foreground hover:bg-white/30"
               }`}
             >
               💻 Teleconsulta
@@ -54,7 +54,7 @@ export const ScheduleSection = () => {
             />
             <Button 
               size="lg" 
-              className="h-12 px-8 bg-[#0d9488] hover:bg-[#0d8579] text-white rounded-lg"
+              className="h-12 px-8 bg-primary-light hover:bg-primary-glow text-primary-foreground rounded-lg"
               asChild
             >
               <Link to="/profissionais">
