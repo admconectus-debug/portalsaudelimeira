@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import institutionalVideo from "@/assets/institutional-video.mp4";
+import explainerVideo from "@/assets/explainer-video.mp4";
 
 export const VideosSection = () => {
   return (
@@ -16,7 +16,7 @@ export const VideosSection = () => {
           <div className="rounded-lg overflow-hidden shadow-sm border">
             <video
               className="w-full aspect-video object-cover"
-              src={institutionalVideo}
+              src={explainerVideo}
               controls
               autoPlay
               muted
