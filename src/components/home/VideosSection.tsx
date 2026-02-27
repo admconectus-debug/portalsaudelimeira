@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import institutionalVideo from "@/assets/institutional-video.mp4";
 
 export const VideosSection = () => {
   return (
@@ -13,15 +13,17 @@ export const VideosSection = () => {
         
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto items-center">
           {/* Video */}
-          <Card className="bg-white border rounded-lg overflow-hidden shadow-sm">
-            <CardContent className="p-0">
-              <div className="aspect-video flex items-center justify-center bg-muted/30">
-                <span className="text-lg font-medium text-muted-foreground uppercase tracking-wide">
-                  Vídeo Institucional
-                </span>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="rounded-lg overflow-hidden shadow-sm border">
+            <video
+              className="w-full aspect-video object-cover"
+              src={institutionalVideo}
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </div>
 
           {/* Text Content */}
           <div className="space-y-4">
