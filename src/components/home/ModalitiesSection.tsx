@@ -75,7 +75,7 @@ export const ModalitiesSection = () => {
               align: "start",
               loop: true,
             }}
-            className="w-full"
+            className="w-full [&>div]:overflow-visible"
           >
             <CarouselContent className="-ml-4">
               {modalities.map((modality) => {
