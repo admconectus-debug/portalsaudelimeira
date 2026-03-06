@@ -69,13 +69,13 @@ export const ModalitiesSection = () => {
         </h2>
         <p className="text-center text-muted-foreground mb-8 text-sm uppercase tracking-wide">Carrossel</p>
         
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto overflow-visible">
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full"
+            className="w-full [&>div]:overflow-visible"
           >
             <CarouselContent className="-ml-4">
               {modalities.map((modality) => {
