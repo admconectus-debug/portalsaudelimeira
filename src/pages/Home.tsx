@@ -72,6 +72,9 @@ const Home = () => {
       {/* Modalities Section */}
       <ModalitiesSection />
 
+      {/* Partners Section */}
+      <PartnersSection />
+
       {/* Videos Section */}
       <VideosSection />
 
@@ -133,8 +136,6 @@ const Home = () => {
       {/* Featured Clinics Section */}
       <FeaturedClinicsSection />
 
-      {/* Partners Section */}
-      <PartnersSection />
       
       <Footer />
     </div>
