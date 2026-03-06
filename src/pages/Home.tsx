@@ -72,6 +72,9 @@ const Home = () => {
       {/* Modalities Section */}
       <ModalitiesSection />
 
+      {/* Partners Section */}
+      <PartnersSection />
+
       {/* Videos Section */}
       <VideosSection />
 
