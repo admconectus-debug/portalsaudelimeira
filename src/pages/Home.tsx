@@ -136,8 +136,6 @@ const Home = () => {
       {/* Featured Clinics Section */}
       <FeaturedClinicsSection />
 
-      {/* Partners Section */}
-      <PartnersSection />
       
       <Footer />
     </div>
