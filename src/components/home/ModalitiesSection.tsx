@@ -72,7 +72,7 @@ export const ModalitiesSection = () => {
         <div className="max-w-7xl mx-auto overflow-visible">
           <Carousel
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
             }}
             className="w-full [&>div]:overflow-visible"
