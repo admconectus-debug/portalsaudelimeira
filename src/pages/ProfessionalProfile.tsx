@@ -437,6 +437,7 @@ const ProfessionalProfile = () => {
                 <h4 className="font-medium text-muted-foreground">Região de Atendimento</h4>
                 <p className="font-semibold">{professional.location}</p>
               </div>
+              <MapEmbed address={`${professional.location}, Brasil`} />
             </CardContent>
           </Card>
 
