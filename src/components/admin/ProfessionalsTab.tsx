@@ -25,6 +25,7 @@ interface Professional {
   banners: string[];
   specialty_id: string | null;
   specialties: { name: string } | null;
+  registration_number: string | null;
   instagram: string | null;
   facebook: string | null;
   linkedin: string | null;
@@ -70,6 +71,7 @@ export function ProfessionalsTab() {
     photo_url: "",
     banners: [] as string[],
     specialty_id: "",
+    registration_number: "",
     instagram: "",
     facebook: "",
     linkedin: "",
@@ -185,6 +187,7 @@ export function ProfessionalsTab() {
       photo_url: "",
       banners: [],
       specialty_id: "",
+      registration_number: "",
       instagram: "",
       facebook: "",
       linkedin: "",
@@ -259,6 +262,7 @@ export function ProfessionalsTab() {
             photo_url: formData.photo_url || null,
             banners: formData.banners,
             specialty_id: formData.specialty_id || null,
+            registration_number: formData.registration_number || null,
             instagram: formData.instagram || null,
             facebook: formData.facebook || null,
             linkedin: formData.linkedin || null,
@@ -290,6 +294,7 @@ export function ProfessionalsTab() {
             photo_url: formData.photo_url || null,
             banners: formData.banners,
             specialty_id: formData.specialty_id || null,
+            registration_number: formData.registration_number || null,
             instagram: formData.instagram || null,
             facebook: formData.facebook || null,
             linkedin: formData.linkedin || null,
@@ -340,6 +345,7 @@ export function ProfessionalsTab() {
       photo_url: professional.photo_url || "",
       banners: professional.banners || [],
       specialty_id: professional.specialty_id || "",
+      registration_number: (professional as any).registration_number || "",
       instagram: professional.instagram || "",
       facebook: professional.facebook || "",
       linkedin: professional.linkedin || "",
@@ -437,6 +443,15 @@ export function ProfessionalsTab() {
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="registration_number">Registro (CRM/CRO/etc)</Label>
+                  <Input
+                    id="registration_number"
+                    value={formData.registration_number}
+                    onChange={(e) => setFormData({ ...formData, registration_number: e.target.value })}
+                    placeholder="Ex: CRM 12345/SP"
                   />
                 </div>
                 <div className="col-span-2">

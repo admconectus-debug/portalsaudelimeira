@@ -280,6 +280,7 @@ export type Database = {
           name: string
           phone: string | null
           photo_url: string | null
+          registration_number: string | null
           specialty_id: string | null
           updated_at: string
           whatsapp: string | null
@@ -298,6 +299,7 @@ export type Database = {
           name: string
           phone?: string | null
           photo_url?: string | null
+          registration_number?: string | null
           specialty_id?: string | null
           updated_at?: string
           whatsapp?: string | null
@@ -316,6 +318,7 @@ export type Database = {
           name?: string
           phone?: string | null
           photo_url?: string | null
+          registration_number?: string | null
           specialty_id?: string | null
           updated_at?: string
           whatsapp?: string | null

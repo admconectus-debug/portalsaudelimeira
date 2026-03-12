@@ -1,0 +1,1 @@
+ALTER TABLE public.professionals ADD COLUMN registration_number text DEFAULT NULL;
