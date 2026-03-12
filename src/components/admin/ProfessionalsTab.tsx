@@ -445,6 +445,15 @@ export function ProfessionalsTab() {
                     required
                   />
                 </div>
+                <div>
+                  <Label htmlFor="registration_number">Registro (CRM/CRO/etc)</Label>
+                  <Input
+                    id="registration_number"
+                    value={formData.registration_number}
+                    onChange={(e) => setFormData({ ...formData, registration_number: e.target.value })}
+                    placeholder="Ex: CRM 12345/SP"
+                  />
+                </div>
                 <div className="col-span-2">
                   <Label htmlFor="specialty">Especialidade</Label>
                   <Select

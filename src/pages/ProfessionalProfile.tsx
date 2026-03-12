@@ -251,6 +251,9 @@ const ProfessionalProfile = () => {
 
                  <div className="flex-1 text-center md:text-left">
                    <h1 className="text-3xl font-bold mb-2">{professional.name}</h1>
+                   {professional.registration_number && (
+                     <p className="text-muted-foreground font-medium mb-2">{professional.registration_number}</p>
+                   )}
                    <Badge variant="secondary" className="text-lg px-4 py-2 mb-4">
                      {professional.specialties?.name || "Sem especialidade"}
                    </Badge>
