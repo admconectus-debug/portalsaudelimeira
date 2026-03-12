@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
+import MapEmbed from "@/components/shared/MapEmbed";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Clinic {
@@ -223,6 +224,16 @@ const ClinicDetail = () => {
                 </div>
               )}
             </div>
+
+            {/* Mapa */}
+            {clinic.address && (
+              <>
+                <Separator className="my-6" />
+                <MapEmbed 
+                  address={`${clinic.address}, ${clinic.city}${clinic.state ? ` - ${clinic.state}` : ""}, Brasil`} 
+                />
+              </>
+            )}
 
             {(clinic.website || clinic.instagram || clinic.facebook || clinic.linkedin || clinic.youtube) && (
               <>

@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
+import MapEmbed from "@/components/shared/MapEmbed";
 import { ContactInfo } from "@/components/auth/ContactInfo";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -436,6 +437,7 @@ const ProfessionalProfile = () => {
                 <h4 className="font-medium text-muted-foreground">Região de Atendimento</h4>
                 <p className="font-semibold">{professional.location}</p>
               </div>
+              <MapEmbed address={`${professional.location}, Brasil`} />
             </CardContent>
           </Card>
 
