@@ -225,6 +225,16 @@ const ClinicDetail = () => {
               )}
             </div>
 
+            {/* Mapa */}
+            {clinic.address && (
+              <>
+                <Separator className="my-6" />
+                <MapEmbed 
+                  address={`${clinic.address}, ${clinic.city}${clinic.state ? ` - ${clinic.state}` : ""}, Brasil`} 
+                />
+              </>
+            )}
+
             {(clinic.website || clinic.instagram || clinic.facebook || clinic.linkedin || clinic.youtube) && (
               <>
                 <Separator className="my-6" />
