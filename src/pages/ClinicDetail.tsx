@@ -338,6 +338,14 @@ const ClinicDetail = () => {
         )}
       </div>
 
+      {/* WhatsApp Floating Button */}
+      {clinic.phone && (
+        <WhatsAppFloatingButton 
+          phone={clinic.phone}
+          message={`Olá! Encontrei a ${clinic.name} no Portal Saúde Limeira e gostaria de mais informações.`}
+        />
+      )}
+
       <Footer />
     </div>
   );
