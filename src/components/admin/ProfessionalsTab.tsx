@@ -71,6 +71,7 @@ export function ProfessionalsTab() {
     photo_url: "",
     banners: [] as string[],
     specialty_id: "",
+    registration_number: "",
     instagram: "",
     facebook: "",
     linkedin: "",
