@@ -469,6 +469,13 @@ const ProfessionalProfile = () => {
           </Card>
         </div>
       </div>
+      {/* WhatsApp Floating Button */}
+      {(professional.whatsapp || professional.phone) && (
+        <WhatsAppFloatingButton 
+          phone={professional.whatsapp || professional.phone!}
+          message={`Olá ${professional.name}, encontrei seu contato no Portal Saúde Limeira e gostaria de agendar uma consulta.`}
+        />
+      )}
       
       <Footer />
     </div>
