@@ -25,6 +25,7 @@ interface Professional {
   banners: string[];
   specialty_id: string | null;
   specialties: { name: string } | null;
+  registration_number: string | null;
   instagram: string | null;
   facebook: string | null;
   linkedin: string | null;
