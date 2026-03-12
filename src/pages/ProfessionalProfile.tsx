@@ -10,6 +10,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
 import MapEmbed from "@/components/shared/MapEmbed";
+import WhatsAppFloatingButton from "@/components/shared/WhatsAppFloatingButton";
 import { ContactInfo } from "@/components/auth/ContactInfo";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -36,6 +37,8 @@ interface Professional {
   banners: string[];
   specialties: { name: string } | null;
   registration_number: string | null;
+  whatsapp: string | null;
+  phone: string | null;
   instagram: string | null;
   facebook: string | null;
   linkedin: string | null;
@@ -74,6 +77,8 @@ const ProfessionalProfile = () => {
           banners,
           specialty_id,
           registration_number,
+          whatsapp,
+          phone,
           instagram,
           facebook,
           linkedin,
@@ -464,6 +469,13 @@ const ProfessionalProfile = () => {
           </Card>
         </div>
       </div>
+      {/* WhatsApp Floating Button */}
+      {(professional.whatsapp || professional.phone) && (
+        <WhatsAppFloatingButton 
+          phone={professional.whatsapp || professional.phone!}
+          message={`Olá ${professional.name}, encontrei seu contato no Portal Saúde Limeira e gostaria de agendar uma consulta.`}
+        />
+      )}
       
       <Footer />
     </div>
