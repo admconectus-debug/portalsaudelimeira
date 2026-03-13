@@ -237,12 +237,11 @@ const ClinicDetail = () => {
               </>
             )}
 
-            {(true) && (
-              <>
-                <Separator className="my-6" />
-                <div>
-                  <h2 className="text-xl font-semibold mb-4">Redes Sociais</h2>
-                  <div className="flex flex-wrap items-center gap-4">
+            
+            <Separator className="my-6" />
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Redes Sociais e Compartilhar</h2>
+              <div className="flex flex-wrap items-center gap-4">
                     {clinic.website && (
                       <Button asChild variant="outline" size="lg">
                         <a href={clinic.website} target="_blank" rel="noopener noreferrer">
