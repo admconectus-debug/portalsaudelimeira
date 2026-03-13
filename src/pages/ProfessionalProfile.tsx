@@ -322,23 +322,33 @@ const ProfessionalProfile = () => {
                  </div>
                 </div>
 
-                {/* Enhanced About Section */}
-                {professional.description && (
-                  <>
-                    <Separator className="my-8" />
-                    <div>
-                      <div className="flex items-center mb-6">
-                        <Award className="h-6 w-6 mr-3 text-primary" />
-                        <h3 className="text-2xl font-semibold">Sobre o Profissional</h3>
-                      </div>
-                      <div className="prose prose-neutral dark:prose-invert max-w-none">
-                        <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
-                          {professional.description}
-                        </p>
-                      </div>
+                {/* About + Professional Info Section */}
+                <Separator className="my-8" />
+                <div>
+                  <div className="flex items-center mb-6">
+                    <Award className="h-6 w-6 mr-3 text-primary" />
+                    <h3 className="text-2xl font-semibold">Sobre o Profissional</h3>
+                  </div>
+                  
+                  {professional.description && (
+                    <div className="prose prose-neutral dark:prose-invert max-w-none mb-6">
+                      <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
+                        {professional.description}
+                      </p>
                     </div>
-                  </>
-                )}
+                  )}
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium text-muted-foreground">Especialidade</h4>
+                      <p className="font-semibold">{professional.specialties?.name || "Não informada"}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-muted-foreground">Região de Atendimento</h4>
+                      <p className="font-semibold">{professional.location}</p>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
