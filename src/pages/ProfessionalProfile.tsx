@@ -11,6 +11,7 @@ import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
 import MapEmbed from "@/components/shared/MapEmbed";
 import WhatsAppFloatingButton from "@/components/shared/WhatsAppFloatingButton";
+import ShareButton from "@/components/shared/ShareButton";
 import { ContactInfo } from "@/components/auth/ContactInfo";
 import { supabase } from "@/integrations/supabase/client";
 
