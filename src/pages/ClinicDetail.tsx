@@ -299,10 +299,8 @@ const ClinicDetail = () => {
                       text={`Conheça ${clinic.name} no Portal Saúde Limeira`} 
                       size="md"
                     />
-                  </div>
-                </div>
-              </>
-            )}
+              </div>
+            </div>
           </CardContent>
         </Card>
 
