@@ -237,7 +237,7 @@ const ClinicDetail = () => {
               </>
             )}
 
-            {(clinic.website || clinic.instagram || clinic.facebook || clinic.linkedin || clinic.youtube) && (
+            {(true) && (
               <>
                 <Separator className="my-6" />
                 <div>
