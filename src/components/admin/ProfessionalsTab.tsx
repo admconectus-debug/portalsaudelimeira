@@ -70,6 +70,7 @@ export function ProfessionalsTab() {
     description: "",
     photo_url: "",
     banners: [] as string[],
+    gallery: [] as string[],
     specialty_id: "",
     registration_number: "",
     instagram: "",
