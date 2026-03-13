@@ -263,6 +263,7 @@ export function ProfessionalsTab() {
             description: formData.description || null,
             photo_url: formData.photo_url || null,
             banners: formData.banners,
+            gallery: formData.gallery,
             specialty_id: formData.specialty_id || null,
             registration_number: formData.registration_number || null,
             instagram: formData.instagram || null,
