@@ -415,7 +415,25 @@ const ProfessionalProfile = () => {
           </Card>
         )}
 
-        {/* Health Plans Section */}
+        {/* Gallery Section */}
+        {professional.gallery && Array.isArray(professional.gallery) && professional.gallery.filter(g => g && g.trim() !== '').length > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Camera className="h-5 w-5 text-primary" />
+                Fotos do Local de Trabalho
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <BannerCarousel 
+                banners={professional.gallery.filter(g => g && g.trim() !== '')} 
+                alt={`Galeria de ${professional.name}`} 
+              />
+            </CardContent>
+          </Card>
+        )}
+
+
         {healthPlans.length > 0 && (
           <Card className="mt-8">
             <CardHeader>
