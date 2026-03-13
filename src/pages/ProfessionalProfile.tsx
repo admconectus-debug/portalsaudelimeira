@@ -35,6 +35,7 @@ interface Professional {
   description: string | null;
   photo_url: string | null;
   banners: string[];
+  gallery: string[];
   specialties: { name: string } | null;
   registration_number: string | null;
   whatsapp: string | null;
