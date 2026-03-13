@@ -295,6 +295,11 @@ const ClinicDetail = () => {
                         <Youtube className="w-7 h-7 text-white" />
                       </a>
                     )}
+                    <ShareButton 
+                      title={clinic.name} 
+                      text={`Conheça ${clinic.name} no Portal Saúde Limeira`} 
+                      size="md"
+                    />
                   </div>
                 </div>
               </>

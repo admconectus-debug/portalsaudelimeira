@@ -273,55 +273,57 @@ const ProfessionalProfile = () => {
                      <span>{professional.location}</span>
                    </div>
 
-                   {/* Social Media Icons */}
-                   {(professional.instagram || professional.facebook || professional.linkedin || professional.youtube) && (
-                     <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
-                       {professional.instagram && (
-                         <a 
-                           href={professional.instagram} 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           title="Instagram"
-                           className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                         >
-                           <Instagram className="w-6 h-6 text-white" />
-                         </a>
-                       )}
-                       {professional.facebook && (
-                         <a 
-                           href={professional.facebook} 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           title="Facebook"
-                           className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                         >
-                           <Facebook className="w-6 h-6 text-white" />
-                         </a>
-                       )}
-                       {professional.linkedin && (
-                         <a 
-                           href={professional.linkedin} 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           title="LinkedIn"
-                           className="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                         >
-                           <Linkedin className="w-6 h-6 text-white" />
-                         </a>
-                       )}
-                       {professional.youtube && (
-                         <a 
-                           href={professional.youtube} 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           title="YouTube"
-                           className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                         >
-                           <Youtube className="w-6 h-6 text-white" />
-                         </a>
-                       )}
-                     </div>
-                   )}
+                   {/* Social Media Icons & Share */}
+                   <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
+                     {professional.instagram && (
+                       <a 
+                         href={professional.instagram} 
+                         target="_blank" 
+                         rel="noopener noreferrer" 
+                         title="Instagram"
+                         className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                       >
+                         <Instagram className="w-6 h-6 text-white" />
+                       </a>
+                     )}
+                     {professional.facebook && (
+                       <a 
+                         href={professional.facebook} 
+                         target="_blank" 
+                         rel="noopener noreferrer" 
+                         title="Facebook"
+                         className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                       >
+                         <Facebook className="w-6 h-6 text-white" />
+                       </a>
+                     )}
+                     {professional.linkedin && (
+                       <a 
+                         href={professional.linkedin} 
+                         target="_blank" 
+                         rel="noopener noreferrer" 
+                         title="LinkedIn"
+                         className="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                       >
+                         <Linkedin className="w-6 h-6 text-white" />
+                       </a>
+                     )}
+                     {professional.youtube && (
+                       <a 
+                         href={professional.youtube} 
+                         target="_blank" 
+                         rel="noopener noreferrer" 
+                         title="YouTube"
+                         className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                       >
+                         <Youtube className="w-6 h-6 text-white" />
+                       </a>
+                     )}
+                     <ShareButton 
+                       title={professional.name} 
+                       text={`Conheça ${professional.name} - ${professional.specialties?.name || 'Profissional de Saúde'} no Portal Saúde Limeira`} 
+                     />
+                   </div>
                  </div>
                 </div>
 
