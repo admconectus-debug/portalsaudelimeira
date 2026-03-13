@@ -273,6 +273,7 @@ export type Database = {
           description: string | null
           email: string | null
           facebook: string | null
+          gallery: string[] | null
           id: string
           instagram: string | null
           linkedin: string | null
@@ -292,6 +293,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           facebook?: string | null
+          gallery?: string[] | null
           id?: string
           instagram?: string | null
           linkedin?: string | null
@@ -311,6 +313,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           facebook?: string | null
+          gallery?: string[] | null
           id?: string
           instagram?: string | null
           linkedin?: string | null
