@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
 import MapEmbed from "@/components/shared/MapEmbed";
 import WhatsAppFloatingButton from "@/components/shared/WhatsAppFloatingButton";
+import ShareButton from "@/components/shared/ShareButton";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Clinic {
@@ -236,12 +237,11 @@ const ClinicDetail = () => {
               </>
             )}
 
-            {(clinic.website || clinic.instagram || clinic.facebook || clinic.linkedin || clinic.youtube) && (
-              <>
-                <Separator className="my-6" />
-                <div>
-                  <h2 className="text-xl font-semibold mb-4">Redes Sociais</h2>
-                  <div className="flex flex-wrap items-center gap-4">
+            
+            <Separator className="my-6" />
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Redes Sociais e Compartilhar</h2>
+              <div className="flex flex-wrap items-center gap-4">
                     {clinic.website && (
                       <Button asChild variant="outline" size="lg">
                         <a href={clinic.website} target="_blank" rel="noopener noreferrer">
@@ -294,10 +294,13 @@ const ClinicDetail = () => {
                         <Youtube className="w-7 h-7 text-white" />
                       </a>
                     )}
-                  </div>
-                </div>
-              </>
-            )}
+                    <ShareButton 
+                      title={clinic.name} 
+                      text={`Conheça ${clinic.name} no Portal Saúde Limeira`} 
+                      size="md"
+                    />
+              </div>
+            </div>
           </CardContent>
         </Card>
 
