@@ -636,6 +636,50 @@ export function ProfessionalsTab() {
                   </div>
                 </div>
                 <div className="col-span-2">
+                  <Label>Galeria de Fotos (Local de Trabalho) - Máx. 10</Label>
+                  <div className="space-y-2">
+                    {formData.gallery.map((photo, index) => (
+                      <div key={index} className="flex gap-2">
+                        <ImageUpload
+                          value={photo}
+                          onChange={(url) => {
+                            const newGallery = [...formData.gallery];
+                            newGallery[index] = url;
+                            setFormData({ ...formData, gallery: newGallery });
+                          }}
+                          onUpload={async (file) => {
+                            const result = await uploadBanner(file);
+                            return result.url;
+                          }}
+                          maxSize={10}
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => {
+                            const newGallery = formData.gallery.filter((_, i) => i !== index);
+                            setFormData({ ...formData, gallery: newGallery });
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    {formData.gallery.length < 10 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          setFormData({ ...formData, gallery: [...formData.gallery, ""] });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Adicionar Foto
+                      </Button>
+                    )}
+                  </div>
+                </div>
                   <Label htmlFor="description">Sobre o Profissional</Label>
                   <Textarea
                     id="description"
