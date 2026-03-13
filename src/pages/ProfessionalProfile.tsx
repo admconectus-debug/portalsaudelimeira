@@ -438,47 +438,31 @@ const ProfessionalProfile = () => {
           </Card>
         )}
 
-        {/* Additional Information */}
-        <div className="grid md:grid-cols-2 gap-8 mt-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Informações Profissionais</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h4 className="font-medium text-muted-foreground">Especialidade</h4>
-                <p className="font-semibold">{professional.specialties?.name || "Não informada"}</p>
+        {/* How to Schedule */}
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Calendar className="h-5 w-5 text-primary" />
+              Como Agendar
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex items-start space-x-3">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">1</div>
+                <p className="text-sm">Entre em contato via WhatsApp ou telefone</p>
               </div>
-              <div>
-                <h4 className="font-medium text-muted-foreground">Região de Atendimento</h4>
-                <p className="font-semibold">{professional.location}</p>
+              <div className="flex items-start space-x-3">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">2</div>
+                <p className="text-sm">Informe seus dados e necessidade</p>
               </div>
-              <MapEmbed address={`${professional.location}, Brasil`} />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Como Agendar</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">1</div>
-                  <p className="text-sm">Entre em contato via WhatsApp ou telefone</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">2</div>
-                  <p className="text-sm">Informe seus dados e necessidade</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-sm font-bold">3</div>
-                  <p className="text-sm">Confirme data e horário disponível</p>
-                </div>
+              <div className="flex items-start space-x-3">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">3</div>
+                <p className="text-sm">Confirme data e horário disponível</p>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
       {/* WhatsApp Floating Button */}
       {(professional.whatsapp || professional.phone) && (
