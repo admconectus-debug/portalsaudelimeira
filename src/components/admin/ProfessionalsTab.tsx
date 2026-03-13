@@ -348,6 +348,7 @@ export function ProfessionalsTab() {
       description: professional.description || "",
       photo_url: professional.photo_url || "",
       banners: professional.banners || [],
+      gallery: (professional as any).gallery || [],
       specialty_id: professional.specialty_id || "",
       registration_number: (professional as any).registration_number || "",
       instagram: professional.instagram || "",
