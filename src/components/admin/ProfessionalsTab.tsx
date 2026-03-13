@@ -680,6 +680,7 @@ export function ProfessionalsTab() {
                     )}
                   </div>
                 </div>
+                <div className="col-span-2">
                   <Label htmlFor="description">Sobre o Profissional</Label>
                   <Textarea
                     id="description"
