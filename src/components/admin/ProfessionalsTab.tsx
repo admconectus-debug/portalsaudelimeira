@@ -187,6 +187,7 @@ export function ProfessionalsTab() {
       description: "",
       photo_url: "",
       banners: [],
+      gallery: [],
       specialty_id: "",
       registration_number: "",
       instagram: "",
