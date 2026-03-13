@@ -1,0 +1,1 @@
+ALTER TABLE public.professionals ADD COLUMN gallery text[] DEFAULT '{}'::text[];

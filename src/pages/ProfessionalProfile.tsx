@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube, Building2, CreditCard } from "lucide-react";
+import { ArrowLeft, MapPin, Star, Calendar, Award, Loader2, Instagram, Facebook, Linkedin, Youtube, Building2, CreditCard, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -35,6 +35,7 @@ interface Professional {
   description: string | null;
   photo_url: string | null;
   banners: string[];
+  gallery: string[];
   specialties: { name: string } | null;
   registration_number: string | null;
   whatsapp: string | null;
@@ -75,6 +76,7 @@ const ProfessionalProfile = () => {
           description,
           photo_url,
           banners,
+          gallery,
           specialty_id,
           registration_number,
           whatsapp,
@@ -413,7 +415,25 @@ const ProfessionalProfile = () => {
           </Card>
         )}
 
-        {/* Health Plans Section */}
+        {/* Gallery Section */}
+        {professional.gallery && Array.isArray(professional.gallery) && professional.gallery.filter(g => g && g.trim() !== '').length > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Camera className="h-5 w-5 text-primary" />
+                Fotos do Local de Trabalho
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <BannerCarousel 
+                banners={professional.gallery.filter(g => g && g.trim() !== '')} 
+                alt={`Galeria de ${professional.name}`} 
+              />
+            </CardContent>
+          </Card>
+        )}
+
+
         {healthPlans.length > 0 && (
           <Card className="mt-8">
             <CardHeader>

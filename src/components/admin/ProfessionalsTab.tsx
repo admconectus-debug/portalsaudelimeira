@@ -70,6 +70,7 @@ export function ProfessionalsTab() {
     description: "",
     photo_url: "",
     banners: [] as string[],
+    gallery: [] as string[],
     specialty_id: "",
     registration_number: "",
     instagram: "",
@@ -186,6 +187,7 @@ export function ProfessionalsTab() {
       description: "",
       photo_url: "",
       banners: [],
+      gallery: [],
       specialty_id: "",
       registration_number: "",
       instagram: "",
@@ -261,6 +263,7 @@ export function ProfessionalsTab() {
             description: formData.description || null,
             photo_url: formData.photo_url || null,
             banners: formData.banners,
+            gallery: formData.gallery,
             specialty_id: formData.specialty_id || null,
             registration_number: formData.registration_number || null,
             instagram: formData.instagram || null,
@@ -293,6 +296,7 @@ export function ProfessionalsTab() {
             description: formData.description || null,
             photo_url: formData.photo_url || null,
             banners: formData.banners,
+            gallery: formData.gallery,
             specialty_id: formData.specialty_id || null,
             registration_number: formData.registration_number || null,
             instagram: formData.instagram || null,
@@ -344,6 +348,7 @@ export function ProfessionalsTab() {
       description: professional.description || "",
       photo_url: professional.photo_url || "",
       banners: professional.banners || [],
+      gallery: (professional as any).gallery || [],
       specialty_id: professional.specialty_id || "",
       registration_number: (professional as any).registration_number || "",
       instagram: professional.instagram || "",
@@ -626,6 +631,51 @@ export function ProfessionalsTab() {
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Adicionar Banner
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                <div className="col-span-2">
+                  <Label>Galeria de Fotos (Local de Trabalho) - Máx. 10</Label>
+                  <div className="space-y-2">
+                    {formData.gallery.map((photo, index) => (
+                      <div key={index} className="flex gap-2">
+                        <ImageUpload
+                          value={photo}
+                          onChange={(url) => {
+                            const newGallery = [...formData.gallery];
+                            newGallery[index] = url;
+                            setFormData({ ...formData, gallery: newGallery });
+                          }}
+                          onUpload={async (file) => {
+                            const result = await uploadBanner(file);
+                            return result.url;
+                          }}
+                          maxSize={10}
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => {
+                            const newGallery = formData.gallery.filter((_, i) => i !== index);
+                            setFormData({ ...formData, gallery: newGallery });
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    {formData.gallery.length < 10 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          setFormData({ ...formData, gallery: [...formData.gallery, ""] });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Adicionar Foto
                       </Button>
                     )}
                   </div>
