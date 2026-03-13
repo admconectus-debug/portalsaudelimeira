@@ -355,11 +355,12 @@ const ProfessionalProfile = () => {
 
           {/* Contact Sidebar */}
           <div>
-            <div className="sticky top-24">
+            <div className="sticky top-24 space-y-6">
               <ContactInfo 
                 professionalId={professional.id} 
                 professionalName={professional.name}
               />
+              <MapEmbed address={`${professional.location}, Brasil`} />
             </div>
           </div>
         </div>
