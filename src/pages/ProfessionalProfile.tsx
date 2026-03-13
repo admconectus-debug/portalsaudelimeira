@@ -76,6 +76,7 @@ const ProfessionalProfile = () => {
           description,
           photo_url,
           banners,
+          gallery,
           specialty_id,
           registration_number,
           whatsapp,
