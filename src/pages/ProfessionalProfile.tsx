@@ -461,29 +461,8 @@ const ProfessionalProfile = () => {
         )}
 
 
-        {healthPlans.length > 0 && (
-          <Card className="mt-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5 text-primary" />
-                Planos que Atende
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {healthPlans.map((plan) => (
-                  <Badge 
-                    key={plan.id} 
-                    variant={plan.is_particular ? "secondary" : "default"}
-                    className="text-sm px-3 py-1"
-                  >
-                    {plan.name}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+
+
 
         {/* How to Schedule */}
         <Card className="mt-8">
