@@ -80,6 +80,7 @@ export function HealthPlansTab() {
             name: formData.name,
             is_particular: formData.is_particular,
             is_active: formData.is_active,
+            logo_url: formData.logo_url || null,
           })
           .eq("id", editingPlan.id);
 
