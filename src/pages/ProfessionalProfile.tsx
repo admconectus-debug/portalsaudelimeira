@@ -353,6 +353,30 @@ const ProfessionalProfile = () => {
                       <p className="font-semibold">{professional.location}</p>
                     </div>
                   </div>
+
+                  {/* Health Plans - inside About section */}
+                  {healthPlans.length > 0 && (
+                    <>
+                      <Separator className="my-6" />
+                      <div>
+                        <div className="flex items-center mb-4">
+                          <CreditCard className="h-5 w-5 mr-2 text-primary" />
+                          <h3 className="text-xl font-semibold">Planos que Atende</h3>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {healthPlans.map((plan) => (
+                            <Badge 
+                              key={plan.id} 
+                              variant={plan.is_particular ? "secondary" : "default"}
+                              className="text-sm px-3 py-1"
+                            >
+                              {plan.name}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </CardContent>
             </Card>
