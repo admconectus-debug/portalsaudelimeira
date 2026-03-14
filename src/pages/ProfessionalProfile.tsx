@@ -364,15 +364,26 @@ const ProfessionalProfile = () => {
                           <CreditCard className="h-5 w-5 mr-2 text-primary" />
                           <h3 className="text-xl font-semibold">Planos que Atende</h3>
                         </div>
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-3">
                           {healthPlans.map((plan) => (
-                            <Badge 
+                            <div 
                               key={plan.id} 
-                              variant={plan.is_particular ? "secondary" : "default"}
-                              className="text-sm px-3 py-1"
+                              className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-muted/50"
                             >
-                              {plan.name}
-                            </Badge>
+                              {plan.logo_url ? (
+                                <img 
+                                  src={plan.logo_url} 
+                                  alt={plan.name} 
+                                  className="h-8 w-8 rounded object-contain"
+                                />
+                              ) : (
+                                <CreditCard className="h-5 w-5 text-muted-foreground" />
+                              )}
+                              <span className="text-sm font-medium">{plan.name}</span>
+                              {plan.is_particular && (
+                                <Badge variant="secondary" className="text-xs">Particular</Badge>
+                              )}
+                            </div>
                           ))}
                         </div>
                       </div>
