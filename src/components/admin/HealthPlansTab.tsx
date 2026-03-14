@@ -234,6 +234,19 @@ export function HealthPlansTab() {
                 />
               </div>
 
+              <div>
+                <ImageUpload
+                  label="Logo do Plano"
+                  value={formData.logo_url}
+                  onChange={(url) => setFormData({ ...formData, logo_url: url })}
+                  onUpload={async (file) => {
+                    const result = await uploadImage(file);
+                    return result.url;
+                  }}
+                  maxSize={5}
+                />
+              </div>
+
               <div className="flex justify-end gap-2 pt-4">
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                   Cancelar
