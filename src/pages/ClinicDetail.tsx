@@ -151,22 +151,20 @@ const ClinicDetail = () => {
 
         <Card className="mb-8">
           <CardContent className="p-8">
-            <div className="flex items-start gap-6 mb-6">
+            <div className="flex flex-col items-center text-center mb-6">
               {clinic.image_url && (
-                <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 border-2 border-border bg-card">
+                <div className="w-40 h-40 rounded-lg overflow-hidden flex-shrink-0 border-2 border-border bg-card mb-4">
                   <img 
                     src={clinic.image_url} 
                     alt={`Logo ${clinic.name}`}
-                    className="w-full h-full object-contain p-2"
+                    className="w-full h-full object-contain p-3"
                   />
                 </div>
               )}
-              <div className="flex-1">
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">{clinic.name}</h1>
-                <p className="text-lg text-muted-foreground">
-                  {clinic.city}{clinic.state ? ` - ${clinic.state}` : ""}
-                </p>
-              </div>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">{clinic.name}</h1>
+              <p className="text-lg text-muted-foreground">
+                {clinic.city}{clinic.state ? ` - ${clinic.state}` : ""}
+              </p>
             </div>
 
             {clinic.description && (
