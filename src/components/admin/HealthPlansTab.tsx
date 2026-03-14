@@ -6,15 +6,18 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2, CreditCard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { uploadImage } from "@/lib/storage";
 
 interface HealthPlan {
   id: string;
   name: string;
   is_particular: boolean;
   is_active: boolean;
+  logo_url: string | null;
 }
 
 export function HealthPlansTab() {
@@ -29,6 +32,7 @@ export function HealthPlansTab() {
     name: "",
     is_particular: false,
     is_active: true,
+    logo_url: "",
   });
 
   useEffect(() => {
@@ -59,6 +63,7 @@ export function HealthPlansTab() {
       name: "",
       is_particular: false,
       is_active: true,
+      logo_url: "",
     });
     setEditingPlan(null);
   };
@@ -75,6 +80,7 @@ export function HealthPlansTab() {
             name: formData.name,
             is_particular: formData.is_particular,
             is_active: formData.is_active,
+            logo_url: formData.logo_url || null,
           })
           .eq("id", editingPlan.id);
 
@@ -91,6 +97,7 @@ export function HealthPlansTab() {
             name: formData.name,
             is_particular: formData.is_particular,
             is_active: formData.is_active,
+            logo_url: formData.logo_url || null,
           });
 
         if (error) throw error;
@@ -121,6 +128,7 @@ export function HealthPlansTab() {
       name: plan.name,
       is_particular: plan.is_particular,
       is_active: plan.is_active,
+      logo_url: plan.logo_url || "",
     });
     setIsDialogOpen(true);
   };
@@ -226,6 +234,19 @@ export function HealthPlansTab() {
                 />
               </div>
 
+              <div>
+                <ImageUpload
+                  label="Logo do Plano"
+                  value={formData.logo_url}
+                  onChange={(url) => setFormData({ ...formData, logo_url: url })}
+                  onUpload={async (file) => {
+                    const result = await uploadImage(file);
+                    return result.url;
+                  }}
+                  maxSize={5}
+                />
+              </div>
+
               <div className="flex justify-end gap-2 pt-4">
                 <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                   Cancelar
@@ -261,7 +282,11 @@ export function HealthPlansTab() {
                 <TableRow key={plan.id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4 text-muted-foreground" />
+                      {plan.logo_url ? (
+                        <img src={plan.logo_url} alt={plan.name} className="h-8 w-8 rounded object-contain border border-border" />
+                      ) : (
+                        <CreditCard className="h-4 w-4 text-muted-foreground" />
+                      )}
                       {plan.name}
                     </div>
                   </TableCell>

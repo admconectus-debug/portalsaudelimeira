@@ -131,6 +131,7 @@ export type Database = {
           id: string
           is_active: boolean
           is_particular: boolean
+          logo_url: string | null
           name: string
           updated_at: string
         }
@@ -139,6 +140,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           is_particular?: boolean
+          logo_url?: string | null
           name: string
           updated_at?: string
         }
@@ -147,6 +149,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           is_particular?: boolean
+          logo_url?: string | null
           name?: string
           updated_at?: string
         }
