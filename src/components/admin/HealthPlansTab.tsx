@@ -282,7 +282,11 @@ export function HealthPlansTab() {
                 <TableRow key={plan.id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4 text-muted-foreground" />
+                      {plan.logo_url ? (
+                        <img src={plan.logo_url} alt={plan.name} className="h-8 w-8 rounded object-contain border border-border" />
+                      ) : (
+                        <CreditCard className="h-4 w-4 text-muted-foreground" />
+                      )}
                       {plan.name}
                     </div>
                   </TableCell>

@@ -150,7 +150,7 @@ const ProfessionalProfile = () => {
         
         const { data: plansData, error: plansError } = await supabase
           .from("health_plans" as any)
-          .select("id, name, is_particular")
+          .select("id, name, is_particular, logo_url")
           .in("id", healthPlanIds);
 
         if (plansError) throw plansError;
