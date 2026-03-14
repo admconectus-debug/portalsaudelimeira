@@ -63,6 +63,7 @@ export function HealthPlansTab() {
       name: "",
       is_particular: false,
       is_active: true,
+      logo_url: "",
     });
     setEditingPlan(null);
   };
