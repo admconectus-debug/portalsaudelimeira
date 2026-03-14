@@ -6,15 +6,18 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Pencil, Trash2, CreditCard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { uploadImage } from "@/lib/storage";
 
 interface HealthPlan {
   id: string;
   name: string;
   is_particular: boolean;
   is_active: boolean;
+  logo_url: string | null;
 }
 
 export function HealthPlansTab() {
