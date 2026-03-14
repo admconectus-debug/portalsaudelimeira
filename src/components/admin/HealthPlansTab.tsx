@@ -128,6 +128,7 @@ export function HealthPlansTab() {
       name: plan.name,
       is_particular: plan.is_particular,
       is_active: plan.is_active,
+      logo_url: plan.logo_url || "",
     });
     setIsDialogOpen(true);
   };
