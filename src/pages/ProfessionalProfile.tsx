@@ -27,6 +27,7 @@ interface HealthPlan {
   id: string;
   name: string;
   is_particular: boolean;
+  logo_url: string | null;
 }
 
 interface Professional {
