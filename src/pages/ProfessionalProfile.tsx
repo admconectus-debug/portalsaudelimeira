@@ -156,7 +156,7 @@ const ProfessionalProfile = () => {
         if (plansError) throw plansError;
 
         if (plansData) {
-          setHealthPlans(plansData as unknown as HealthPlan[]);
+          setHealthPlans(plansData as HealthPlan[]);
         }
       }
     } catch (err: any) {
