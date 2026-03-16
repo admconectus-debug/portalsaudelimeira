@@ -139,17 +139,17 @@ const ProfessionalProfile = () => {
   const fetchProfessionalHealthPlans = async (professionalId: string) => {
     try {
       const { data, error } = await supabase
-        .from("professional_health_plans" as any)
+        .from("professional_health_plans")
         .select("health_plan_id")
         .eq("professional_id", professionalId);
 
       if (error) throw error;
 
       if (data && data.length > 0) {
-        const healthPlanIds = (data as any[]).map((item) => item.health_plan_id);
+        const healthPlanIds = data.map((item) => item.health_plan_id);
         
         const { data: plansData, error: plansError } = await supabase
-          .from("health_plans" as any)
+          .from("health_plans")
           .select("id, name, is_particular, logo_url")
           .in("id", healthPlanIds);
 
