@@ -172,7 +172,7 @@ export function ProfessionalsTab() {
         variant: "destructive",
       });
     } else {
-      setHealthPlans((data as unknown as HealthPlan[]) || []);
+      setHealthPlans(data || []);
     }
   };
 
