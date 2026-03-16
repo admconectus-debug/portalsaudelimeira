@@ -120,8 +120,7 @@ export function HealthPlansTab() {
         });
       }
 
-      setIsDialogOpen(false);
-      resetForm();
+      handleDialogOpenChange(false);
       fetchHealthPlans();
     } catch (error: any) {
       toast({
