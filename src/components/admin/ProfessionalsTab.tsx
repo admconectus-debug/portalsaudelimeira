@@ -225,14 +225,14 @@ export function ProfessionalsTab() {
   const updateProfessionalHealthPlans = async (professionalId: string, healthPlanIds: string[]) => {
     // First delete all existing relationships
     await supabase
-      .from("professional_health_plans" as any)
+      .from("professional_health_plans")
       .delete()
       .eq("professional_id", professionalId);
 
     // Then insert new relationships
     if (healthPlanIds.length > 0) {
       const { error } = await supabase
-        .from("professional_health_plans" as any)
+        .from("professional_health_plans")
         .insert(
           healthPlanIds.map(healthPlanId => ({
             professional_id: professionalId,
