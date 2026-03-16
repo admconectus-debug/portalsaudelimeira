@@ -333,8 +333,7 @@ export function ProfessionalsTab() {
         });
       }
 
-      setIsDialogOpen(false);
-      resetForm();
+      handleDialogOpenChange(false);
       fetchProfessionals();
     } catch (error: any) {
       toast({
