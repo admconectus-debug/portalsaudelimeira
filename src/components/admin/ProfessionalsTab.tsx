@@ -100,7 +100,7 @@ export function ProfessionalsTab() {
 
     // Fetch health plan associations separately
     const { data: healthPlanData } = await supabase
-      .from("professional_health_plans" as any)
+      .from("professional_health_plans")
       .select("professional_id, health_plan_id");
 
     if (error) {
@@ -159,7 +159,7 @@ export function ProfessionalsTab() {
 
   const fetchHealthPlans = async () => {
     const { data, error } = await supabase
-      .from("health_plans" as any)
+      .from("health_plans")
       .select("id, name, is_particular")
       .eq("is_active", true)
       .order("is_particular", { ascending: false })
@@ -172,7 +172,7 @@ export function ProfessionalsTab() {
         variant: "destructive",
       });
     } else {
-      setHealthPlans((data as unknown as HealthPlan[]) || []);
+      setHealthPlans(data || []);
     }
   };
 
@@ -225,14 +225,14 @@ export function ProfessionalsTab() {
   const updateProfessionalHealthPlans = async (professionalId: string, healthPlanIds: string[]) => {
     // First delete all existing relationships
     await supabase
-      .from("professional_health_plans" as any)
+      .from("professional_health_plans")
       .delete()
       .eq("professional_id", professionalId);
 
     // Then insert new relationships
     if (healthPlanIds.length > 0) {
       const { error } = await supabase
-        .from("professional_health_plans" as any)
+        .from("professional_health_plans")
         .insert(
           healthPlanIds.map(healthPlanId => ({
             professional_id: professionalId,
