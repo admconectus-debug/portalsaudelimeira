@@ -501,39 +501,32 @@ export function ProfessionalsTab() {
                         {clinics.map((clinic) => {
                           const isSelected = formData.clinic_ids.includes(clinic.id);
                           return (
-                            <div
+                            <button
                               key={clinic.id}
+                              type="button"
                               onClick={() => {
-                                if (isSelected) {
-                                  setFormData({
-                                    ...formData,
-                                    clinic_ids: formData.clinic_ids.filter((id) => id !== clinic.id),
-                                  });
-                                } else {
-                                  setFormData({
-                                    ...formData,
-                                    clinic_ids: [...formData.clinic_ids, clinic.id],
-                                  });
-                                }
+                                setFormData((current) => ({
+                                  ...current,
+                                  clinic_ids: toggleSelection(current.clinic_ids, clinic.id),
+                                }));
                               }}
-                              className={`
-                                cursor-pointer rounded-lg border-2 p-3 transition-all
-                                ${isSelected 
-                                  ? 'border-primary bg-primary/10 shadow-sm' 
-                                  : 'border-border hover:border-primary/50 hover:bg-muted/50'
-                                }
-                              `}
+                              className={isSelected
+                                ? "flex w-full items-center gap-2 rounded-lg border-2 border-primary bg-primary/10 p-3 text-left shadow-sm transition-all"
+                                : "flex w-full items-center gap-2 rounded-lg border-2 border-border p-3 text-left transition-all hover:border-primary/50 hover:bg-muted/50"
+                              }
                             >
-                              <div className="flex items-center gap-2">
-                                <Checkbox
-                                  checked={isSelected}
-                                  className="pointer-events-none"
-                                />
-                                <span className="text-sm font-medium line-clamp-1">
-                                  {clinic.name}
-                                </span>
-                              </div>
-                            </div>
+                              <span
+                                className={isSelected
+                                  ? "flex h-4 w-4 items-center justify-center rounded-sm border border-primary bg-primary text-primary-foreground"
+                                  : "flex h-4 w-4 items-center justify-center rounded-sm border border-border bg-background"
+                                }
+                              >
+                                {isSelected && <Check className="h-3 w-3" />}
+                              </span>
+                              <span className="text-sm font-medium line-clamp-1">
+                                {clinic.name}
+                              </span>
+                            </button>
                           );
                         })}
                       </div>
@@ -550,42 +543,35 @@ export function ProfessionalsTab() {
                         {healthPlans.map((plan) => {
                           const isSelected = formData.health_plan_ids.includes(plan.id);
                           return (
-                            <div
+                            <button
                               key={plan.id}
+                              type="button"
                               onClick={() => {
-                                if (isSelected) {
-                                  setFormData({
-                                    ...formData,
-                                    health_plan_ids: formData.health_plan_ids.filter((id) => id !== plan.id),
-                                  });
-                                } else {
-                                  setFormData({
-                                    ...formData,
-                                    health_plan_ids: [...formData.health_plan_ids, plan.id],
-                                  });
-                                }
+                                setFormData((current) => ({
+                                  ...current,
+                                  health_plan_ids: toggleSelection(current.health_plan_ids, plan.id),
+                                }));
                               }}
-                              className={`
-                                cursor-pointer rounded-lg border-2 p-3 transition-all
-                                ${isSelected 
-                                  ? 'border-primary bg-primary/10 shadow-sm' 
-                                  : 'border-border hover:border-primary/50 hover:bg-muted/50'
-                                }
-                              `}
+                              className={isSelected
+                                ? "flex w-full items-center gap-2 rounded-lg border-2 border-primary bg-primary/10 p-3 text-left shadow-sm transition-all"
+                                : "flex w-full items-center gap-2 rounded-lg border-2 border-border p-3 text-left transition-all hover:border-primary/50 hover:bg-muted/50"
+                              }
                             >
-                              <div className="flex items-center gap-2">
-                                <Checkbox
-                                  checked={isSelected}
-                                  className="pointer-events-none"
-                                />
-                                <span className="text-sm font-medium line-clamp-1">
-                                  {plan.name}
-                                  {plan.is_particular && (
-                                    <span className="ml-1 text-xs text-muted-foreground">(Particular)</span>
-                                  )}
-                                </span>
-                              </div>
-                            </div>
+                              <span
+                                className={isSelected
+                                  ? "flex h-4 w-4 items-center justify-center rounded-sm border border-primary bg-primary text-primary-foreground"
+                                  : "flex h-4 w-4 items-center justify-center rounded-sm border border-border bg-background"
+                                }
+                              >
+                                {isSelected && <Check className="h-3 w-3" />}
+                              </span>
+                              <span className="text-sm font-medium line-clamp-1">
+                                {plan.name}
+                                {plan.is_particular && (
+                                  <span className="ml-1 text-xs text-muted-foreground">(Particular)</span>
+                                )}
+                              </span>
+                            </button>
                           );
                         })}
                       </div>
