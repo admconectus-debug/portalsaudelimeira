@@ -200,6 +200,18 @@ export function ProfessionalsTab() {
     setEditingProfessional(null);
   };
 
+  const openCreateDialog = () => {
+    resetForm();
+    setIsDialogOpen(true);
+  };
+
+  const handleDialogOpenChange = (open: boolean) => {
+    setIsDialogOpen(open);
+    if (!open) {
+      resetForm();
+    }
+  };
+
   const updateClinicProfessionals = async (professionalId: string, clinicIds: string[]) => {
     // First delete all existing relationships
     await supabase
