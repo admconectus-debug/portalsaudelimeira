@@ -211,6 +211,12 @@ export function ProfessionalsTab() {
     }
   };
 
+  const toggleSelection = (items: string[], itemId: string) => {
+    return items.includes(itemId)
+      ? items.filter((id) => id !== itemId)
+      : [...items, itemId];
+  };
+
   const updateClinicProfessionals = async (professionalId: string, clinicIds: string[]) => {
     // First delete all existing relationships
     await supabase
