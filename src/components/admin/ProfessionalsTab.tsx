@@ -100,7 +100,7 @@ export function ProfessionalsTab() {
 
     // Fetch health plan associations separately
     const { data: healthPlanData } = await supabase
-      .from("professional_health_plans" as any)
+      .from("professional_health_plans")
       .select("professional_id, health_plan_id");
 
     if (error) {
