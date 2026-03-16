@@ -740,7 +740,7 @@ export function ProfessionalsTab() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setIsDialogOpen(false)}
+                  onClick={() => handleDialogOpenChange(false)}
                 >
                   Cancelar
                 </Button>
