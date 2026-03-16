@@ -403,13 +403,11 @@ export function ProfessionalsTab() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Profissionais Cadastrados</h3>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={resetForm}>
-              <Plus className="w-4 h-4 mr-2" />
-              Adicionar Profissional
-            </Button>
-          </DialogTrigger>
+        <Button onClick={openCreateDialog}>
+          <Plus className="w-4 h-4 mr-2" />
+          Adicionar Profissional
+        </Button>
+        <Dialog open={isDialogOpen} onOpenChange={handleDialogOpenChange}>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
