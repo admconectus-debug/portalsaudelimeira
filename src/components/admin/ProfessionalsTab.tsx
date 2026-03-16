@@ -159,7 +159,7 @@ export function ProfessionalsTab() {
 
   const fetchHealthPlans = async () => {
     const { data, error } = await supabase
-      .from("health_plans" as any)
+      .from("health_plans")
       .select("id, name, is_particular")
       .eq("is_active", true)
       .order("is_particular", { ascending: false })
