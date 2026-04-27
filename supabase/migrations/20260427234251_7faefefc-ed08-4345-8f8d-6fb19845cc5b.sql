@@ -1,0 +1,5 @@
+INSERT INTO public.hospitals (name, description, address, city, state, phone, website, is_emergency, is_public) VALUES
+('Santa Casa de Limeira', 'Hospital filantrópico referência em atendimento à população de Limeira e região, com diversas especialidades e pronto-socorro 24h.', 'Rua Santa Cruz, 585 - Centro', 'Limeira', 'SP', '(19) 3404-2000', 'https://www.santacasalimeira.com.br', true, false),
+('UPA Vila Queiroz', 'Unidade de Pronto Atendimento 24 horas, voltada a urgências e emergências de média complexidade.', 'Rua Ana Carolina de Oliveira, 100 - Vila Queiroz', 'Limeira', 'SP', '(19) 3451-7000', NULL, true, true),
+('Hospital Unimed Limeira', 'Hospital particular com estrutura moderna, UTI, centro cirúrgico e atendimento a beneficiários Unimed.', 'Av. Antônio Ometto, 2200 - Jardim Graminha', 'Limeira', 'SP', '(19) 3404-8000', 'https://www.unimedlimeira.com.br', true, false),
+('Hospital São Luiz Limeira', 'Hospital geral com pronto atendimento, maternidade e diversas especialidades médicas.', 'Rua Boa Morte, 1400 - Centro', 'Limeira', 'SP', '(19) 3441-5000', NULL, false, false);
