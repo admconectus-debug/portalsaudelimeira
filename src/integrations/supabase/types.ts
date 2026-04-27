@@ -155,6 +155,60 @@ export type Database = {
         }
         Relationships: []
       }
+      hospitals: {
+        Row: {
+          address: string | null
+          city: string
+          created_at: string
+          description: string | null
+          email: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          is_emergency: boolean
+          is_public: boolean
+          name: string
+          phone: string | null
+          state: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          city: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          is_emergency?: boolean
+          is_public?: boolean
+          name: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          is_emergency?: boolean
+          is_public?: boolean
+          name?: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       news: {
         Row: {
           author: string | null
