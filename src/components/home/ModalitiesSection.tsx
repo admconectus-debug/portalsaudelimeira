@@ -56,6 +56,9 @@ const modalities: Modality[] = [
 
 export const ModalitiesSection = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const autoplay = useRef(
+    Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
 
   const toggleExpand = (id: number, e: React.MouseEvent) => {
     e.preventDefault();
@@ -75,7 +78,9 @@ export const ModalitiesSection = () => {
             opts={{
               align: "start",
               loop: true,
+              slidesToScroll: 5,
             }}
+            plugins={[autoplay.current]}
             className="w-full [&>div]:overflow-visible"
           >
             <CarouselContent className="-ml-4">
