@@ -43,15 +43,15 @@ interface Modality {
 }
 
 const modalities: Modality[] = [
-  { id: 1, title: "Hospitais", image: hospitalsImg, link: "/profissionais", icon: Hospital, specialties: ["Emergência", "UTI", "Centro Cirúrgico", "Internação"] },
-  { id: 2, title: "Planos Médicos", image: healthPlansImg, link: "/profissionais", icon: Shield, specialties: ["Unimed", "Amil", "SulAmérica", "Particular"] },
-  { id: 3, title: "Serviços 24 Horas", image: service24hImg, link: "/profissionais", icon: Clock, specialties: ["Pronto Socorro", "Farmácia", "Laboratório"] },
+  { id: 1, title: "Hospitais", image: hospitalsImg, link: "/hospitais", icon: Hospital, specialties: ["Emergência", "UTI", "Centro Cirúrgico", "Internação"] },
+  { id: 2, title: "Planos Médicos", image: healthPlansImg, link: "/planos-medicos", icon: Shield, specialties: ["Unimed", "Amil", "SulAmérica", "Particular"] },
+  { id: 3, title: "Serviços 24 Horas", image: service24hImg, link: "/servicos-24h", icon: Clock, specialties: ["Pronto Socorro", "Farmácia", "Laboratório"] },
   { id: 4, title: "Medicina", image: medicineImg, link: "/profissionais", icon: Stethoscope, specialties: ["Cardiologia", "Neurologia", "Ortopedia", "Pediatria", "Dermatologia"] },
   { id: 5, title: "Odontologia", image: dentistryImg, link: "/profissionais", icon: SmilePlus, specialties: ["Ortodontia", "Implantes", "Clínico Geral", "Endodontia"] },
-  { id: 6, title: "Laboratório", image: laboratoryImg, link: "/profissionais", icon: FlaskConical, specialties: ["Análises Clínicas", "Imagem", "Patologia"] },
-  { id: 7, title: "Farmácia", image: pharmacyImg, link: "/profissionais", icon: Pill, specialties: ["Manipulação", "Drogaria", "Homeopatia"] },
-  { id: 8, title: "Saúde & Beleza", image: beautyImg, link: "/profissionais", icon: Sparkles, specialties: ["Estética", "Nutrição", "Fisioterapia", "Pilates"] },
-  { id: 9, title: "Saúde Pets", image: petsImg, link: "/profissionais", icon: PawPrint, specialties: ["Veterinário", "Pet Shop", "Banho e Tosa"] },
+  { id: 6, title: "Laboratório", image: laboratoryImg, link: "/laboratorios", icon: FlaskConical, specialties: ["Análises Clínicas", "Imagem", "Patologia"] },
+  { id: 7, title: "Farmácia", image: pharmacyImg, link: "/farmacias", icon: Pill, specialties: ["Manipulação", "Drogaria", "Homeopatia"] },
+  { id: 8, title: "Saúde & Beleza", image: beautyImg, link: "/saude-beleza", icon: Sparkles, specialties: ["Estética", "Nutrição", "Fisioterapia", "Pilates"] },
+  { id: 9, title: "Saúde Pets", image: petsImg, link: "/saude-pets", icon: PawPrint, specialties: ["Veterinário", "Pet Shop", "Banho e Tosa"] },
 ];
 
 export const ModalitiesSection = () => {
