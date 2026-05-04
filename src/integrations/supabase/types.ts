@@ -125,6 +125,72 @@ export type Database = {
         }
         Relationships: []
       }
+      establishments: {
+        Row: {
+          address: string | null
+          category: string
+          city: string
+          created_at: string
+          description: string | null
+          email: string | null
+          id: string
+          image_url: string | null
+          is_24h: boolean
+          is_active: boolean
+          is_featured: boolean
+          name: string
+          phone: string | null
+          schedule: string | null
+          slug: string
+          state: string | null
+          updated_at: string
+          website: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          address?: string | null
+          category: string
+          city?: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          is_24h?: boolean
+          is_active?: boolean
+          is_featured?: boolean
+          name: string
+          phone?: string | null
+          schedule?: string | null
+          slug: string
+          state?: string | null
+          updated_at?: string
+          website?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          address?: string | null
+          category?: string
+          city?: string
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          image_url?: string | null
+          is_24h?: boolean
+          is_active?: boolean
+          is_featured?: boolean
+          name?: string
+          phone?: string | null
+          schedule?: string | null
+          slug?: string
+          state?: string | null
+          updated_at?: string
+          website?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
       health_plans: {
         Row: {
           created_at: string
