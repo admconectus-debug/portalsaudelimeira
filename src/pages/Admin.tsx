@@ -109,7 +109,11 @@ export default function Admin() {
               <TabsContent value="hospitals">
                 <HospitalsTab />
               </TabsContent>
-              
+
+              <TabsContent value="establishments">
+                <EstablishmentsTab />
+              </TabsContent>
+
               <TabsContent value="professionals">
                 <ProfessionalsTab />
               </TabsContent>
