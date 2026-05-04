@@ -41,6 +41,12 @@ const App = () => (
           <Route path="/noticias" element={<News />} />
           <Route path="/noticias/:slug" element={<NewsDetail />} />
           <Route path="/hospitais" element={<Hospitals />} />
+          <Route path="/planos-medicos" element={<ModalityPage config={MODALITY_CONFIGS["planos-medicos"]} />} />
+          <Route path="/servicos-24h" element={<ModalityPage config={MODALITY_CONFIGS["servicos-24h"]} />} />
+          <Route path="/laboratorios" element={<ModalityPage config={MODALITY_CONFIGS["laboratorios"]} />} />
+          <Route path="/farmacias" element={<ModalityPage config={MODALITY_CONFIGS["farmacias"]} />} />
+          <Route path="/saude-beleza" element={<ModalityPage config={MODALITY_CONFIGS["saude-beleza"]} />} />
+          <Route path="/saude-pets" element={<ModalityPage config={MODALITY_CONFIGS["saude-pets"]} />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
