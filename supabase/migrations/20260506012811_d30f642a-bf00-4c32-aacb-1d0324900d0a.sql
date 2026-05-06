@@ -1,0 +1,25 @@
+
+INSERT INTO public.establishments (category, name, slug, description, address, city, state, phone, whatsapp, email, website, schedule, is_24h, is_featured) VALUES
+-- Farmácias (mais 6)
+('farmacias','Drogaria Araujo','drogaria-araujo','Rede de drogarias com ampla variedade de medicamentos e produtos de higiene.','Rua Barão de Campinas, 450','Limeira','SP','(19) 3441-1100','19994411100','contato@araujo.com.br','https://araujo.com.br','Seg-Sáb: 7h às 22h | Dom: 8h às 20h',false,true),
+('farmacias','Farmácia Popular','farmacia-popular','Medicamentos com preços acessíveis e atendimento humanizado.','Av. Campinas, 890','Limeira','SP','(19) 3442-2200','19994422200','popular@farmacia.com','https://farmaciapopular.com.br','Seg-Sex: 8h às 20h | Sáb: 8h às 18h',false,false),
+('farmacias','Drogaria Onofre','drogaria-onofre','Farmácia com delivery rápido e farmacêuticos disponíveis.','Rua XV de Novembro, 1200','Limeira','SP','(19) 3443-3300','19994433300','onofre@onofre.com.br','https://onofre.com.br','Seg-Dom: 7h às 23h',false,false),
+('farmacias','Farmácia Homeopática Natural','farmacia-homeopatica','Especializada em homeopatia, fitoterápicos e produtos naturais.','Rua das Acácias, 78','Limeira','SP','(19) 3444-4400','19994444400','natural@homeopatia.com','https://farmacianatural.com.br','Seg-Sex: 8h às 18h | Sáb: 8h às 13h',false,false),
+('farmacias','Drogasil Centro','drogasil-centro','Unidade central da Drogasil com medicamentos e perfumaria.','Praça Toledo Barros, 100','Limeira','SP','(19) 3445-5500','19994455500','centro@drogasil.com.br','https://drogasil.com.br','Seg-Dom: 7h às 22h',false,true),
+('farmacias','Farma Conde','farma-conde','Farmácia tradicional com manipulação de fórmulas.','Rua Boa Morte, 567','Limeira','SP','(19) 3446-6600','19994466600','contato@farmaconde.com.br','https://farmaconde.com.br','Seg-Sáb: 8h às 21h',false,false),
+
+-- Serviços 24h (mais 6)
+('servicos-24h','Hospital São Luiz Emergência','hsl-emergencia','Pronto atendimento 24h com equipe médica completa.','Av. Major José Levy, 1500','Limeira','SP','(19) 3451-1100','19995511100','emergencia@hsl.com.br','https://hospitalsaoluiz.com.br','24 horas',true,true),
+('servicos-24h','Clínica 24h Saúde Total','clinica-24h-saude','Consultas e exames de urgência 24 horas por dia.','Rua Santa Cruz, 320','Limeira','SP','(19) 3452-2200','19995522200','contato@saudetotal24h.com.br','https://saudetotal24h.com.br','24 horas',true,false),
+('servicos-24h','Drogaria Pague Menos 24h','pague-menos-24h','Farmácia 24h com entrega em domicílio.','Av. Castelo Branco, 800','Limeira','SP','(19) 3453-3300','19995533300','24h@paguemenos.com.br','https://paguemenos.com.br','24 horas',true,true),
+('servicos-24h','Pronto Atendimento Vila Camargo','pa-vila-camargo','Atendimento de urgência e emergência 24 horas.','Rua das Palmeiras, 234','Limeira','SP','(19) 3454-4400','19995544400','pa@vilacamargo.com.br',null,'24 horas',true,false),
+('servicos-24h','Lab Análises Já 24h','lab-analises-ja','Coleta de exames laboratoriais 24 horas, com resultado expresso.','Av. Antônio Ometto, 567','Limeira','SP','(19) 3455-5500','19995555500','contato@analisesja.com.br','https://analisesja.com.br','24 horas',true,false),
+('servicos-24h','SAMU Limeira','samu-limeira','Serviço de Atendimento Móvel de Urgência - 24 horas.','Centro de Operações - Limeira','Limeira','SP','192','19995566600','samu@limeira.sp.gov.br',null,'24 horas - Ligue 192',true,true),
+
+-- Saúde Pets (mais 6)
+('saude-pets','Vet Center Limeira','vet-center','Hospital veterinário com exames, cirurgias e internação 24h.','Av. Campinas, 1234','Limeira','SP','(19) 3461-1100','19996611100','contato@vetcenter.com.br','https://vetcenter.com.br','24 horas',true,true),
+('saude-pets','Pet Care Veterinária','pet-care-vet','Consultas, vacinas e cuidados veterinários para cães e gatos.','Rua Olavo Bilac, 456','Limeira','SP','(19) 3462-2200','19996622200','petcare@vet.com.br','https://petcarevet.com.br','Seg-Sáb: 8h às 19h',false,false),
+('saude-pets','Cão & Cia Pet Shop','cao-cia-petshop','Pet shop completo com banho, tosa e produtos para pets.','Rua Boa Morte, 789','Limeira','SP','(19) 3463-3300','19996633300','contato@caoecia.com.br','https://caoecia.com.br','Seg-Sáb: 8h às 18h | Dom: 9h às 13h',false,true),
+('saude-pets','Clínica Veterinária Animal House','animal-house','Atendimento clínico, vacinação e estética animal.','Av. Bandeirantes, 234','Limeira','SP','(19) 3464-4400','19996644400','animalhouse@vet.com.br','https://animalhouse.com.br','Seg-Sex: 8h às 19h | Sáb: 8h às 16h',false,false),
+('saude-pets','Pet Vida Veterinária','pet-vida','Especializada em felinos e cães de pequeno porte.','Rua Senador Vergueiro, 100','Limeira','SP','(19) 3465-5500','19996655500','petvida@clinica.com.br',null,'Seg-Sáb: 8h às 18h',false,false),
+('saude-pets','Banho e Tosa Patinhas Felizes','patinhas-felizes','Estética animal com profissionais especializados.','Rua das Flores, 345','Limeira','SP','(19) 3466-6600','19996666600','patinhas@feliz.com.br',null,'Ter-Sáb: 8h às 18h',false,false);
