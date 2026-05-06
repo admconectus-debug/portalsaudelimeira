@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -148,7 +149,11 @@ const ModalityPage = ({ config }: { config: ModalityConfig }) => {
                       </div>
                     </div>
                     <CardContent className="p-6 flex-1">
-                      <h3 className="text-lg font-bold text-primary mb-2">{item.name}</h3>
+                      <h3 className="text-lg font-bold text-primary mb-2">
+                        <Link to={`/${config.category}/${item.slug}`} className="hover:underline">
+                          {item.name}
+                        </Link>
+                      </h3>
                       {item.description && (
                         <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                           {item.description}

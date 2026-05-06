@@ -17,6 +17,7 @@ import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import Hospitals from "./pages/Hospitals";
 import ModalityPage, { MODALITY_CONFIGS } from "./pages/ModalityPage";
+import EstablishmentDetail from "./pages/EstablishmentDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,11 +43,17 @@ const App = () => (
           <Route path="/noticias/:slug" element={<NewsDetail />} />
           <Route path="/hospitais" element={<Hospitals />} />
           <Route path="/planos-medicos" element={<ModalityPage config={MODALITY_CONFIGS["planos-medicos"]} />} />
+          <Route path="/planos-medicos/:slug" element={<EstablishmentDetail category="planos-medicos" />} />
           <Route path="/servicos-24h" element={<ModalityPage config={MODALITY_CONFIGS["servicos-24h"]} />} />
+          <Route path="/servicos-24h/:slug" element={<EstablishmentDetail category="servicos-24h" />} />
           <Route path="/laboratorios" element={<ModalityPage config={MODALITY_CONFIGS["laboratorios"]} />} />
+          <Route path="/laboratorios/:slug" element={<EstablishmentDetail category="laboratorios" />} />
           <Route path="/farmacias" element={<ModalityPage config={MODALITY_CONFIGS["farmacias"]} />} />
+          <Route path="/farmacias/:slug" element={<EstablishmentDetail category="farmacias" />} />
           <Route path="/saude-beleza" element={<ModalityPage config={MODALITY_CONFIGS["saude-beleza"]} />} />
+          <Route path="/saude-beleza/:slug" element={<EstablishmentDetail category="saude-beleza" />} />
           <Route path="/saude-pets" element={<ModalityPage config={MODALITY_CONFIGS["saude-pets"]} />} />
+          <Route path="/saude-pets/:slug" element={<EstablishmentDetail category="saude-pets" />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
