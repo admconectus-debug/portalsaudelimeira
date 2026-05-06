@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, MapPin, Award, Clock, Phone, Mail, Globe, MessageCircle, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import BannerCarousel from "@/components/shared/BannerCarousel";
+import MapEmbed from "@/components/shared/MapEmbed";
+import ShareButton from "@/components/shared/ShareButton";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Globe, Clock, MessageCircle, ArrowLeft, ExternalLink } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 import { MODALITY_CONFIGS, ModalityConfig } from "./ModalityPage";
 
 interface Establishment {
@@ -39,137 +44,209 @@ const EstablishmentDetail = ({ category }: { category: string }) => {
       if (data) {
         document.title = `${data.name} - ${config?.title}`;
         const meta = document.querySelector('meta[name="description"]');
-        if (meta) meta.setAttribute("content", data.description?.slice(0, 155) || config?.metaDescription || "");
+        if (meta) meta.setAttribute("content", (data.description || config?.metaDescription || "").slice(0, 155));
       }
       setLoading(false);
     };
     load();
   }, [category, slug]);
 
-  if (!config) return null;
+  const getInitials = (name: string) =>
+    name.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-12 text-center text-muted-foreground animate-pulse">
+          Carregando perfil...
+        </div>
+      </div>
+    );
+  }
+
+  if (!item || !config) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-12 text-center">
+          <h1 className="text-2xl font-bold mb-4">Estabelecimento não encontrado</h1>
+          <Button asChild>
+            <Link to={`/${category}`}>Voltar para a lista</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const fullAddress = item.address ? `${item.address}, ${item.city}${item.state ? ` - ${item.state}` : ""}` : `${item.city}, Brasil`;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-background">
       <Header />
-      <main className="flex-1">
-        {loading ? (
-          <div className="container mx-auto px-4 py-20 text-center text-muted-foreground">Carregando...</div>
-        ) : !item ? (
-          <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="text-2xl font-bold mb-2">Não encontrado</h1>
-            <Button asChild variant="outline" className="mt-4">
-              <Link to={`/${category}`}><ArrowLeft className="w-4 h-4 mr-2" />Voltar</Link>
-            </Button>
-          </div>
-        ) : (
-          <>
-            <section className="bg-gradient-primary text-white py-10">
-              <div className="container px-4">
-                <Button asChild variant="ghost" className="text-white hover:bg-white/10 mb-4">
-                  <Link to={`/${category}`}><ArrowLeft className="w-4 h-4 mr-2" />{config.title}</Link>
-                </Button>
-                <div className="flex items-center gap-3 mb-2">
-                  {Icon && <Icon className="w-8 h-8" />}
-                  <h1 className="text-3xl md:text-4xl font-bold">{item.name}</h1>
-                </div>
-                <div className="flex gap-2 flex-wrap mt-3">
-                  {item.is_featured && <Badge className="bg-white text-primary">Destaque</Badge>}
-                  {item.is_24h && <Badge className="bg-destructive"><Clock className="w-3 h-3 mr-1" />24h</Badge>}
-                </div>
-              </div>
-            </section>
 
-            <div className="container mx-auto px-4 py-10 grid lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 space-y-6">
-                <div className="rounded-lg overflow-hidden bg-gradient-subtle aspect-video">
-                  {item.image_url ? (
-                    <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
-                  ) : Icon && (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Icon className="w-24 h-24 text-muted-foreground/30" />
+      {/* Banner */}
+      {item.image_url && (
+        <BannerCarousel banners={[item.image_url]} alt={`Banner de ${item.name}`} />
+      )}
+
+      <div className="container mx-auto px-4 py-8">
+        <Button variant="ghost" asChild className="mb-6">
+          <Link to={`/${category}`}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Voltar para {config.title}
+          </Link>
+        </Button>
+
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Main */}
+          <div className="lg:col-span-2">
+            <Card className="mb-8">
+              <CardContent className="p-8">
+                <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
+                  {/* Avatar */}
+                  <div className="relative mx-auto md:mx-0">
+                    <Avatar className="h-32 w-32 border-4 border-primary/20 shadow-lg">
+                      <AvatarImage
+                        src={item.image_url || undefined}
+                        alt={item.name}
+                        className="object-cover"
+                      />
+                      <AvatarFallback className="bg-gradient-primary text-white text-2xl font-bold">
+                        {Icon ? <Icon className="w-12 h-12" /> : getInitials(item.name)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
+
+                  <div className="flex-1 text-center md:text-left">
+                    <h1 className="text-3xl font-bold mb-2">{item.name}</h1>
+                    <Badge variant="secondary" className="text-lg px-4 py-2 mb-4">
+                      {config.title}
+                    </Badge>
+
+                    <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+                      {item.is_featured && <Badge className="bg-primary">Destaque</Badge>}
+                      {item.is_24h && (
+                        <Badge className="bg-destructive">
+                          <Clock className="w-3 h-3 mr-1" />
+                          Aberto 24h
+                        </Badge>
+                      )}
+                    </div>
+
+                    {item.address && (
+                      <div className="flex items-center justify-center md:justify-start text-muted-foreground mb-4">
+                        <MapPin className="h-5 w-5 mr-2" />
+                        <span>{fullAddress}</span>
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
+                      <ShareButton
+                        title={item.name}
+                        text={`Conheça ${item.name} - ${config.title} no Portal Saúde Limeira`}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* About */}
+                <Separator className="my-8" />
+                <div>
+                  <div className="flex items-center mb-6">
+                    <Award className="h-6 w-6 mr-3 text-primary" />
+                    <h3 className="text-2xl font-semibold">Sobre</h3>
+                  </div>
+
+                  {item.description && (
+                    <div className="prose prose-neutral dark:prose-invert max-w-none mb-6">
+                      <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
+                        {item.description}
+                      </p>
                     </div>
                   )}
-                </div>
-                {item.description && (
-                  <Card>
-                    <CardContent className="p-6">
-                      <h2 className="text-xl font-bold mb-3 text-primary">Sobre</h2>
-                      <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
 
-              <div className="space-y-4">
-                <Card>
-                  <CardContent className="p-6 space-y-4">
-                    <h2 className="text-lg font-bold text-primary">Contato</h2>
-                    {item.address && (
-                      <div className="flex items-start gap-3 text-sm">
-                        <MapPin className="w-4 h-4 text-primary mt-0.5" />
-                        <div className="text-muted-foreground">
-                          {item.address}<br />
-                          <span className="text-xs">{item.city}{item.state && ` - ${item.state}`}</span>
-                        </div>
-                      </div>
-                    )}
-                    {item.phone && (
-                      <div className="flex items-center gap-3 text-sm">
-                        <Phone className="w-4 h-4 text-primary" />
-                        <a href={`tel:${item.phone}`} className="text-muted-foreground hover:text-primary">{item.phone}</a>
-                      </div>
-                    )}
-                    {item.email && (
-                      <div className="flex items-center gap-3 text-sm">
-                        <Mail className="w-4 h-4 text-primary" />
-                        <a href={`mailto:${item.email}`} className="text-muted-foreground hover:text-primary truncate">{item.email}</a>
-                      </div>
-                    )}
-                    {item.website && (
-                      <div className="flex items-center gap-3 text-sm">
-                        <Globe className="w-4 h-4 text-primary" />
-                        <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary truncate">
-                          {item.website.replace(/^https?:\/\//, "")}
-                        </a>
-                      </div>
-                    )}
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium text-muted-foreground">Categoria</h4>
+                      <p className="font-semibold">{config.title}</p>
+                    </div>
                     {item.schedule && (
-                      <div className="flex items-start gap-3 text-sm">
-                        <Clock className="w-4 h-4 text-primary mt-0.5" />
-                        <span className="text-muted-foreground">{item.schedule}</span>
+                      <div>
+                        <h4 className="font-medium text-muted-foreground">Horário de Atendimento</h4>
+                        <p className="font-semibold">{item.schedule}</p>
                       </div>
                     )}
-                  </CardContent>
-                </Card>
+                    <div>
+                      <h4 className="font-medium text-muted-foreground">Localização</h4>
+                      <p className="font-semibold">{item.city}{item.state && ` - ${item.state}`}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-                <div className="space-y-2">
-                  {item.whatsapp && (
-                    <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                      <a href={`https://wa.me/55${item.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="w-4 h-4 mr-2" />Conversar no WhatsApp
-                      </a>
-                    </Button>
+          {/* Sidebar */}
+          <div>
+            <div className="sticky top-24 space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Contato</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {item.phone && (
+                    <a href={`tel:${item.phone}`} className="flex items-center gap-3 text-sm hover:text-primary">
+                      <Phone className="w-4 h-4 text-primary" />
+                      <span>{item.phone}</span>
+                    </a>
                   )}
-                  {item.address && (
-                    <Button asChild variant="outline" className="w-full">
-                      <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${item.address}, ${item.city}`)}`} target="_blank" rel="noopener noreferrer">
-                        <MapPin className="w-4 h-4 mr-2" />Ver no Mapa
-                      </a>
-                    </Button>
+                  {item.email && (
+                    <a href={`mailto:${item.email}`} className="flex items-center gap-3 text-sm hover:text-primary">
+                      <Mail className="w-4 h-4 text-primary" />
+                      <span className="truncate">{item.email}</span>
+                    </a>
                   )}
                   {item.website && (
-                    <Button asChild variant="outline" className="w-full">
-                      <a href={item.website} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4 mr-2" />Visitar Site
-                      </a>
-                    </Button>
+                    <a href={item.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm hover:text-primary">
+                      <Globe className="w-4 h-4 text-primary" />
+                      <span className="truncate">{item.website.replace(/^https?:\/\//, "")}</span>
+                    </a>
                   )}
-                </div>
-              </div>
+                  {item.schedule && (
+                    <div className="flex items-start gap-3 text-sm">
+                      <Clock className="w-4 h-4 text-primary mt-0.5" />
+                      <span className="text-muted-foreground">{item.schedule}</span>
+                    </div>
+                  )}
+
+                  <Separator />
+
+                  <div className="space-y-2 pt-2">
+                    {item.whatsapp && (
+                      <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+                        <a href={`https://wa.me/55${item.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer">
+                          <MessageCircle className="w-4 h-4 mr-2" />WhatsApp
+                        </a>
+                      </Button>
+                    )}
+                    {item.website && (
+                      <Button asChild variant="outline" className="w-full">
+                        <a href={item.website} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-4 h-4 mr-2" />Visitar Site
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <MapEmbed address={fullAddress} />
             </div>
-          </>
-        )}
-      </main>
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
