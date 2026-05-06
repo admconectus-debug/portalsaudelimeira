@@ -17,6 +17,7 @@ import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import Hospitals from "./pages/Hospitals";
 import ModalityPage, { MODALITY_CONFIGS } from "./pages/ModalityPage";
+import EstablishmentDetail from "./pages/EstablishmentDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
