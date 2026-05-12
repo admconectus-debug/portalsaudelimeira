@@ -144,7 +144,7 @@ const EstablishmentDetail = ({ category }: { category: string }) => {
                     <div className="flex items-center justify-center md:justify-start gap-3 mt-2">
                       <ShareButton
                         title={item.name}
-                        text={`Conheça ${item.name} - ${config.title} no Portal Saúde Limeira`}
+                        text={`Conheça ${item.name} - ${config.title} no VivaxSaúde`}
                       />
                     </div>
                   </div>

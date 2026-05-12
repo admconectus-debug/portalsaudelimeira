@@ -13,7 +13,7 @@ const Footer = () => {
                 <Stethoscope className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-primary">Portal Saúde Limeira</h1>
+                <h1 className="text-xl font-bold text-primary">VivaxSaúde</h1>
                 <p className="text-xs text-muted-foreground">Portal de Profissionais</p>
               </div>
             </Link>
@@ -91,7 +91,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">contato@portalsaudelimeira.com</span>
+                <span className="text-muted-foreground">contato@vivaxsaude.com</span>
               </li>
             </ul>
           </div>
@@ -100,7 +100,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Portal Saúde Limeira. Todos os direitos reservados.
+            © 2024 VivaxSaúde. Todos os direitos reservados.
           </p>
           <div className="flex items-center space-x-1 text-sm text-muted-foreground mt-4 md:mt-0">
             <span>Feito com</span>
