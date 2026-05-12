@@ -73,27 +73,29 @@ export const ModalitiesSection = () => {
         </h2>
         <p className="text-center text-muted-foreground mb-8 text-sm uppercase tracking-wide">Carrossel</p>
         
-        <div className="max-w-7xl mx-auto overflow-visible">
+        <div className="max-w-7xl mx-auto px-2 sm:px-0 overflow-hidden">
           <Carousel
             opts={{
               align: "start",
               loop: true,
               slidesToScroll: 1,
+              containScroll: "trimSnaps",
               breakpoints: {
+                "(min-width: 640px)": { slidesToScroll: 2 },
                 "(min-width: 768px)": { slidesToScroll: 3 },
                 "(min-width: 1024px)": { slidesToScroll: 5 },
               },
             }}
             plugins={[autoplay.current]}
-            className="w-full [&>div]:overflow-visible"
+            className="w-full"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-3">
               {modalities.map((modality) => {
                 const Icon = modality.icon;
                 const isExpanded = expandedId === modality.id;
 
                 return (
-                  <CarouselItem key={modality.id} className="pl-4 basis-4/5 sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
+                  <CarouselItem key={modality.id} className="pl-3 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
                     <div className="group block">
                       <Card className="bg-white border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
                         <CardContent className="p-0">
