@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -23,8 +24,10 @@ interface Specialty {
 }
 
 const Professionals = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialSpecialty = searchParams.get("specialty") || "all";
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedSpecialty, setSelectedSpecialty] = useState("all");
+  const [selectedSpecialty, setSelectedSpecialty] = useState(initialSpecialty);
   const [selectedLocation, setSelectedLocation] = useState("all");
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
@@ -33,6 +36,18 @@ const Professionals = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // Sync URL ?specialty= with state (case-insensitive match against loaded specialties)
+  useEffect(() => {
+    const param = searchParams.get("specialty");
+    if (!param || specialties.length === 0) return;
+    const match = specialties.find(
+      (s) => s.name.toLowerCase() === param.toLowerCase()
+    );
+    if (match && match.name !== selectedSpecialty) {
+      setSelectedSpecialty(match.name);
+    }
+  }, [searchParams, specialties]);
 
   const fetchData = async () => {
     try {
