@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Stethoscope, MapPin, Phone, Mail, Heart } from "lucide-react";
+import { MapPin, Phone, Mail, Heart } from "lucide-react";
+import logo from "@/assets/vivaxsaude-logo.jpeg";
 
 const Footer = () => {
   return (
@@ -9,12 +10,10 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-primary">
-                <Stethoscope className="h-6 w-6 text-white" />
-              </div>
+              <img src={logo} alt="VivaxSaúde" className="h-10 w-10 rounded-full object-cover" />
               <div>
                 <h1 className="text-xl font-bold text-primary">VivaxSaúde</h1>
-                <p className="text-xs text-muted-foreground">Portal de Profissionais</p>
+                <p className="text-xs text-muted-foreground">vivaxsaude.com.br</p>
               </div>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
