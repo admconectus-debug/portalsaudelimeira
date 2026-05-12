@@ -157,18 +157,6 @@ const ModalityPage = ({ config }: { config: ModalityConfig }) => {
                         )}
                       </div>
                     </div>
-                      <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-                        {item.is_featured && (
-                          <Badge className="bg-primary text-primary-foreground">Destaque</Badge>
-                        )}
-                        {item.is_24h && (
-                          <Badge className="bg-destructive text-destructive-foreground">
-                            <Clock className="w-3 h-3 mr-1" />
-                            24h
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
                     <CardContent className="p-6 flex-1">
                       <h3 className="text-lg font-bold text-primary mb-2">
                         <Link to={`/${config.category}/${item.slug}`} className="hover:underline">
