@@ -130,16 +130,21 @@ export const ModalitiesSection = () => {
                             }`}
                           >
                             <div className="px-4 pb-4 space-y-1.5 border-t border-border pt-3">
-                              {modality.specialties.map((spec, i) => (
-                                <Link
-                                  key={i}
-                                  to={modality.link}
-                                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                                >
-                                  <div className="h-1.5 w-1.5 rounded-full bg-primary/60 shrink-0" />
-                                  <span>{spec}</span>
-                                </Link>
-                              ))}
+                              {modality.specialties.map((spec, i) => {
+                                const specLink = modality.link === "/profissionais"
+                                  ? `/profissionais?specialty=${encodeURIComponent(spec)}`
+                                  : modality.link;
+                                return (
+                                  <Link
+                                    key={i}
+                                    to={specLink}
+                                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                                  >
+                                    <div className="h-1.5 w-1.5 rounded-full bg-primary/60 shrink-0" />
+                                    <span>{spec}</span>
+                                  </Link>
+                                );
+                              })}
                             </div>
                           </div>
                         </CardContent>
