@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { MODALITY_CONFIGS, ModalityConfig } from "./ModalityPage";
+import { MODALITY_CONFIGS, ModalityConfig, CATEGORY_FALLBACK_IMAGES } from "./ModalityPage";
 
 interface Establishment {
   id: string; category: string; name: string; slug: string;
@@ -86,9 +86,10 @@ const EstablishmentDetail = ({ category }: { category: string }) => {
       <Header />
 
       {/* Banner */}
-      {item.image_url && (
-        <BannerCarousel banners={[item.image_url]} alt={`Banner de ${item.name}`} />
-      )}
+      <BannerCarousel
+        banners={[item.image_url || CATEGORY_FALLBACK_IMAGES[category] || ""].filter(Boolean)}
+        alt={`Banner de ${item.name}`}
+      />
 
       <div className="container mx-auto px-4 py-8">
         <Button variant="ghost" asChild className="mb-6">
@@ -102,13 +103,13 @@ const EstablishmentDetail = ({ category }: { category: string }) => {
           {/* Main */}
           <div className="lg:col-span-2">
             <Card className="mb-8">
-              <CardContent className="p-8">
+              <CardContent className="p-4 sm:p-8">
                 <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
                   {/* Avatar */}
                   <div className="relative mx-auto md:mx-0">
                     <Avatar className="h-32 w-32 border-4 border-primary/20 shadow-lg">
                       <AvatarImage
-                        src={item.image_url || undefined}
+                        src={item.image_url || CATEGORY_FALLBACK_IMAGES[category] || undefined}
                         alt={item.name}
                         className="object-cover"
                       />
