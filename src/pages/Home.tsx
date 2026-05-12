@@ -91,7 +91,7 @@ const Home = () => {
             Profissionais em Destaque
           </h2>
           <p className="text-center text-muted-foreground mb-8 text-sm">
-            Novos perfis no Portal Saúde Limeira
+            Novos perfis no VivaxSaúde
           </p>
 
           {loading ? (

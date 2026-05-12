@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Stethoscope } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/vivaxsaude-logo.jpeg";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -35,13 +36,11 @@ const Header = () => {
   return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-primary">
-            <Stethoscope className="h-6 w-6 text-white" />
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-primary">Portal Saude Limeira</h1>
-            <p className="text-xs text-muted-foreground">Portal de Profissionais</p>
+        <Link to="/" className="flex items-center space-x-2 min-w-0">
+          <img src={logo} alt="VivaxSaúde" className="h-10 w-10 rounded-full object-cover flex-shrink-0" />
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-xl font-bold text-primary truncate">VivaxSaúde</h1>
+            <p className="text-[10px] sm:text-xs text-muted-foreground truncate">vivaxsaude.com.br</p>
           </div>
         </Link>
 

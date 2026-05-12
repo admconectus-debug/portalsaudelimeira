@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Stethoscope, MapPin, Phone, Mail, Heart } from "lucide-react";
+import { MapPin, Phone, Mail, Heart } from "lucide-react";
+import logo from "@/assets/vivaxsaude-logo.jpeg";
 
 const Footer = () => {
   return (
@@ -9,12 +10,10 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-primary">
-                <Stethoscope className="h-6 w-6 text-white" />
-              </div>
+              <img src={logo} alt="VivaxSaúde" className="h-10 w-10 rounded-full object-cover" />
               <div>
-                <h1 className="text-xl font-bold text-primary">Portal Saúde Limeira</h1>
-                <p className="text-xs text-muted-foreground">Portal de Profissionais</p>
+                <h1 className="text-xl font-bold text-primary">VivaxSaúde</h1>
+                <p className="text-xs text-muted-foreground">vivaxsaude.com.br</p>
               </div>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
@@ -91,7 +90,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-muted-foreground">contato@portalsaudelimeira.com</span>
+                <span className="text-muted-foreground">contato@vivaxsaude.com</span>
               </li>
             </ul>
           </div>
@@ -100,7 +99,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Portal Saúde Limeira. Todos os direitos reservados.
+            © 2024 VivaxSaúde. Todos os direitos reservados.
           </p>
           <div className="flex items-center space-x-1 text-sm text-muted-foreground mt-4 md:mt-0">
             <span>Feito com</span>

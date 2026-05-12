@@ -12,6 +12,21 @@ import {
   Shield, Pill, FlaskConical, Sparkles, PawPrint, Activity, Building2,
   ExternalLink, MessageCircle,
 } from "lucide-react";
+import healthPlansImg from "@/assets/modality-health-plans.jpg";
+import service24hImg from "@/assets/modality-24h.jpg";
+import laboratoryImg from "@/assets/modality-laboratory.jpg";
+import pharmacyImg from "@/assets/modality-pharmacy-new.jpg";
+import beautyImg from "@/assets/modality-beauty.jpg";
+import petsImg from "@/assets/modality-pets.jpg";
+
+export const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  "planos-medicos": healthPlansImg,
+  "servicos-24h": service24hImg,
+  "laboratorios": laboratoryImg,
+  "farmacias": pharmacyImg,
+  "saude-beleza": beautyImg,
+  "saude-pets": petsImg,
+};
 
 export interface ModalityConfig {
   category: string;
@@ -48,7 +63,7 @@ const ModalityPage = ({ config }: { config: ModalityConfig }) => {
   const Icon = config.icon;
 
   useEffect(() => {
-    document.title = `${config.title} - Portal Saúde Limeira`;
+    document.title = `${config.title} - VivaxSaúde`;
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", config.metaDescription);
     fetch();
@@ -124,18 +139,12 @@ const ModalityPage = ({ config }: { config: ModalityConfig }) => {
                     className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
                   >
                     <div className="relative h-48 bg-gradient-subtle">
-                      {item.image_url ? (
-                        <img
-                          src={item.image_url}
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Icon className="w-16 h-16 text-muted-foreground/30" />
-                        </div>
-                      )}
+                      <img
+                        src={item.image_url || CATEGORY_FALLBACK_IMAGES[item.category] || ""}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
                       <div className="absolute top-3 left-3 flex flex-wrap gap-2">
                         {item.is_featured && (
                           <Badge className="bg-primary text-primary-foreground">Destaque</Badge>
