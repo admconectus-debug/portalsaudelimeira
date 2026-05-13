@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="VivaxSaúde" style={{ width: 400, height: 100 }} className="max-w-full object-contain" />
+              <img src={logo} alt="VivaxSaúde" className="w-[240px] sm:w-[320px] md:w-[400px] aspect-[4/1] object-contain" />
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Conectando você com os melhores profissionais de saúde de Limeira.
