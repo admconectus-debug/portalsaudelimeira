@@ -37,7 +37,7 @@ const Header = () => {
       <div className="container flex items-center justify-between px-4 py-2">
         {/* Logo */}
         <Link to="/" className="flex items-center min-w-0">
-          <img src={logo} alt="VivaxSaúde" style={{ width: 400, height: 100 }} className="max-w-full object-contain flex-shrink-0" />
+          <img src={logo} alt="VivaxSaúde" className="w-[200px] sm:w-[300px] md:w-[400px] aspect-[4/1] object-contain flex-shrink-0" />
         </Link>
 
         {/* Desktop Navigation */}
