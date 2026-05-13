@@ -28,7 +28,7 @@ export const VideosSection = () => {
           {/* Text Content */}
           <div className="space-y-4">
             <h3 className="text-xl md:text-2xl font-bold text-foreground">
-              VivaxSaúde
+              Portal Saúde Limeira
             </h3>
             <p className="text-muted-foreground leading-relaxed">
               Somos o maior portal de saúde da região de Limeira, conectando pacientes 
