@@ -34,10 +34,10 @@ const Header = () => {
   }];
   const isActive = (href: string) => location.pathname === href;
   return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
+      <div className="container flex h-20 sm:h-28 items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center min-w-0">
-          <img src={logo} alt="VivaxSaúde" className="h-10 sm:h-12 w-auto object-contain flex-shrink-0" />
+          <img src={logo} alt="VivaxSaúde" className="h-16 sm:h-24 w-auto object-contain flex-shrink-0" />
         </Link>
 
         {/* Desktop Navigation */}
