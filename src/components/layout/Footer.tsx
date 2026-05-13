@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Heart } from "lucide-react";
-import logo from "@/assets/vivaxsaude-logo.jpeg";
+import logo from "@/assets/vivaxsaude-logo-full.png";
 
 const Footer = () => {
   return (
@@ -9,12 +9,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2">
-              <img src={logo} alt="VivaxSaúde" className="h-10 w-10 rounded-full object-cover" />
-              <div>
-                <h1 className="text-xl font-bold text-primary">VivaxSaúde</h1>
-                <p className="text-xs text-muted-foreground">vivaxsaude.com.br</p>
-              </div>
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="VivaxSaúde" className="h-12 w-auto object-contain" />
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Conectando você com os melhores profissionais de saúde de Limeira.
