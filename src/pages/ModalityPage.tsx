@@ -63,7 +63,7 @@ const ModalityPage = ({ config }: { config: ModalityConfig }) => {
   const Icon = config.icon;
 
   useEffect(() => {
-    document.title = `${config.title} - VivaxSaúde`;
+    document.title = `${config.title} - Portal Saúde Limeira`;
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", config.metaDescription);
     fetch();

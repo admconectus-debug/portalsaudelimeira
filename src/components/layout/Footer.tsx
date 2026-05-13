@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Heart } from "lucide-react";
-import logo from "@/assets/vivaxsaude-logo-full.png";
+
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="VivaxSaúde" className="w-[240px] sm:w-[320px] md:w-[400px] aspect-[4/1] object-contain" />
+              <span className="text-2xl font-bold text-primary">Portal Saúde Limeira</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Conectando você com os melhores profissionais de saúde de Limeira.

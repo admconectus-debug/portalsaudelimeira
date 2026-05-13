@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/vivaxsaude-logo-full.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -37,7 +36,7 @@ const Header = () => {
       <div className="container flex items-center justify-between px-4 py-2">
         {/* Logo */}
         <Link to="/" className="flex items-center min-w-0">
-          <img src={logo} alt="VivaxSaúde" className="w-[200px] sm:w-[300px] md:w-[400px] aspect-[4/1] object-contain flex-shrink-0" />
+          <span className="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap truncate">Portal Saúde Limeira</span>
         </Link>
 
         {/* Desktop Navigation */}
