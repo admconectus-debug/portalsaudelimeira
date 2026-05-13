@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Heart } from "lucide-react";
-import logo from "@/assets/vivaxsaude-logo-full.png";
+
 
 const Footer = () => {
   return (
