@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Heart } from "lucide-react";
+import { MapPin, Phone, Mail, Heart, HeartPulse } from "lucide-react";
 
 
 const Footer = () => {
@@ -9,7 +9,10 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center gap-2">
+              <span className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-primary-foreground">
+                <HeartPulse className="h-6 w-6" />
+              </span>
               <span className="text-2xl font-bold text-primary">Portal Saúde Limeira</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
