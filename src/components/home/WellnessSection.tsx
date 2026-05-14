@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dumbbell, Leaf, HeartHandshake, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import wellnessImage from "@/assets/wellness-fitness.jpg";
+import gymImage from "@/assets/wellness-gym.jpg";
+import personalImage from "@/assets/wellness-personal.jpg";
+import pilatesImage from "@/assets/wellness-pilates.jpg";
+
+const slides = [
+  { src: gymImage, alt: "Academia moderna com equipamentos" },
+  { src: personalImage, alt: "Personal trainer com aluno" },
+  { src: pilatesImage, alt: "Aula de pilates em estúdio" },
+  { src: wellnessImage, alt: "Aula de yoga e bem-estar" },
+];
 
 const items = [
   { icon: Dumbbell, title: "Fitness & Personal", desc: "Treinos personalizados e educação física." },
