@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dumbbell, Leaf, HeartHandshake, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import wellnessImage from "@/assets/wellness-fitness.jpg";
+import gymImage from "@/assets/wellness-gym.jpg";
+import personalImage from "@/assets/wellness-personal.jpg";
+import pilatesImage from "@/assets/wellness-pilates.jpg";
+
+const slides = [
+  { src: gymImage, alt: "Academia moderna com equipamentos" },
+  { src: personalImage, alt: "Personal trainer com aluno" },
+  { src: pilatesImage, alt: "Aula de pilates em estúdio" },
+  { src: wellnessImage, alt: "Aula de yoga e bem-estar" },
+];
 
 const items = [
   { icon: Dumbbell, title: "Fitness & Personal", desc: "Treinos personalizados e educação física." },
@@ -11,20 +24,56 @@ const items = [
 ];
 
 export const WellnessSection = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
   return (
     <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-accent/10">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div className="relative rounded-2xl overflow-hidden shadow-xl order-2 lg:order-1">
-            <img
-              src={wellnessImage}
-              alt="Profissionais de bem-estar e terapias integrativas"
-              loading="lazy"
-              width={1280}
-              height={832}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
+            <Carousel
+              setApi={setApi}
+              opts={{ loop: true }}
+              plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
+              className="w-full"
+            >
+              <CarouselContent>
+                {slides.map((s, i) => (
+                  <CarouselItem key={i}>
+                    <div className="relative aspect-[16/10]">
+                      <img
+                        src={s.src}
+                        alt={s.alt}
+                        loading="lazy"
+                        width={1280}
+                        height={832}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => api?.scrollTo(i)}
+                  aria-label={`Ir para slide ${i + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    current === i ? "w-6 bg-white" : "w-2 bg-white/60"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="order-1 lg:order-2">
