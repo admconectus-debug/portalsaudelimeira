@@ -82,6 +82,9 @@ const Home = () => {
       {/* News Section */}
       <NewsCarousel />
 
+      {/* Wellness / Integrative Therapies Section */}
+      <WellnessSection />
+
       {/* Featured Professionals */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
