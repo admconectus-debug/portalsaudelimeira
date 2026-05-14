@@ -6,7 +6,15 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    navigate(`/profissionais${q ? `?q=${encodeURIComponent(q)}` : ""}`);
+  };
   const navigation = [{
     name: "Início",
     href: "/"
