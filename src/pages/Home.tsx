@@ -81,9 +81,6 @@ const Home = () => {
       {/* News Section */}
       <NewsCarousel />
 
-      {/* Schedule CTA Section */}
-      <ScheduleSection />
-
       {/* Featured Professionals */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
