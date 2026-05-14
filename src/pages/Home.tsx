@@ -11,6 +11,7 @@ import { VideosSection } from "@/components/home/VideosSection";
 import { PartnersSection } from "@/components/home/PartnersSection";
 import { NewsCarousel } from "@/components/home/NewsCarousel";
 import { FeaturedClinicsSection } from "@/components/home/FeaturedClinicsSection";
+import { WellnessSection } from "@/components/home/WellnessSection";
 
 import { supabase } from "@/integrations/supabase/client";
 import {
