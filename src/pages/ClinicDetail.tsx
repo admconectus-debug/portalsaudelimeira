@@ -4,6 +4,14 @@ import { MapPin, Phone, Mail, Clock, ExternalLink, ArrowLeft, Building2, Instagr
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
@@ -12,12 +20,14 @@ import WhatsAppFloatingButton from "@/components/shared/WhatsAppFloatingButton";
 import ShareButton from "@/components/shared/ShareButton";
 import { supabase } from "@/integrations/supabase/client";
 
+
 interface Clinic {
   id: string;
   name: string;
   description: string | null;
   image_url: string | null;
   banners: string[];
+  gallery_images: string[];
   address: string | null;
   city: string;
   state: string | null;
@@ -44,6 +54,8 @@ const ClinicDetail = () => {
   const [clinic, setClinic] = useState<Clinic | null>(null);
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+
 
   useEffect(() => {
     if (slug) {
@@ -179,6 +191,38 @@ const ClinicDetail = () => {
               </>
             )}
 
+            {clinic.gallery_images && clinic.gallery_images.length > 0 && (
+              <>
+                <Separator className="my-6" />
+                <div>
+                  <h2 className="text-xl font-semibold mb-4">Fotos da Clínica</h2>
+                  <Carousel opts={{ align: "start", loop: true }} className="w-full">
+                    <CarouselContent className="-ml-2">
+                      {clinic.gallery_images.map((img, i) => (
+                        <CarouselItem key={i} className="pl-2 basis-full sm:basis-1/2 md:basis-1/3">
+                          <button
+                            type="button"
+                            onClick={() => setLightboxImg(img)}
+                            className="block w-full aspect-video overflow-hidden rounded-lg bg-muted group"
+                          >
+                            <img
+                              src={img}
+                              alt={`Foto ${i + 1} de ${clinic.name}`}
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                          </button>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden md:flex -left-4" />
+                    <CarouselNext className="hidden md:flex -right-4" />
+                  </Carousel>
+                </div>
+              </>
+            )}
+
+
             <Separator className="my-6" />
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -206,15 +250,8 @@ const ClinicDetail = () => {
                 </div>
               )}
 
-              {clinic.email && (
-                <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium mb-1">E-mail</p>
-                    <p className="text-muted-foreground text-sm">{clinic.email}</p>
-                  </div>
-                </div>
-              )}
+
+
 
               {clinic.schedule && (
                 <div className="flex items-start gap-3">
@@ -348,6 +385,18 @@ const ClinicDetail = () => {
           message={`Olá! Encontrei a ${clinic.name} no Portal Saúde Limeira e gostaria de mais informações.`}
         />
       )}
+
+      <Dialog open={!!lightboxImg} onOpenChange={(o) => !o && setLightboxImg(null)}>
+        <DialogContent className="max-w-5xl p-0 bg-transparent border-0 shadow-none">
+          {lightboxImg && (
+            <img
+              src={lightboxImg}
+              alt="Foto ampliada"
+              className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>

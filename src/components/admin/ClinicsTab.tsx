@@ -19,6 +19,7 @@ interface Clinic {
   description: string | null;
   image_url: string | null;
   banners: string[];
+  gallery_images: string[];
   address: string | null;
   city: string;
   state: string | null;
@@ -59,6 +60,7 @@ export function ClinicsTab() {
     description: "",
     image_url: "",
     banners: [] as string[],
+    gallery_images: [] as string[],
     address: "",
     city: "",
     state: "",
@@ -147,6 +149,7 @@ export function ClinicsTab() {
       description: "",
       image_url: "",
       banners: [],
+      gallery_images: [],
       address: "",
       city: "",
       state: "",
@@ -180,6 +183,7 @@ export function ClinicsTab() {
             description: formData.description || null,
             image_url: formData.image_url || null,
             banners: formData.banners,
+            gallery_images: formData.gallery_images,
             address: formData.address || null,
             city: formData.city,
             state: formData.state || null,
@@ -211,6 +215,7 @@ export function ClinicsTab() {
             description: formData.description || null,
             image_url: formData.image_url || null,
             banners: formData.banners,
+            gallery_images: formData.gallery_images,
             address: formData.address || null,
             city: formData.city,
             state: formData.state || null,
@@ -256,6 +261,7 @@ export function ClinicsTab() {
       description: clinic.description || "",
       image_url: clinic.image_url || "",
       banners: clinic.banners || [],
+      gallery_images: clinic.gallery_images || [],
       address: clinic.address || "",
       city: clinic.city,
       state: clinic.state || "",
@@ -440,6 +446,51 @@ export function ClinicsTab() {
                       >
                         <Plus className="w-4 h-4 mr-2" />
                         Adicionar Banner
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                <div className="col-span-2">
+                  <Label>Galeria de Fotos (carrossel na página da clínica) - Máx. 10</Label>
+                  <div className="space-y-2">
+                    {formData.gallery_images.map((img, index) => (
+                      <div key={index} className="flex gap-2">
+                        <ImageUpload
+                          value={img}
+                          onChange={(url) => {
+                            const next = [...formData.gallery_images];
+                            next[index] = url;
+                            setFormData({ ...formData, gallery_images: next });
+                          }}
+                          onUpload={async (file) => {
+                            const result = await uploadBanner(file, "clinics", "gallery");
+                            return result.url;
+                          }}
+                          maxSize={10}
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => {
+                            const next = formData.gallery_images.filter((_, i) => i !== index);
+                            setFormData({ ...formData, gallery_images: next });
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    {formData.gallery_images.length < 10 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          setFormData({ ...formData, gallery_images: [...formData.gallery_images, ""] });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Adicionar Foto
                       </Button>
                     )}
                   </div>

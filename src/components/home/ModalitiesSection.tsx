@@ -19,19 +19,20 @@ import {
   Pill,
   Sparkles,
   PawPrint,
+  Dumbbell,
   ChevronDown,
 } from "lucide-react";
 
 // Import modality images
-import hospitalsImg from "@/assets/modality-hospitals.jpg";
 import healthPlansImg from "@/assets/modality-health-plans.jpg";
-import service24hImg from "@/assets/modality-24h.jpg";
 import medicineImg from "@/assets/modality-medicine.jpg";
 import dentistryImg from "@/assets/modality-dentistry.jpg";
 import laboratoryImg from "@/assets/modality-laboratory.jpg";
 import pharmacyImg from "@/assets/modality-pharmacy-new.jpg";
 import beautyImg from "@/assets/modality-beauty.jpg";
 import petsImg from "@/assets/modality-pets.jpg";
+import fitnessImg from "@/assets/modality-fitness.jpg";
+
 
 interface Modality {
   id: number;
@@ -43,16 +44,16 @@ interface Modality {
 }
 
 const modalities: Modality[] = [
-  { id: 1, title: "Hospitais", image: hospitalsImg, link: "/hospitais", icon: Hospital, specialties: ["Emergência", "UTI", "Centro Cirúrgico", "Internação"] },
   { id: 2, title: "Planos Médicos", image: healthPlansImg, link: "/planos-medicos", icon: Shield, specialties: ["Unimed", "Amil", "SulAmérica", "Particular"] },
-  { id: 3, title: "Serviços 24 Horas", image: service24hImg, link: "/servicos-24h", icon: Clock, specialties: ["Pronto Socorro", "Farmácia", "Laboratório"] },
   { id: 4, title: "Medicina", image: medicineImg, link: "/profissionais", icon: Stethoscope, specialties: ["Cardiologia", "Neurologia", "Ortopedia", "Pediatria", "Dermatologia"] },
   { id: 5, title: "Odontologia", image: dentistryImg, link: "/profissionais", icon: SmilePlus, specialties: ["Ortodontia", "Implantes", "Clínico Geral", "Endodontia"] },
   { id: 6, title: "Laboratório", image: laboratoryImg, link: "/laboratorios", icon: FlaskConical, specialties: ["Análises Clínicas", "Imagem", "Patologia"] },
   { id: 7, title: "Farmácia", image: pharmacyImg, link: "/farmacias", icon: Pill, specialties: ["Manipulação", "Drogaria", "Homeopatia"] },
   { id: 8, title: "Saúde & Beleza", image: beautyImg, link: "/saude-beleza", icon: Sparkles, specialties: ["Estética", "Nutrição", "Fisioterapia", "Pilates"] },
   { id: 9, title: "Saúde Pets", image: petsImg, link: "/saude-pets", icon: PawPrint, specialties: ["Veterinário", "Pet Shop", "Banho e Tosa"] },
+  { id: 10, title: "Fitness", image: fitnessImg, link: "/fitness", icon: Dumbbell, specialties: ["Academias", "Personal Trainer", "Pilates", "Crossfit", "Yoga"] },
 ];
+
 
 export const ModalitiesSection = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);

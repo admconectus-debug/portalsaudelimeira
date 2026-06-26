@@ -60,6 +60,7 @@ export type Database = {
           description: string | null
           email: string | null
           facebook: string | null
+          gallery_images: string[]
           id: string
           image_url: string | null
           instagram: string | null
@@ -84,6 +85,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           facebook?: string | null
+          gallery_images?: string[]
           id?: string
           image_url?: string | null
           instagram?: string | null
@@ -108,6 +110,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           facebook?: string | null
+          gallery_images?: string[]
           id?: string
           image_url?: string | null
           instagram?: string | null
@@ -188,6 +191,39 @@ export type Database = {
           updated_at?: string
           website?: string | null
           whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      gym_ads: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          link_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          link_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          link_url?: string | null
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }

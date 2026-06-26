@@ -28,6 +28,9 @@ const Header = () => {
     name: "Especialidades",
     href: "/especialidades"
   }, {
+    name: "Categorias",
+    href: "/categorias"
+  }, {
     name: "Hospitais",
     href: "/hospitais"
   }, {

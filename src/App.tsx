@@ -18,6 +18,7 @@ import NewsDetail from "./pages/NewsDetail";
 import Hospitals from "./pages/Hospitals";
 import ModalityPage, { MODALITY_CONFIGS } from "./pages/ModalityPage";
 import EstablishmentDetail from "./pages/EstablishmentDetail";
+import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -54,6 +55,9 @@ const App = () => (
           <Route path="/saude-beleza/:slug" element={<EstablishmentDetail category="saude-beleza" />} />
           <Route path="/saude-pets" element={<ModalityPage config={MODALITY_CONFIGS["saude-pets"]} />} />
           <Route path="/saude-pets/:slug" element={<EstablishmentDetail category="saude-pets" />} />
+          <Route path="/fitness" element={<ModalityPage config={MODALITY_CONFIGS["fitness"]} />} />
+          <Route path="/fitness/:slug" element={<EstablishmentDetail category="fitness" />} />
+          <Route path="/categorias" element={<Categories />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

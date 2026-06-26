@@ -15,6 +15,7 @@ import { NewsTab } from "@/components/admin/NewsTab";
 import { HealthPlansTab } from "@/components/admin/HealthPlansTab";
 import { HospitalsTab } from "@/components/admin/HospitalsTab";
 import { EstablishmentsTab } from "@/components/admin/EstablishmentsTab";
+import { GymAdsTab } from "@/components/admin/GymAdsTab";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
@@ -91,7 +92,7 @@ export default function Admin() {
           </CardHeader>
           <CardContent className="px-2 sm:px-6">
             <Tabs defaultValue="clinics" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 mb-4 sm:mb-6 h-auto gap-1">
+              <TabsList className="grid w-full grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 mb-4 sm:mb-6 h-auto gap-1">
                 <TabsTrigger value="clinics" className="text-xs sm:text-sm py-2">Clínicas</TabsTrigger>
                 <TabsTrigger value="hospitals" className="text-xs sm:text-sm py-2">Hospitais</TabsTrigger>
                 <TabsTrigger value="establishments" className="text-xs sm:text-sm py-2">Modalidades</TabsTrigger>
@@ -100,6 +101,7 @@ export default function Admin() {
                 <TabsTrigger value="health-plans" className="text-xs sm:text-sm py-2">Planos</TabsTrigger>
                 <TabsTrigger value="partners" className="text-xs sm:text-sm py-2">Parceiros</TabsTrigger>
                 <TabsTrigger value="news" className="text-xs sm:text-sm py-2">Notícias</TabsTrigger>
+                <TabsTrigger value="gym-ads" className="text-xs sm:text-sm py-2">Propaganda</TabsTrigger>
               </TabsList>
               
               <TabsContent value="clinics">
@@ -132,6 +134,10 @@ export default function Admin() {
               
               <TabsContent value="news">
                 <NewsTab />
+              </TabsContent>
+
+              <TabsContent value="gym-ads">
+                <GymAdsTab />
               </TabsContent>
             </Tabs>
           </CardContent>
