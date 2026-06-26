@@ -191,6 +191,38 @@ const ClinicDetail = () => {
               </>
             )}
 
+            {clinic.gallery_images && clinic.gallery_images.length > 0 && (
+              <>
+                <Separator className="my-6" />
+                <div>
+                  <h2 className="text-xl font-semibold mb-4">Fotos da Clínica</h2>
+                  <Carousel opts={{ align: "start", loop: true }} className="w-full">
+                    <CarouselContent className="-ml-2">
+                      {clinic.gallery_images.map((img, i) => (
+                        <CarouselItem key={i} className="pl-2 basis-full sm:basis-1/2 md:basis-1/3">
+                          <button
+                            type="button"
+                            onClick={() => setLightboxImg(img)}
+                            className="block w-full aspect-video overflow-hidden rounded-lg bg-muted group"
+                          >
+                            <img
+                              src={img}
+                              alt={`Foto ${i + 1} de ${clinic.name}`}
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                          </button>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden md:flex -left-4" />
+                    <CarouselNext className="hidden md:flex -right-4" />
+                  </Carousel>
+                </div>
+              </>
+            )}
+
+
             <Separator className="my-6" />
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -218,15 +250,8 @@ const ClinicDetail = () => {
                 </div>
               )}
 
-              {clinic.email && (
-                <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium mb-1">E-mail</p>
-                    <p className="text-muted-foreground text-sm">{clinic.email}</p>
-                  </div>
-                </div>
-              )}
+
+
 
               {clinic.schedule && (
                 <div className="flex items-start gap-3">
