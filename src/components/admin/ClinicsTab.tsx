@@ -149,6 +149,7 @@ export function ClinicsTab() {
       description: "",
       image_url: "",
       banners: [],
+      gallery_images: [],
       address: "",
       city: "",
       state: "",
