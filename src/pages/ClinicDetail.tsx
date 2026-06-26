@@ -27,6 +27,7 @@ interface Clinic {
   description: string | null;
   image_url: string | null;
   banners: string[];
+  gallery_images: string[];
   address: string | null;
   city: string;
   state: string | null;
@@ -53,6 +54,8 @@ const ClinicDetail = () => {
   const [clinic, setClinic] = useState<Clinic | null>(null);
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+
 
   useEffect(() => {
     if (slug) {
