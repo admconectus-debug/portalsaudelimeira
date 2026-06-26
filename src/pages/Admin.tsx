@@ -15,6 +15,7 @@ import { NewsTab } from "@/components/admin/NewsTab";
 import { HealthPlansTab } from "@/components/admin/HealthPlansTab";
 import { HospitalsTab } from "@/components/admin/HospitalsTab";
 import { EstablishmentsTab } from "@/components/admin/EstablishmentsTab";
+import { GymAdsTab } from "@/components/admin/GymAdsTab";
 
 export default function Admin() {
   const [session, setSession] = useState<Session | null>(null);
