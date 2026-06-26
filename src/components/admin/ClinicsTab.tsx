@@ -261,6 +261,7 @@ export function ClinicsTab() {
       description: clinic.description || "",
       image_url: clinic.image_url || "",
       banners: clinic.banners || [],
+      gallery_images: clinic.gallery_images || [],
       address: clinic.address || "",
       city: clinic.city,
       state: clinic.state || "",
