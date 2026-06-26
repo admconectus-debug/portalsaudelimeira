@@ -29,7 +29,7 @@ const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
   };
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 bg-gradient-card border-0">
+    <Card className="group hover:shadow-lg transition-all duration-300 bg-gradient-card border-0 shadow-none ring-0">
       <CardContent className="p-6">
         <div className="flex items-start space-x-4">
           {/* Avatar */}
