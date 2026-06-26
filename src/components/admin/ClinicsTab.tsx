@@ -451,6 +451,51 @@ export function ClinicsTab() {
                   </div>
                 </div>
                 <div className="col-span-2">
+                  <Label>Galeria de Fotos (carrossel na página da clínica) - Máx. 10</Label>
+                  <div className="space-y-2">
+                    {formData.gallery_images.map((img, index) => (
+                      <div key={index} className="flex gap-2">
+                        <ImageUpload
+                          value={img}
+                          onChange={(url) => {
+                            const next = [...formData.gallery_images];
+                            next[index] = url;
+                            setFormData({ ...formData, gallery_images: next });
+                          }}
+                          onUpload={async (file) => {
+                            const result = await uploadBanner(file, "clinics", "gallery");
+                            return result.url;
+                          }}
+                          maxSize={10}
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => {
+                            const next = formData.gallery_images.filter((_, i) => i !== index);
+                            setFormData({ ...formData, gallery_images: next });
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    {formData.gallery_images.length < 10 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => {
+                          setFormData({ ...formData, gallery_images: [...formData.gallery_images, ""] });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Adicionar Foto
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                <div className="col-span-2">
                   <Label htmlFor="description">Descrição</Label>
                   <Textarea
                     id="description"
