@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Heart, HeartPulse } from "lucide-react";
+import GymAdSection from "./GymAdSection";
 
 
 const Footer = () => {
@@ -7,18 +8,17 @@ const Footer = () => {
     <footer className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8">
-          {/* Brand */}
+          {/* Gym Ad */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
               <span className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-primary-foreground">
                 <HeartPulse className="h-6 w-6" />
               </span>
-              <span className="text-2xl font-bold text-primary">Portal Saúde Limeira</span>
+              <span className="text-xl font-bold text-primary">Portal Saúde Limeira</span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              Conectando você com os melhores profissionais de saúde de Limeira.
-            </p>
+            <GymAdSection />
           </div>
+
 
           {/* Quick Links */}
           <div>
