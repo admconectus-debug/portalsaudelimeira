@@ -4,6 +4,14 @@ import { MapPin, Phone, Mail, Clock, ExternalLink, ArrowLeft, Building2, Instagr
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BannerCarousel from "@/components/shared/BannerCarousel";
@@ -11,6 +19,7 @@ import MapEmbed from "@/components/shared/MapEmbed";
 import WhatsAppFloatingButton from "@/components/shared/WhatsAppFloatingButton";
 import ShareButton from "@/components/shared/ShareButton";
 import { supabase } from "@/integrations/supabase/client";
+
 
 interface Clinic {
   id: string;
