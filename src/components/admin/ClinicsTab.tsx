@@ -19,6 +19,7 @@ interface Clinic {
   description: string | null;
   image_url: string | null;
   banners: string[];
+  gallery_images: string[];
   address: string | null;
   city: string;
   state: string | null;
@@ -59,6 +60,7 @@ export function ClinicsTab() {
     description: "",
     image_url: "",
     banners: [] as string[],
+    gallery_images: [] as string[],
     address: "",
     city: "",
     state: "",
