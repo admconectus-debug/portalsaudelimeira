@@ -386,6 +386,18 @@ const ClinicDetail = () => {
         />
       )}
 
+      <Dialog open={!!lightboxImg} onOpenChange={(o) => !o && setLightboxImg(null)}>
+        <DialogContent className="max-w-5xl p-0 bg-transparent border-0 shadow-none">
+          {lightboxImg && (
+            <img
+              src={lightboxImg}
+              alt="Foto ampliada"
+              className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
       <Footer />
     </div>
   );
