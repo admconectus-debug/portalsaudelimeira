@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import {
   MapPin, Phone, Mail, Globe, Clock, Search,
   Shield, Pill, FlaskConical, Sparkles, PawPrint, Activity, Building2,
-  ExternalLink, MessageCircle,
+  ExternalLink, MessageCircle, Dumbbell,
 } from "lucide-react";
 import healthPlansImg from "@/assets/modality-health-plans.jpg";
 import service24hImg from "@/assets/modality-24h.jpg";
@@ -18,6 +18,7 @@ import laboratoryImg from "@/assets/modality-laboratory.jpg";
 import pharmacyImg from "@/assets/modality-pharmacy-new.jpg";
 import beautyImg from "@/assets/modality-beauty.jpg";
 import petsImg from "@/assets/modality-pets.jpg";
+import fitnessImg from "@/assets/modality-fitness.jpg";
 
 export const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   "planos-medicos": healthPlansImg,
@@ -26,7 +27,9 @@ export const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   "farmacias": pharmacyImg,
   "saude-beleza": beautyImg,
   "saude-pets": petsImg,
+  "fitness": fitnessImg,
 };
+
 
 export interface ModalityConfig {
   category: string;
@@ -298,6 +301,15 @@ export const MODALITY_CONFIGS: Record<string, ModalityConfig> = {
     icon: PawPrint,
     emptyEmoji: "🐾",
   },
+  "fitness": {
+    category: "fitness",
+    title: "Fitness",
+    subtitle: "Academias, personal trainers, pilates, crossfit e bem-estar físico.",
+    metaDescription: "Academias, personal trainers e estúdios de pilates em Limeira.",
+    icon: Dumbbell,
+    emptyEmoji: "💪",
+  },
 };
+
 
 export default ModalityPage;
