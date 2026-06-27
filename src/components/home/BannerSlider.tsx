@@ -25,47 +25,47 @@ interface Banner {
 const banners: Banner[] = [
   {
     id: 1,
-    title: "Encontre os Melhores",
-    subtitle: "Profissionais de Saúde",
-    description: "Conectamos você com médicos, dentistas, psicólogos e outros especialistas qualificados na sua região",
+    title: "Movimento &",
+    subtitle: "Vida Ativa",
+    description: "Encontre as melhores academias e profissionais de educação física para cuidar do seu corpo",
     imageUrl: banner1,
-    ctaText: "Ver Profissionais",
-    ctaLink: "/profissionais"
+    ctaText: "Ver Fitness",
+    ctaLink: "/fitness"
   },
   {
     id: 2,
-    title: "Cuidados Médicos",
-    subtitle: "de Qualidade",
-    description: "Profissionais verificados e qualificados para cuidar da sua saúde e bem-estar",
+    title: "Espaço",
+    subtitle: "de Beleza",
+    description: "Estética, cuidados e bem-estar em espaços preparados para realçar o seu melhor",
     imageUrl: banner2,
-    ctaText: "Agendar Consulta",
-    ctaLink: "/profissionais"
+    ctaText: "Saúde & Beleza",
+    ctaLink: "/saude-beleza"
   },
   {
     id: 3,
-    title: "Especialidades",
-    subtitle: "Completas",
-    description: "Diversas especialidades médicas disponíveis para atender todas as suas necessidades",
+    title: "Yoga &",
+    subtitle: "Equilíbrio",
+    description: "Práticas integrativas para conectar corpo e mente em harmonia",
     imageUrl: banner3,
     ctaText: "Ver Especialidades",
     ctaLink: "/especialidades"
   },
   {
     id: 4,
-    title: "Atendimento",
-    subtitle: "Personalizado",
-    description: "Cada profissional oferece atendimento personalizado e focado nas suas necessidades específicas",
+    title: "Saúde",
+    subtitle: "Odontológica",
+    description: "Dentistas qualificados para cuidar do seu sorriso com tecnologia e conforto",
     imageUrl: banner4,
-    ctaText: "Fale Conosco",
-    ctaLink: "/contato"
+    ctaText: "Ver Dentistas",
+    ctaLink: "/profissionais"
   },
   {
     id: 5,
-    title: "Sua Saúde",
-    subtitle: "Nossa Prioridade",
-    description: "Facilitamos o acesso a cuidados de saúde de qualidade na sua região",
+    title: "Médicos",
+    subtitle: "Especialistas",
+    description: "Profissionais de saúde de confiança para cuidar de você e da sua família",
     imageUrl: banner5,
-    ctaText: "Começar Agora",
+    ctaText: "Ver Médicos",
     ctaLink: "/profissionais"
   }
 ];
