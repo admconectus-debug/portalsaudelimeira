@@ -128,7 +128,7 @@ export function GymAdsTab() {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <p className="text-sm text-muted-foreground">
-          Propaganda de academia exibida no rodapé do site.
+          Propagandas de empresas parceiras exibidas na home (até 3 ativas) e no rodapé do site.
         </p>
         <Button onClick={() => { reset(); setIsOpen(true); }}>
           <Plus className="w-4 h-4 mr-2" /> Nova Propaganda
