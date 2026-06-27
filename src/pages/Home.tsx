@@ -7,7 +7,7 @@ import Footer from "@/components/layout/Footer";
 import ProfessionalCard from "@/components/cards/ProfessionalCard";
 import { BannerSlider } from "@/components/home/BannerSlider";
 import { ModalitiesSection } from "@/components/home/ModalitiesSection";
-import { VideosSection } from "@/components/home/VideosSection";
+import { SponsoredAdSection } from "@/components/home/SponsoredAdSection";
 import { PartnersSection } from "@/components/home/PartnersSection";
 import { NewsCarousel } from "@/components/home/NewsCarousel";
 import { FeaturedClinicsSection } from "@/components/home/FeaturedClinicsSection";
@@ -76,8 +76,8 @@ const Home = () => {
       {/* Partners Section */}
       <PartnersSection />
 
-      {/* Videos Section */}
-      <VideosSection />
+      {/* Sponsored Ad Section */}
+      <SponsoredAdSection />
 
       {/* News Section */}
       <NewsCarousel />
