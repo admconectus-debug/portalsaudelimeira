@@ -38,7 +38,7 @@ export const SponsoredAdSection = () => {
           </span>
         </div>
         <h2 className="text-2xl md:text-3xl font-medium text-center mb-12 uppercase tracking-wider text-primary">
-          Academias Parceiras
+          Empresas Parceiras
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

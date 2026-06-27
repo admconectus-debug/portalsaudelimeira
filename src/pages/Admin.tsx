@@ -101,7 +101,7 @@ export default function Admin() {
                 <TabsTrigger value="health-plans" className="text-xs sm:text-sm py-2">Planos</TabsTrigger>
                 <TabsTrigger value="partners" className="text-xs sm:text-sm py-2">Parceiros</TabsTrigger>
                 <TabsTrigger value="news" className="text-xs sm:text-sm py-2">Notícias</TabsTrigger>
-                <TabsTrigger value="gym-ads" className="text-xs sm:text-sm py-2">Propaganda</TabsTrigger>
+                <TabsTrigger value="gym-ads" className="text-xs sm:text-sm py-2">Parceiros Ads</TabsTrigger>
               </TabsList>
               
               <TabsContent value="clinics">
