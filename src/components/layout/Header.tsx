@@ -134,8 +134,8 @@ const Header = () => {
           </span>
         </Link>
 
-        {/* Right: Search + Login */}
-        <div className="flex items-center gap-2 md:gap-3 ml-auto z-10">
+        {/* Right: Search + Contact + About */}
+        <div className="flex items-center gap-1 md:gap-3 ml-auto z-10">
           <form
             onSubmit={handleSearch}
             className={cn(
@@ -169,9 +169,17 @@ const Header = () => {
 
           <Button
             asChild
-            className="h-[42px] px-4 md:px-5 rounded-[10px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-sm transition-all"
+            variant="ghost"
+            className="h-11 px-2 md:px-4 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors"
           >
-            <Link to="/login">Entrar</Link>
+            <Link to="/contato">Contato</Link>
+          </Button>
+
+          <Button
+            asChild
+            className="h-[42px] px-3 md:px-5 rounded-[10px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-sm transition-all"
+          >
+            <Link to="/quem-somos">Quem Somos</Link>
           </Button>
         </div>
       </div>
