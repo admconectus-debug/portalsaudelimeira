@@ -64,7 +64,7 @@ const Header = () => {
         </form>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-6 ml-auto">
+        <nav className="hidden lg:flex items-center space-x-8 xl:space-x-10 ml-auto">
           {navigation.map(item => <Link key={item.name} to={item.href} className={cn("text-sm font-medium transition-colors hover:text-primary", isActive(item.href) ? "text-primary border-b-2 border-primary pb-1" : "text-muted-foreground")}>
               {item.name}
             </Link>)}
