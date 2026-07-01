@@ -134,39 +134,8 @@ const Header = () => {
           </span>
         </Link>
 
-        {/* Right: Search + Contact + About */}
+        {/* Right: Contact + About */}
         <div className="flex items-center gap-1 md:gap-3 ml-auto z-10">
-          <form
-            onSubmit={handleSearch}
-            className={cn(
-              "hidden md:flex relative items-center transition-all duration-200",
-              searchFocused ? "w-[340px]" : "w-[280px]"
-            )}
-          >
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-            <Input
-              type="search"
-              placeholder="Buscar médicos, clínicas ou especialidades..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
-              className="pl-9 h-[42px] rounded-[10px] bg-[hsl(210,17%,98%)] border-border focus-visible:ring-1 focus-visible:ring-primary text-sm"
-              aria-label="Buscar no site"
-            />
-          </form>
-
-          {/* Mobile search icon */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden h-11 w-11"
-            onClick={() => navigate("/profissionais")}
-            aria-label="Buscar"
-          >
-            <Search className="h-5 w-5" />
-          </Button>
-
           <Button
             asChild
             variant="ghost"
