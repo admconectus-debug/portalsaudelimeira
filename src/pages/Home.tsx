@@ -77,6 +77,9 @@ const Home = () => {
       {/* Partners Section */}
       <PartnersSection />
 
+      {/* Categories Grid */}
+      <HomeCategoriesSection />
+
       {/* Sponsored Ad Section */}
       <SponsoredAdSection />
 
