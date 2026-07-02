@@ -9,6 +9,7 @@ import { BannerSlider } from "@/components/home/BannerSlider";
 import { ModalitiesSection } from "@/components/home/ModalitiesSection";
 import { SponsoredAdSection } from "@/components/home/SponsoredAdSection";
 import { PartnersSection } from "@/components/home/PartnersSection";
+import { HomeCategoriesSection } from "@/components/home/HomeCategoriesSection";
 import { NewsCarousel } from "@/components/home/NewsCarousel";
 import { FeaturedClinicsSection } from "@/components/home/FeaturedClinicsSection";
 import { WellnessSection } from "@/components/home/WellnessSection";
@@ -75,6 +76,9 @@ const Home = () => {
 
       {/* Partners Section */}
       <PartnersSection />
+
+      {/* Categories Grid */}
+      <HomeCategoriesSection />
 
       {/* Sponsored Ad Section */}
       <SponsoredAdSection />
