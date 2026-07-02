@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
-  YogaIcon,
   Home,
   UserRound,
   Building2,
@@ -13,6 +12,7 @@ import {
   Mail,
   Info,
 } from "lucide-react";
+import { YogaIcon } from "@/components/icons/YogaIcon";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
