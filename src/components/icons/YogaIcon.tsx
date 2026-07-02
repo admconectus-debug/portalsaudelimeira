@@ -17,15 +17,15 @@ export const YogaIcon = (props: LucideProps) => (
     <circle cx="12" cy="5" r="2" />
     {/* Torso */}
     <path d="M12 7v5" />
-    {/* Arms raised in a V / yoga pose */}
-    <path d="M12 9l-4-3" />
-    <path d="M12 9l4-3" />
+    {/* Arms raised and slightly curved like a yoga tree pose */}
+    <path d="M12 9l-3.5-2.5" />
+    <path d="M12 9l3.5-2.5" />
     {/* Standing leg */}
-    <path d="M12 12v6" />
-    {/* Lifted / bent leg in motion */}
-    <path d="M12 12c2 1 3.5 2.5 3.5 4.5" />
-    {/* Motion / energy arc */}
-    <path d="M18 4c1 1.5 2 3.5 2 6s-1 4.5-2 6" />
+    <path d="M12 12v7" />
+    {/* Bent leg in tree pose */}
+    <path d="M12 12c2 0.5 3.5 2 3.5 3.5" />
+    {/* Motion / energy arc wrapping the figure */}
+    <path d="M18 3.5c1.5 2 2 4 2 6.5s-1 5-2.5 6.5" />
   </svg>
 );
 
