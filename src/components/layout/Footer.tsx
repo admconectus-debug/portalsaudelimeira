@@ -99,7 +99,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 VivaxSaúde. Todos os direitos reservados.
+            © 2024 Vivax Saúde e Beleza. Todos os direitos reservados.
           </p>
           <div className="flex items-center space-x-1 text-sm text-muted-foreground mt-4 md:mt-0">
             <span>Feito com</span>
