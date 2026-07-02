@@ -78,9 +78,9 @@ const Header = () => {
               <SheetHeader className="px-6 py-5 border-b border-border">
                 <SheetTitle className="flex items-center gap-2 text-primary">
                   <span className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground">
-                    <HeartPulse className="h-5 w-5" />
+                    <YogaIcon className="h-5 w-5" />
                   </span>
-                  <span className="text-base font-bold">Portal Saúde Limeira</span>
+                  <span className="text-base font-bold">Vivax Saúde e Beleza</span>
                 </SheetTitle>
               </SheetHeader>
               <nav className="py-3">
@@ -113,13 +113,13 @@ const Header = () => {
         <Link
           to="/"
           className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 group"
-          aria-label="Portal Saúde Limeira - Início"
+          aria-label="Vivax Saúde e Beleza - Início"
         >
           <span className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-primary text-primary-foreground shrink-0 transition-transform group-hover:scale-105">
-            <HeartPulse className="h-5 w-5 sm:h-6 sm:w-6" />
+            <YogaIcon className="h-5 w-5 sm:h-6 sm:w-6" />
           </span>
           <span className="hidden md:inline text-lg lg:text-xl font-bold text-primary whitespace-nowrap">
-            Portal Saúde Limeira
+            Vivax Saúde e Beleza
           </span>
         </Link>
 
