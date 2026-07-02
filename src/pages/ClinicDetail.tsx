@@ -333,7 +333,7 @@ const ClinicDetail = () => {
                     )}
                     <ShareButton 
                       title={clinic.name} 
-                      text={`Conheça ${clinic.name} no Portal Saúde Limeira`} 
+                      text={`Conheça ${clinic.name} no Vivax Saúde e Beleza`} 
                       size="md"
                     />
               </div>
@@ -382,7 +382,7 @@ const ClinicDetail = () => {
       {clinic.phone && (
         <WhatsAppFloatingButton 
           phone={clinic.phone}
-          message={`Olá! Encontrei a ${clinic.name} no Portal Saúde Limeira e gostaria de mais informações.`}
+          message={`Olá! Encontrei a ${clinic.name} no Vivax Saúde e Beleza e gostaria de mais informações.`}
         />
       )}
 

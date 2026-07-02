@@ -5,7 +5,7 @@ interface WhatsAppFloatingButtonProps {
   message?: string;
 }
 
-const WhatsAppFloatingButton = ({ phone, message = "Olá! Encontrei seu contato no Portal Saúde Limeira e gostaria de mais informações." }: WhatsAppFloatingButtonProps) => {
+const WhatsAppFloatingButton = ({ phone, message = "Olá! Encontrei seu contato no Vivax Saúde e Beleza e gostaria de mais informações." }: WhatsAppFloatingButtonProps) => {
   const phoneNumber = phone.replace(/\D/g, '');
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;

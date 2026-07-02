@@ -27,7 +27,7 @@ const Hospitals = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "Hospitais - Portal Saúde Limeira";
+    document.title = "Hospitais - Vivax Saúde e Beleza";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", "Conheça os hospitais e pronto-socorros de Limeira: endereço, telefone e localização no mapa.");
     fetchHospitals();
