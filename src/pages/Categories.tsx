@@ -44,7 +44,7 @@ const Categories = () => {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-3">Categorias</h1>
             <p className="text-white/90 max-w-2xl mx-auto">
-              Navegue por todas as categorias do Portal Saúde Limeira.
+              Navegue por todas as categorias do Vivax Saúde e Beleza.
             </p>
           </div>
         </section>
