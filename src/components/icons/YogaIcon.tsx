@@ -13,19 +13,19 @@ export const YogaIcon = (props: LucideProps) => (
     strokeLinejoin="round"
     {...props}
   >
-    {/* Motion arc */}
-    <path d="M19 6c-1.5 1.5-2.5 3.5-2.5 6s1 4.5 2.5 6" />
     {/* Head */}
-    <circle cx="10" cy="5" r="2" />
-    {/* Body in warrior / tree pose */}
-    <path d="M10 7v4" />
-    <path d="M10 11l-3 6" />
-    <path d="M10 11l3 6" />
-    <path d="M8 17h4" />
-    {/* Standing leg with slight bend */}
-    <path d="M10 11v5" />
-    {/* Lifted leg bent */}
-    <path d="M13 13c1.5 0 2.5-1 2.5-2.5" />
+    <circle cx="12" cy="5" r="2" />
+    {/* Torso */}
+    <path d="M12 7v5" />
+    {/* Arms raised in a V / yoga pose */}
+    <path d="M12 9l-4-3" />
+    <path d="M12 9l4-3" />
+    {/* Standing leg */}
+    <path d="M12 12v6" />
+    {/* Lifted / bent leg in motion */}
+    <path d="M12 12c2 1 3.5 2.5 3.5 4.5" />
+    {/* Motion / energy arc */}
+    <path d="M18 4c1 1.5 2 3.5 2 6s-1 4.5-2 6" />
   </svg>
 );
 
