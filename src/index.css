@@ -18,10 +18,10 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 210 11% 15%;
 
-    /* Medical Blue - Primary brand color */
-    --primary: 210 100% 45%;
-    --primary-light: 210 100% 55%;
-    --primary-glow: 210 100% 65%;
+    /* Vivax Blue - Primary brand color (logo #0082FF) */
+    --primary: 210 100% 50%;
+    --primary-light: 210 100% 60%;
+    --primary-glow: 210 100% 70%;
     --primary-foreground: 0 0% 100%;
 
     /* Health Green - Secondary accent */
