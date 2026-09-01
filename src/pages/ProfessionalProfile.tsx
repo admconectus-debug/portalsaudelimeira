@@ -322,7 +322,7 @@ const ProfessionalProfile = () => {
                      )}
                      <ShareButton 
                        title={professional.name} 
-                       text={`Conheça ${professional.name} - ${professional.specialties?.name || 'Profissional de Saúde'} no Vivax Saúde e Beleza`} 
+                       text={`Conheça ${professional.name} - ${professional.specialties?.name || 'Profissional de Saúde'} no Vivax Saúde`} 
                      />
                    </div>
                  </div>
@@ -506,7 +506,7 @@ const ProfessionalProfile = () => {
       {(professional.whatsapp || professional.phone) && (
         <WhatsAppFloatingButton 
           phone={professional.whatsapp || professional.phone!}
-          message={`Olá ${professional.name}, encontrei seu contato no Vivax Saúde e Beleza e gostaria de agendar uma consulta.`}
+          message={`Olá ${professional.name}, encontrei seu contato no Vivax Saúde e gostaria de agendar uma consulta.`}
         />
       )}
       

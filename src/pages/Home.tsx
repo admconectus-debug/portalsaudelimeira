@@ -96,7 +96,7 @@ const Home = () => {
             Profissionais em Destaque
           </h2>
           <p className="text-center text-muted-foreground mb-8 text-sm">
-            Novos perfis no Vivax Saúde e Beleza
+            Novos perfis no Vivax Saúde
           </p>
 
           {loading ? (

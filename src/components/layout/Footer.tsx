@@ -15,7 +15,7 @@ const Footer = () => {
             <span className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-primary-foreground">
               <YogaIcon className="h-6 w-6" />
             </span>
-            <span className="text-xl font-bold text-primary">Vivax Saúde e Beleza</span>
+            <span className="text-xl font-bold text-primary">Vivax Saúde</span>
           </Link>
             <GymAdSection />
           </div>
@@ -99,7 +99,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Vivax Saúde e Beleza. Todos os direitos reservados.
+            © 2024 Vivax Saúde. Todos os direitos reservados.
           </p>
           <div className="flex items-center space-x-1 text-sm text-muted-foreground mt-4 md:mt-0">
             <span>Feito com</span>
