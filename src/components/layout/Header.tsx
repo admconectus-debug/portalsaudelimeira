@@ -115,7 +115,7 @@ const Header = () => {
           <img
             src={logoAsset.url}
             alt="Vivax Saúde e Bem-Estar"
-            className="h-14 md:h-[72px] w-auto transition-transform group-hover:scale-105"
+            className="h-12 md:h-[72px] w-auto transition-transform group-hover:scale-105"
           />
         </Link>
 
@@ -124,14 +124,14 @@ const Header = () => {
           <Button
             asChild
             variant="ghost"
-            className="h-11 px-2 md:px-4 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors"
+            className="hidden md:inline-flex h-11 px-2 md:px-4 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors"
           >
             <Link to="/contato">Contato</Link>
           </Button>
 
           <Button
             asChild
-            className="h-[42px] px-3 md:px-5 rounded-[10px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-sm transition-all"
+            className="h-[42px] px-2 md:px-5 rounded-[10px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-sm transition-all"
           >
             <Link to="/quem-somos">Quem Somos</Link>
           </Button>
