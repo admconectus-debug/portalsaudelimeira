@@ -57,7 +57,7 @@ const Header = () => {
         scrolled ? "shadow-[0_4px_16px_-8px_rgba(0,0,0,0.15)]" : "shadow-none"
       )}
     >
-      <div className="container relative flex items-center h-[72px] md:h-[76px] px-4 lg:px-6">
+      <div className="container relative flex items-center h-[80px] md:h-[88px] px-4 lg:px-6">
         {/* Left: Menu button */}
         <div className="flex items-center z-10">
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
@@ -77,7 +77,7 @@ const Header = () => {
             >
               <SheetHeader className="px-6 py-5 border-b border-border">
                 <SheetTitle className="flex items-center gap-2 text-primary">
-                  <img src={logoAsset.url} alt="Vivax Saúde" className="h-10 w-auto" />
+                  <img src={logoAsset.url} alt="Vivax Saúde" className="h-12 w-auto" />
                 </SheetTitle>
               </SheetHeader>
               <nav className="py-3">
@@ -115,7 +115,7 @@ const Header = () => {
           <img
             src={logoAsset.url}
             alt="Vivax Saúde e Bem-Estar"
-            className="h-12 md:h-14 w-auto transition-transform group-hover:scale-105"
+            className="h-14 md:h-[72px] w-auto transition-transform group-hover:scale-105"
           />
         </Link>
 
