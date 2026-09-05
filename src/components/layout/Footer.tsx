@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Heart } from "lucide-react";
-import { YogaIcon } from "@/components/icons/YogaIcon";
 import GymAdSection from "./GymAdSection";
+import logoAsset from "@/assets/logo-vivax-bem-estar.png.asset.json";
 
 
 const Footer = () => {
@@ -12,10 +12,7 @@ const Footer = () => {
           {/* Gym Ad */}
           <div className="space-y-4">
           <Link to="/" className="flex items-center gap-2">
-            <span className="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-primary-foreground">
-              <YogaIcon className="h-6 w-6" />
-            </span>
-            <span className="text-xl font-bold text-primary">Vivax Saúde</span>
+            <img src={logoAsset.url} alt="Vivax Saúde e Bem-Estar" className="h-14 w-auto" />
           </Link>
             <GymAdSection />
           </div>

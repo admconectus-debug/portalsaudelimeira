@@ -12,8 +12,8 @@ import {
   Mail,
   Info,
 } from "lucide-react";
-import { YogaIcon } from "@/components/icons/YogaIcon";
 import { Button } from "@/components/ui/button";
+import logoAsset from "@/assets/logo-vivax-bem-estar.png.asset.json";
 import {
   Sheet,
   SheetContent,
@@ -77,10 +77,7 @@ const Header = () => {
             >
               <SheetHeader className="px-6 py-5 border-b border-border">
                 <SheetTitle className="flex items-center gap-2 text-primary">
-                  <span className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground">
-                    <YogaIcon className="h-5 w-5" />
-                  </span>
-                  <span className="text-base font-bold">Vivax Saúde</span>
+                  <img src={logoAsset.url} alt="Vivax Saúde" className="h-10 w-auto" />
                 </SheetTitle>
               </SheetHeader>
               <nav className="py-3">
@@ -112,15 +109,14 @@ const Header = () => {
         {/* Center: Logo (absolutely centered) */}
         <Link
           to="/"
-          className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 group"
+          className="absolute left-1/2 -translate-x-1/2 flex items-center group"
           aria-label="Vivax Saúde - Início"
         >
-          <span className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-primary text-primary-foreground shrink-0 transition-transform group-hover:scale-105">
-            <YogaIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-          </span>
-          <span className="hidden md:inline text-lg lg:text-xl font-bold text-primary whitespace-nowrap">
-            Vivax Saúde
-          </span>
+          <img
+            src={logoAsset.url}
+            alt="Vivax Saúde e Bem-Estar"
+            className="h-12 md:h-14 w-auto transition-transform group-hover:scale-105"
+          />
         </Link>
 
         {/* Right: Contact + About */}
